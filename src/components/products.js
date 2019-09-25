@@ -24,11 +24,17 @@ class Products extends React.Component {
   render() {
 
     return (
-          <div> 
+          <div id="all-products"> 
 
           <h2> Here are all my products: </h2>
 
-              <ul>{this.state.products}</ul>
+              <ul>
+
+              {this.state.products.map((product) =>{
+                return <li>{product} <a href="http://localhost:3001/api/product">show</a></li>
+              })}
+
+              </ul>
 
           </div>
     )

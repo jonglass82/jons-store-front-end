@@ -1,1 +1,8 @@
-
+#all-products{
+  font-size: 20pt;
+  align-content: center;
+  text-align: center;
+}
+li{
+  list-style-type: none;
+}
