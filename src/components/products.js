@@ -40,56 +40,109 @@ class Products extends React.Component {
   render() {
 
     return (
-          <div id="all-products"> 
+          
+        <div id="all-products"> 
+            
+          <div>
+              <Nav tabs>
 
-      <div>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
-              onClick={() => { this.toggle('1'); }}
-            >
-              All
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
-            >
-              Clothing
-            </NavLink>
-          </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '1' })}
+                    onClick={() => { this.toggle('1'); }}>
+
+                    All
+
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '2' })}
+                    onClick={() => { this.toggle('2'); }}>
+
+                    Clothing
+
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '3' })}
+                    onClick={() => { this.toggle('3'); }}>
+
+                    Collectibles
+
+                  </NavLink>
+                </NavItem>
+
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === '4' })}
+                    onClick={() => { this.toggle('4'); }}>
+
+                    Artwork
+
+                  </NavLink>
+                </NavItem>
+
         </Nav>
+
+        
         <TabContent activeTab={this.state.activeTab}>
+
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
                 <h1>All Items:</h1>
 
-            <ul>
+                    <ul>
 
-              {this.state.products.map((product) =>{
-                return <li>{product} <a href="http://localhost:3001/api/product">show</a></li>
-              })}
+                      {this.state.products.map((product) =>{
+                        return <li>{product} <a href="http://localhost:3001/api/product">show</a></li>
+                      })}
 
-              </ul>
+                    </ul>
 
-          </Col>
-            </Row>
-              </TabPane>
-                <TabPane tabId="2">
-                  <Row>
-                  
-                    <Col sm="12">
+                </Col>
+              </Row>
+            </TabPane>
+
+
+            <TabPane tabId="2">
+              <Row>    
+                <Col sm="12">
+
                       <h1>All Clothing</h1>
-                    </Col>
-                  </Row>
-                </TabPane>
-              </TabContent>
+                </Col>
+              </Row>
+             </TabPane>
+
+
+            <TabPane tabId="3">
+              <Row>    
+                <Col sm="12">
+
+                      <h1>All collectibles</h1>
+                </Col>
+              </Row>
+             </TabPane>
+
+
+            <TabPane tabId="4">
+              <Row>    
+                <Col sm="12">
+
+                      <h1>All artwork</h1>
+
+                </Col>
+              </Row>
+             </TabPane>
+
+            </TabContent>
           </div>
 
-          </div>
+      </div>
     )
   }
 }

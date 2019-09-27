@@ -3,6 +3,15 @@
   align-content: center;
   text-align: center;
 }
+
 li{
   list-style-type: none;
 }
+
+#header{
+  align-content: center;
+  text-align: center;
+  height: 150px;
+}
+
+
