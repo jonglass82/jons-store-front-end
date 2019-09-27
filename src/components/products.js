@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import classnames from 'classnames';
 
 
@@ -9,9 +9,11 @@ class Products extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.modalToggle = this.modalToggle.bind(this);
     this.state = {
       products: [],
-      activeTab: '1'
+      activeTab: '1',
+      modal: false
     }
   }
 
@@ -22,7 +24,7 @@ class Products extends React.Component {
         products: products
       }));
     })
-  }
+  };
 
   componentDidMount() {
       this.getProducts();
@@ -34,8 +36,13 @@ class Products extends React.Component {
         activeTab: tab
       });
     }
-  }
+  };
 
+  modalToggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
 
   render() {
 
@@ -99,7 +106,20 @@ class Products extends React.Component {
                     <ul>
 
                       {this.state.products.map((product) =>{
-                        return <li>{product} <a href="http://localhost:3001/api/product">show</a></li>
+                        
+                        return <li> {product}<Button outline color="danger" onClick={this.modalToggle}>Show</Button>
+                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.modalToggle}>{product}</ModalHeader>
+                        <ModalBody>
+                          {product}
+                        </ModalBody>
+                        <ModalFooter>
+                        <Button color="primary" onClick={this.modalToggle}>Do Something</Button>{' '}
+                        <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
+                        </ModalFooter>
+                        </Modal>
+                        </li>
+
                       })}
 
                     </ul>

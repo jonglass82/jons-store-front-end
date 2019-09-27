@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-class ProductShow extends React.component{
+class ProductShow extends React.Component{
 
   render (){
 
