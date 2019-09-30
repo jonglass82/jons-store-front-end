@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import classnames from 'classnames';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 
 class Products extends React.Component {
@@ -51,6 +52,7 @@ class Products extends React.Component {
         <div id="all-products"> 
             
           <div>
+              
               <Nav tabs>
 
                 <NavItem>
@@ -105,25 +107,30 @@ class Products extends React.Component {
 
                     <ul>
 
-                      {this.state.products.map((product) =>{
+                      {this.state.products.map((product) => {
                         
-                        return <li> {product}<Button outline color="danger" onClick={this.modalToggle}>Show</Button>
-                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        return ( <li>{product}<Button outline color="danger" onClick={this.modalToggle}>{product}</Button>
+
+                        <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
                         <ModalHeader toggle={this.modalToggle}>{product}</ModalHeader>
                         <ModalBody>
                           {product}
                         </ModalBody>
                         <ModalFooter>
-                        <Button color="primary" onClick={this.modalToggle}>Do Something</Button>{' '}
+
+                         <Link to="/purchase">
+                          <Button outline color="primary" onClick={this.modalToggle}>Purchase</Button>
+                          </Link>{' '}
                         <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
                         </ModalFooter>
-                        </Modal>
-                        </li>
+                        </Modal></li>
 
-                      })}
+                           )
+                        
+                        })}
 
-                    </ul>
-
+                        </ul>
+                      
                 </Col>
               </Row>
             </TabPane>
@@ -160,6 +167,7 @@ class Products extends React.Component {
              </TabPane>
 
             </TabContent>
+
           </div>
 
       </div>
