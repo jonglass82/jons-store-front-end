@@ -1,5 +1,4 @@
 import React from 'react'
-import { Nav } from 'reactstrap'
 
 
 class Header extends React.Component {
@@ -11,7 +10,8 @@ class Header extends React.Component {
 
           <h1>Jons Store</h1>
 
-      </div>  
+      </div> 
+       
       )
     }
 

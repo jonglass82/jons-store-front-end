@@ -1,49 +1,68 @@
 import React from 'react';
 import './App.css';
-import axios from 'axios';
 import Products from './components/products.js';
 import Header from './components/header.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-function Home() {
+function Home(props) {
   return <div>
             <Header></Header>
-            <Products></Products>
+            <Products handlePurchase={props.handlePurchase}></Products>
         </div>
   }
 
-function Purchase() {
-  return <Checkout></Checkout>
+
+function Purchase(props) {
+  return <Checkout selectedProduct={props.selectedProduct}></Checkout>
 }
 
 
-function App() {
+  class App extends React.Component {
 
-  return (
+    constructor(props) {
+      super(props);
+        this.state = {
+          carted_product: [],
+          selectedProduct: ''
+      }
+    }
+
+    selectProduct = (product) => {
+      console.log(product)
+      this.setState({ selectedProduct: product})
+    }
+
+    render (){
+
+      return (
             <Router>
               <div className="App">
 
                 <nav>
                   <ul>
                      <li> <Link to="/">Home</Link></li>
-                     <li><Link to="/purchase">Checkout</Link></li>
-
                   </ul>
                 </nav>
 
+                          {this.state.carted_product}
+
         <Switch>
+
           <Route path="/purchase">
-            <Purchase />
+            <Purchase selectedProduct={this.state.selectedProduct}/>
           </Route>
+
           <Route path="/">
-            <Home />
+            <Home handlePurchase={this.selectProduct} />
           </Route>
+
         </Switch>
 
               </div>
             </Router>
-  );
+  )
+ }
 }
 
 export default App;

@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import classnames from 'classnames';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+import Product from './product';
 
 
 class Products extends React.Component {
@@ -10,13 +12,20 @@ class Products extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.modalToggle = this.modalToggle.bind(this);
     this.state = {
       products: [],
-      activeTab: '1',
-      modal: false
+      activeTab: '1'
     }
   }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab,
+        carted_products: "jon"
+      });
+    }
+  };
 
   getProducts() {
       axios.get('http://localhost:3001/api/products').then(res=>{
@@ -30,20 +39,6 @@ class Products extends React.Component {
   componentDidMount() {
       this.getProducts();
   };
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  };
-
-  modalToggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
 
   render() {
 
@@ -109,27 +104,17 @@ class Products extends React.Component {
 
                       {this.state.products.map((product) => {
                         
-                        return ( <li>{product}<Button outline color="danger" onClick={this.modalToggle}>{product}</Button>
-
-                        <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
-                        <ModalHeader toggle={this.modalToggle}>{product}</ModalHeader>
-                        <ModalBody>
-                          {product}
-                        </ModalBody>
-                        <ModalFooter>
-
-                         <Link to="/purchase">
-                          <Button outline color="primary" onClick={this.modalToggle}>Purchase</Button>
-                          </Link>{' '}
-                        <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
-                        </ModalFooter>
-                        </Modal></li>
-
-                           )
+                        return ( 
+                          <Product
+                            key={product}
+                            product={product}
+                            handlePurchase={this.props.handlePurchase}
+                          />
+                        )
                         
-                        })}
+                      })}
 
-                        </ul>
+                    </ul>
                       
                 </Col>
               </Row>
