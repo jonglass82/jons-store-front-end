@@ -23,14 +23,15 @@ function Purchase(props) {
     constructor(props) {
       super(props);
         this.state = {
-          carted_product: [],
           selectedProduct: ''
       }
     }
 
     selectProduct = (product) => {
       console.log(product)
-      this.setState({ selectedProduct: product})
+      this.setState({ 
+        selectedProduct: product
+      })
     }
 
     render (){
@@ -45,7 +46,6 @@ function Purchase(props) {
                   </ul>
                 </nav>
 
-                          {this.state.carted_product}
 
         <Switch>
 

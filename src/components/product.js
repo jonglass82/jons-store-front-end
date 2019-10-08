@@ -2,6 +2,7 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from "react-router-dom";
 
+
 class Product extends React.Component {
 
   constructor(props) {
@@ -13,30 +14,45 @@ class Product extends React.Component {
      }
    }
 
+
   modalToggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
 
+
   purchase = () => {
+    console.log(this.props.product)
     this.props.handlePurchase(this.props.product);
     this.modalToggle();
   }
 
+
   render () {
+
     const product = this.props.product;
+
     return (
-      <li>{product}
-        <Button outline color="danger" onClick={this.modalToggle}>{product}
+      <li>{this.props.title}
+        <Button outline color="danger" onClick={this.modalToggle}>View
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>
-            {product}
+            {this.props.title}
           </ModalHeader>
           <ModalBody>
-            {product}
+            <h3>Image</h3>
+
+            <h3>Description:</h3>
+              {this.props.description}
+
+            <h3>Price:</h3>
+
+            <h3>Shipping:</h3>
+
           </ModalBody>
+
           <ModalFooter>
 
             <Link to="/purchase">

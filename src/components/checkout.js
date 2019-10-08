@@ -5,17 +5,18 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
      this.state = {
-      carted_product: []
+      
      }
    }
 
 render (){
 
-
   return  (<div>
 
     <div>Checkout page</div>
-      <p>{this.props.selectedProduct}</p>
+
+    <h1>You are purchasing:</h1>
+      <p>{this.props.selectedProduct.title}</p>
     </div>
 
     )

@@ -22,13 +22,12 @@ class Products extends React.Component {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
-        carted_products: "jon"
       });
     }
   };
 
   getProducts() {
-      axios.get('http://localhost:3001/api/products').then(res=>{
+      axios.get('http://localhost:3001/api/products').then(res => {
       const products = res.data;
       this.setState((state, props) => ({
         products: products
@@ -106,8 +105,10 @@ class Products extends React.Component {
                         
                         return ( 
                           <Product
-                            key={product}
-                            product={product}
+                            key={product._id}
+                            product = {product}
+                            title = {product.title}
+                            description = {product.description}
                             handlePurchase={this.props.handlePurchase}
                           />
                         )
