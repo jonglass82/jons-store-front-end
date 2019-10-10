@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Products from './components/products.js';
 import Header from './components/header.js';
+import Login from './components/login.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
@@ -15,6 +16,10 @@ function Home(props) {
 
 function Purchase(props) {
   return <Checkout selectedProduct={props.selectedProduct}></Checkout>
+}
+
+function Signin(props) {
+  return <Login></Login>
 }
 
 
@@ -46,21 +51,24 @@ function Purchase(props) {
                   </ul>
                 </nav>
 
+            <Switch>
 
-        <Switch>
+              <Route path="/login">
+                <Signin></Signin>
+              </Route>
 
-          <Route path="/purchase">
-            <Purchase selectedProduct={this.state.selectedProduct}/>
-          </Route>
+              <Route path="/purchase">
+                <Purchase selectedProduct={this.state.selectedProduct}/>
+              </Route>
 
-          <Route path="/">
-            <Home handlePurchase={this.selectProduct} />
-          </Route>
+              <Route path="/">
+                <Home handlePurchase={this.selectProduct} />
+              </Route>
 
-        </Switch>
+            </Switch>
 
-              </div>
-            </Router>
+          </div>
+        </Router>
   )
  }
 }
