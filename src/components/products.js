@@ -3,7 +3,6 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import classnames from 'classnames';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-
 import Product from './product';
 
 
@@ -47,7 +46,7 @@ class Products extends React.Component {
             
           <div>
               
-              <Nav tabs>
+              <Nav tabs className="nav nav-tabs nav-justified">
 
                 <NavItem>
                   <NavLink
