@@ -3,6 +3,7 @@ import './App.css';
 import Products from './components/products.js';
 import Header from './components/header.js';
 import Login from './components/login.js';
+import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
@@ -20,6 +21,10 @@ function Purchase(props) {
 
 function Signin(props) {
   return <Login></Login>
+}
+
+function AdminDashboard(props) {
+  return <Dashboard></Dashboard>
 }
 
 
@@ -47,11 +52,15 @@ function Signin(props) {
 
                 <nav>
                   <ul>
-                     <li> <Link to="/">Home</Link></li>
+                     <li><Link to="/">Home</Link></li>
                   </ul>
                 </nav>
 
             <Switch>
+
+               <Route path="/dashboard">
+                <AdminDashboard/>
+              </Route>
 
               <Route path="/login">
                 <Signin></Signin>

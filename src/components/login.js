@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 class Login extends React.Component {
 
@@ -45,6 +46,8 @@ class Login extends React.Component {
 
       <h1>Login</h1>
 
+      <Link to="/dashboard">Dashboard</Link>
+
     <Form>
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
@@ -55,7 +58,7 @@ class Login extends React.Component {
           <Input type="password" name="password" id="examplePassword" value={this.password} onChange= {this.onChange} placeholder="" />
         </FormGroup>
         <Button>Submit</Button>
-        </Form>
+    </Form>
 
         </div>
   }

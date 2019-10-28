@@ -14,13 +14,11 @@ class Product extends React.Component {
      }
    }
 
-
   modalToggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
-
 
   purchase = () => {
     console.log(this.props.product)
