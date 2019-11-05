@@ -5,7 +5,7 @@ import Header from './components/header.js';
 import Login from './components/login.js';
 import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 
 function Home(props) {
   return <div>
@@ -19,12 +19,16 @@ function Purchase(props) {
   return <Checkout selectedProduct={props.selectedProduct}></Checkout>
 }
 
-function Signin(props) {
-  return <Login></Login>
-}
+// function Signin(props) {
+//   return <Login></Login>
+// }
 
 function AdminDashboard(props) {
   return <Dashboard></Dashboard>
+}
+
+function ProtectedRoute(props) {
+  return props.loggedIn ? <props.component /> : <Redirect to='/login' />
 }
 
 
@@ -33,7 +37,17 @@ function AdminDashboard(props) {
     constructor(props) {
       super(props);
         this.state = {
-          selectedProduct: ''
+          selectedProduct: '',
+          loggedIn: false
+      }
+    }
+
+    componentDidMount() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.setState({
+          loggedIn: true
+        })
       }
     }
 
@@ -41,6 +55,20 @@ function AdminDashboard(props) {
       console.log(product)
       this.setState({ 
         selectedProduct: product
+      })
+    }
+
+    handleLogin = (token) => {
+      localStorage.setItem('token', token)
+      this.setState({
+        loggedIn: true
+      })
+    }
+
+    handleLogout = () => {
+      localStorage.removeItem("token")
+      this.setState({
+        loggedIn: false
       })
     }
 
@@ -53,17 +81,20 @@ function AdminDashboard(props) {
                 <nav>
                   <ul>
                      <li><Link to="/">Home</Link></li>
+                     { this.state.loggedIn && (         
+                      <li><a href="#" onClick={this.handleLogout}>logout</a></li>
+                      )}
                   </ul>
                 </nav>
 
             <Switch>
 
-               <Route path="/dashboard">
-                <AdminDashboard/>
+              <Route path="/dashboard">
+                <ProtectedRoute component={AdminDashboard} loggedIn={this.state.loggedIn}/>
               </Route>
 
               <Route path="/login">
-                <Signin></Signin>
+                <Login loggedIn={this.state.loggedIn} handleLogin={this.handleLogin}/>
               </Route>
 
               <Route path="/purchase">

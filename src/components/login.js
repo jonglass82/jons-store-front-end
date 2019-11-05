@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Alert, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 
 class Login extends React.Component {
 
@@ -20,43 +20,49 @@ class Login extends React.Component {
     });
   }
 
-  submit () {
+  submit = (e) => {
+      e.preventDefault()
       const params = {
-        email: this.email,
-        password: this.password
+        email: this.state.email,
+        password: this.state.password
       };
+      console.log(params)
 
       axios.post('http://localhost:3001/api/login', params).then(res => {
-        console.log(params);
-      // const email = res.data;
-      // const password = res.data;
-      // this.setState((state, props) => ({
-      //   email: email, 
-      //   password: password
-      // }));
+        console.log(res.data);
+        if (res.data.authenticated) {
+          console.log(res.data.token);
+          this.props.handleLogin(res.data.token);
+        } else {
+          this.setState({
+            message: <Alert color="danger">{res.data}</Alert>
+          })
+        }
     })
   };
 
 
   render () {
-    return <div className="container"> 
-
-    <h2>{this.state.email}</h2>
-    <h2>{this.state.password}</h2>
+    return this.props.loggedIn ?
+    <Redirect to="dashboard" /> :
+    <div className="container"> 
 
       <h1>Login</h1>
 
-      <Link to="/dashboard">Dashboard</Link>
+        {this.state.message}          
 
-    <Form>
+    <Form onSubmit={this.submit}>
+
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input type="email" name="email" id="exampleEmail" value={this.email} onChange= {this.onChange} placeholder="" />
         </FormGroup>
+
         <FormGroup>
           <Label for="examplePassword">Password</Label>
           <Input type="password" name="password" id="examplePassword" value={this.password} onChange= {this.onChange} placeholder="" />
         </FormGroup>
+        
         <Button>Submit</Button>
     </Form>
 

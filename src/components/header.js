@@ -8,7 +8,7 @@ class Header extends React.Component {
 
       <div id="header">
 
-          <h1>Jons Store</h1>
+          <h1>Jon's Store</h1>
 
       </div> 
        

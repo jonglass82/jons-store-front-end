@@ -1,17 +1,22 @@
 import React from 'react'
 import axios from 'axios'
+import Product from './product'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 
 class Dashboard extends React.Component {
 
 constructor(props){
   super(props);
+  this.modalToggle = this.modalToggle.bind(this);
   this.state = {
     products: [],
     productTitle: "",
     productDescription: "",
-    productPrice: ""
+    productPrice: "",
+    modal: false, 
+    selectedProduct: []
   }
   this.onChange = this.onChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +28,13 @@ constructor(props){
     });
   }
 
+  modalToggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal,
+    }));
+  }
 
+//create a new product listing
 createProduct = () => {
 
   const instance = axios.create({
@@ -41,42 +52,96 @@ createProduct = () => {
   })
 }
 
-
+//submit the form to create a new product
 handleSubmit = () => {
   this.createProduct();
 }
 
 
+  getProducts() {
+      axios.get('http://localhost:3001/api/products').then(res => {
+      const products = res.data;
+      this.setState((state, props) => ({
+        products: products
+      }));
+    })
+  };
+
+  componentDidMount() {
+      this.getProducts();
+  };
+
 
 render() {
-  return  <div>
 
-    <h1>Dashboard</h1> 
+  return  <div className="container">
 
-    <h3>Title:{this.state.productTitle}</h3>
-     <h3>Description:{this.state.productDescription}</h3>
-      <h3>Price:{this.state.productPrice}</h3>
+    <h1>Dashboard</h1>
 
-      <form onSubmit={this.handleSubmit}>
+      <div>
 
-        <label>
+      <h3>Create a new product</h3>
+
+      <Form onSubmit={this.handleSubmit}>
+
+      <FormGroup>
+        <Label>
           Title:
-          <input type="text" name="productTitle" value={this.state.productTitle} onChange={this.onChange} />
-        </label>
+          <Input type="text" name="productTitle" value={this.state.productTitle} onChange={this.onChange} />
+        </Label>
+      </FormGroup>
 
-        <label>
+      <FormGroup>
+        <Label>
           Description:
-          <input type="text" name="productDescription" value={this.state.productDescription} onChange={this.onChange} />
-        </label>
+          <Input type="text" name="productDescription" value={this.state.productDescription} onChange={this.onChange} />
+        </Label>
+      </FormGroup>
 
-        <label>
+      <FormGroup>
+        <Label>
           Price:
-          <input type="text" name="productPrice" value={this.state.productPrice} onChange={this.onChange} />
-        </label>
+          <Input type="text" name="productPrice" value={this.state.productPrice} onChange={this.onChange} />
+        </Label>
+      </FormGroup>
 
         <input type="submit" value="Submit" />
 
-      </form>
+      </Form>
+
+      </div>
+
+
+
+      <div id="currently-listed-products">
+
+        <h3>Current Products:</h3>
+
+              {this.state.products.map((product) => {
+                return ( <div>
+                            <ul>
+                              <li>{product.title} | {product.description} | {product.price} | <Button onClick={this.modalToggle}>Edit</Button></li>
+                            </ul>
+                          </div>
+                        )
+                })
+              }
+
+              <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
+                    <ModalHeader toggle={this.modalToggle}>
+                    </ModalHeader>
+
+                    <ModalBody>
+                        
+                    </ModalBody>
+
+                  <ModalFooter>
+                      <Button color="secondary" onClick={this.modalToggle}>
+                        Cancel
+                      </Button>
+                  </ModalFooter>
+              </Modal>
+      </div>
 
     </div>
 
