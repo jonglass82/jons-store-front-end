@@ -16,7 +16,8 @@ constructor(props){
     productDescription: "",
     productPrice: "",
     modal: false, 
-    selectedProduct: []
+    selectedProduct: [], 
+    message: ""
   }
   this.onChange = this.onChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +45,9 @@ createProduct = () => {
   const params = {
     title: this.state.productTitle,
     description: this.state.productDescription,
-    price: this.state.productPrice
+    price: this.state.productPrice, 
+    auth: localStorage.getItem('token')
+
   }
 
   instance.post('http://localhost:3001/api/create', params).then(res => {   
@@ -112,35 +115,23 @@ render() {
       </div>
 
 
-
       <div id="currently-listed-products">
 
         <h3>Current Products:</h3>
 
-              {this.state.products.map((product) => {
-                return ( <div>
-                            <ul>
-                              <li>{product.title} | {product.description} | {product.price} | <Button onClick={this.modalToggle}>Edit</Button></li>
-                            </ul>
-                          </div>
-                        )
-                })
-              }
-
-              <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
-                    <ModalHeader toggle={this.modalToggle}>
-                    </ModalHeader>
-
-                    <ModalBody>
-                        
-                    </ModalBody>
-
-                  <ModalFooter>
-                      <Button color="secondary" onClick={this.modalToggle}>
-                        Cancel
-                      </Button>
-                  </ModalFooter>
-              </Modal>
+                {this.state.products.map((product) => {
+                  
+                  return ( 
+                    <Product
+                      key={product._id}
+                      product = {product}
+                      title = {product.title}
+                      description = {product.description}
+                      handlePurchase={this.props.handlePurchase}
+                    />
+                  ) 
+                })}
+              
       </div>
 
     </div>

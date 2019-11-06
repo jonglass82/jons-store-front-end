@@ -10,7 +10,7 @@ class Login extends React.Component {
     this.state = {
       message: "",
       email: "", 
-      password: "", 
+      password: "" 
     }
   } 
 
@@ -21,17 +21,17 @@ class Login extends React.Component {
   }
 
   submit = (e) => {
-      e.preventDefault()
+
+      e.preventDefault();
+
       const params = {
         email: this.state.email,
         password: this.state.password
       };
-      console.log(params)
 
       axios.post('http://localhost:3001/api/login', params).then(res => {
         console.log(res.data);
         if (res.data.authenticated) {
-          console.log(res.data.token);
           this.props.handleLogin(res.data.token);
         } else {
           this.setState({

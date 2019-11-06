@@ -43,7 +43,7 @@ class Product extends React.Component {
             <h3>Image</h3>
 
             <h3>Description:</h3>
-              {this.props.description}
+              {product.description}
 
             <h3>Price:</h3>
 

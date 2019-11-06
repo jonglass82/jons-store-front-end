@@ -52,7 +52,6 @@ function ProtectedRoute(props) {
     }
 
     selectProduct = (product) => {
-      console.log(product)
       this.setState({ 
         selectedProduct: product
       })
@@ -102,7 +101,9 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/">
-                <Home handlePurchase={this.selectProduct} />
+                <Home 
+                  handlePurchase={this.selectProduct}
+                  />
               </Route>
 
             </Switch>
