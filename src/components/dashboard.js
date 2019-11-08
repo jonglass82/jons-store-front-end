@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Product from './product'
+import AdminProduct from './AdminProduct'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
@@ -34,6 +34,19 @@ constructor(props){
       modal: !prevState.modal,
     }));
   }
+
+  getProducts() {
+      axios.get('http://localhost:3001/api/products').then(res => {
+      const products = res.data;
+      this.setState((state, props) => ({
+        products: products
+      }));
+    })
+  };
+
+  componentDidMount() {
+      this.getProducts();
+  };
 
 //create a new product listing
 createProduct = () => {
@@ -122,22 +135,23 @@ render() {
                 {this.state.products.map((product) => {
                   
                   return ( 
-                    <Product
-                      key={product._id}
+
+                    <AdminProduct
+                      id = {product._id}
                       product = {product}
                       title = {product.title}
                       description = {product.description}
-                      handlePurchase={this.props.handlePurchase}
                     />
                   ) 
-                })}
+
+                })
+              }
               
       </div>
 
     </div>
 
-}
-
+ }
 
 }
 

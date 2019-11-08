@@ -80,7 +80,7 @@ function ProtectedRoute(props) {
                 <nav>
                   <ul>
                      <li><Link to="/">Home</Link></li>
-                     { this.state.loggedIn && (         
+                     { this.state.loggedIn && ( 
                       <li><a href="#" onClick={this.handleLogout}>logout</a></li>
                       )}
                   </ul>
