@@ -98,7 +98,7 @@ class Products extends React.Component {
               <Col sm="12">
                 <h1>All Items:</h1>
 
-                    <ul>
+                    <div className="grid-container">
 
                       {this.state.products.map((product) => {
                         
@@ -114,7 +114,7 @@ class Products extends React.Component {
                         
                       })}
 
-                    </ul>
+                    </div>
                       
                 </Col>
               </Row>

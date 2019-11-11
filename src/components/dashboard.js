@@ -94,9 +94,11 @@ render() {
 
     <h1>Dashboard</h1>
 
+    <h2>{this.state.message}</h2>
+
       <div>
 
-      <h3>Create a new product</h3>
+      <h2>Create a new product</h2>
 
       <Form onSubmit={this.handleSubmit}>
 
@@ -141,6 +143,7 @@ render() {
                       product = {product}
                       title = {product.title}
                       description = {product.description}
+                      price = {product.price}
                     />
                   ) 
 

@@ -32,7 +32,7 @@ class Product extends React.Component {
     const product = this.props.product;
 
     return (
-      <li>{this.props.title}
+      <div>{this.props.title}
         <Button outline color="danger" onClick={this.modalToggle}>View
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
@@ -63,7 +63,7 @@ class Product extends React.Component {
             </Button>
         </ModalFooter>
       </Modal>
-    </li>
+    </div>
     )
   }
 

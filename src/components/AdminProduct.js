@@ -8,16 +8,44 @@ class AdminProduct extends React.Component{
     constructor(props) {
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
-    // this.purchase = this.purchase.bind(this);
     this.state = {
-        modal: false
+        modal: false,
+        newTitleValue: '',
+        newDescriptionValue: '',
+        newPriceValue: ''
      }
+    this.onChange = this.onChange.bind(this);
    }
+
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
   modalToggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      modal: !prevState.modal,
+      newTitleValue: '',
+      newDescriptionValue: '',
+      newPriceValue: ''
     }));
+  }
+
+  reset() {
+    this.setState({
+      newTitleValue: '',
+      newDescriptionValue: '',
+      newPriceValue: ''
+    })
+  }
+
+  initializeInput = (p) => {
+    this.setState({
+      newTitleValue: p.title,
+      newDescriptionValue: p.description,
+      newPriceValue: p.price
+    })
   }
 
   updateProduct = (id) => {
@@ -27,16 +55,18 @@ class AdminProduct extends React.Component{
     });
 
     const params = {
-      newTitle: "new item",
-      newDescription: "a cool new item",
-      newPrice: "$1"
+      newTitle: this.state.newTitleValue,
+      newDescription: this.state.newDescriptionValue,
+      newPrice: this.state.newPriceValue
     }
 
     instance.put('http://localhost:3001/api/update/'+ id, params).then(res => {   
       console.log("Product created!");
     })
-
+    this.modalToggle();
+    this.reset();
   }
+
 
   render () {
 
@@ -47,21 +77,22 @@ class AdminProduct extends React.Component{
         <Button outline color="primary" onClick={this.modalToggle}>View
         </Button>
 
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className} onOpened={() => this.initializeInput(product)}>
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>
             Editing: {this.props.title}
           </ModalHeader>
+
           <ModalBody>
-            <h3>Image</h3>
 
-            <h3>Description:</h3>
-              {product.description}
-              {this.props.id}
-
-            <h3>Price:</h3>
-
-            <h3>Shipping:</h3>
+            <h2>Title:</h2>
+            <Input name="newTitleValue" defaultValue={this.props.title} type="text" onChange={this.onChange}></Input>
+ 
+           <h2>Description:</h2>
+           <Input name="newDescriptionValue" defaultValue={this.props.description} type="text" onChange={this.onChange}></Input>
+  
+           <h2>Price:</h2>
+           <Input name="newPriceValue" defaultValue={this.props.price} type="text" onChange={this.onChange}></Input>
 
           </ModalBody>
 
