@@ -17,6 +17,10 @@ render (){
 
     <h1>You are purchasing:</h1>
       <p>{this.props.selectedProduct.title}</p>
+
+      <p>{this.props.cartedProducts.length}</p>
+
+
     </div>
 
     )

@@ -108,6 +108,7 @@ class Products extends React.Component {
                             product = {product}
                             title = {product.title}
                             description = {product.description}
+                            price = {product.price}
                             handlePurchase={this.props.handlePurchase}
                           />
                         )

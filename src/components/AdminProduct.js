@@ -5,14 +5,15 @@ import { Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form, For
 
 class AdminProduct extends React.Component{
 
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
     this.state = {
         modal: false,
         newTitleValue: '',
         newDescriptionValue: '',
-        newPriceValue: ''
+        newPriceValue: '',
+        message: ''
      }
     this.onChange = this.onChange.bind(this);
    }
@@ -32,6 +33,7 @@ class AdminProduct extends React.Component{
     }));
   }
 
+
   reset() {
     this.setState({
       newTitleValue: '',
@@ -40,6 +42,7 @@ class AdminProduct extends React.Component{
     })
   }
 
+
   initializeInput = (p) => {
     this.setState({
       newTitleValue: p.title,
@@ -47,6 +50,7 @@ class AdminProduct extends React.Component{
       newPriceValue: p.price
     })
   }
+
 
   updateProduct = (id) => {
 
@@ -61,8 +65,16 @@ class AdminProduct extends React.Component{
     }
 
     instance.put('http://localhost:3001/api/update/'+ id, params).then(res => {   
-      console.log("Product created!");
-    })
+        const message = res.data;
+        const newProduct = {
+          _id: id,
+          title: params.newTitle,
+          description: params.newDescription,
+          price: params.newPrice
+        }
+        this.props.updateProduct(newProduct);
+        this.props.getMessage(message)
+      })
     this.modalToggle();
     this.reset();
   }
@@ -73,8 +85,8 @@ class AdminProduct extends React.Component{
     const product = this.props.product;
 
     return (
-      <li>{this.props.title}
-        <Button outline color="primary" onClick={this.modalToggle}>View
+      <div>{this.props.title}
+        <Button outline color="primary" onClick={this.modalToggle}>Edit
         </Button>
 
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className} onOpened={() => this.initializeInput(product)}>
@@ -108,7 +120,7 @@ class AdminProduct extends React.Component{
         </ModalFooter>
       </Modal>
 
-    </li>
+    </div>
     )
   }
 

@@ -21,7 +21,6 @@ class Product extends React.Component {
   }
 
   purchase = () => {
-    console.log(this.props.product)
     this.props.handlePurchase(this.props.product);
     this.modalToggle();
   }
@@ -32,22 +31,31 @@ class Product extends React.Component {
     const product = this.props.product;
 
     return (
-      <div>{this.props.title}
-        <Button outline color="danger" onClick={this.modalToggle}>View
+      <div>
+
+        <div>
+        <ul>
+      <li><h2>{this.props.title}</h2></li>
+      <li>{this.props.description}</li>
+      <li>${this.props.price}</li>
+        <Button outline color="primary" onClick={this.modalToggle}>View
         </Button>
+        </ul>
+
+        </div>
+
+
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>
             {this.props.title}
           </ModalHeader>
           <ModalBody>
-            <h3>Image</h3>
 
             <h3>Description:</h3>
               {product.description}
 
             <h3>Price:</h3>
-
-            <h3>Shipping:</h3>
+              {product.price}
 
           </ModalBody>
 
@@ -58,9 +66,16 @@ class Product extends React.Component {
                 Purchase
               </Button>
             </Link>{' '}
-            <Button color="secondary" onClick={this.modalToggle}>
-              Cancel
+
+
+           <Button outline color="info" onClick={this.modalToggle}>
+              Add To Cart
             </Button>
+
+          <Button color="secondary" onClick={this.modalToggle}>
+              Cancel
+          </Button>
+
         </ModalFooter>
       </Modal>
     </div>

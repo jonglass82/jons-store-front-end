@@ -16,8 +16,8 @@ constructor(props){
     productDescription: "",
     productPrice: "",
     modal: false, 
-    selectedProduct: [], 
-    message: ""
+    selectedProduct: [],
+    message: ''
   }
   this.onChange = this.onChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +27,29 @@ constructor(props){
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  updateProduct = (newProduct) => {
+    const products = this.state.products.map(product => {
+      if (product._id === newProduct._id) {
+        return newProduct
+      }
+      return product
+    });
+    console.log(newProduct, products)
+
+    this.setState({
+      products: products
+    })
+  }
+
+  getMessage = (text) => {
+    this.setState({
+      message: text
+    });
+    setTimeout(() => this.setState({
+      message: ''
+    }), 3000)
   }
 
   modalToggle() {
@@ -48,7 +71,6 @@ constructor(props){
       this.getProducts();
   };
 
-//create a new product listing
 createProduct = () => {
 
   const instance = axios.create({
@@ -68,10 +90,9 @@ createProduct = () => {
   })
 }
 
-//submit the form to create a new product
-handleSubmit = () => {
-  this.createProduct();
-}
+  handleSubmit = () => {
+    this.createProduct();
+  }
 
 
   getProducts() {
@@ -94,7 +115,7 @@ render() {
 
     <h1>Dashboard</h1>
 
-    <h2>{this.state.message}</h2>
+    <div className="message">{this.state.message}</div>
 
       <div>
 
@@ -129,21 +150,22 @@ render() {
 
       </div>
 
-
-      <div id="currently-listed-products">
-
         <h3>Current Products:</h3>
+
+      <div id="currently-listed-products" className="grid-container">
 
                 {this.state.products.map((product) => {
                   
                   return ( 
-
                     <AdminProduct
                       id = {product._id}
+                      key = {product._id}
                       product = {product}
                       title = {product.title}
                       description = {product.description}
                       price = {product.price}
+                      updateProduct = {this.updateProduct}
+                      getMessage = {this.getMessage}
                     />
                   ) 
 

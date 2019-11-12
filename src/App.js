@@ -16,7 +16,7 @@ function Home(props) {
 
 
 function Purchase(props) {
-  return <Checkout selectedProduct={props.selectedProduct}></Checkout>
+  return <Checkout cartedProducts={props.cartedProducts} selectedProduct={props.selectedProduct}></Checkout>
 }
 
 // function Signin(props) {
@@ -38,7 +38,8 @@ function ProtectedRoute(props) {
       super(props);
         this.state = {
           selectedProduct: '',
-          loggedIn: false
+          loggedIn: false,
+          cartedProducts: []
       }
     }
 
@@ -83,6 +84,7 @@ function ProtectedRoute(props) {
                      { this.state.loggedIn && ( 
                       <li><a href="#" onClick={this.handleLogout}>logout</a></li>
                       )}
+                     <li>My Cart {this.state.cartedProducts.length}</li>
                   </ul>
                 </nav>
 
@@ -97,7 +99,7 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/purchase">
-                <Purchase selectedProduct={this.state.selectedProduct}/>
+                <Purchase cartedProducts={this.state.cartedProducts} selectedProduct={this.state.selectedProduct}/>
               </Route>
 
               <Route path="/">
