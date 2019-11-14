@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-ro
 function Home(props) {
   return <div>
             <Header></Header>
-            <Products handlePurchase={props.handlePurchase}></Products>
+            <Products addToCart={props.addToCart}></Products>
         </div>
   }
 
@@ -19,9 +19,6 @@ function Purchase(props) {
   return <Checkout cartedProducts={props.cartedProducts} selectedProduct={props.selectedProduct}></Checkout>
 }
 
-// function Signin(props) {
-//   return <Login></Login>
-// }
 
 function AdminDashboard(props) {
   return <Dashboard></Dashboard>
@@ -72,6 +69,11 @@ function ProtectedRoute(props) {
       })
     }
 
+    addToCart = (itemName, item) => {
+      console.log(item);
+      localStorage.setItem(JSON.stringify(itemName), JSON.stringify(item));
+    }
+
     render (){
 
       return (
@@ -82,9 +84,9 @@ function ProtectedRoute(props) {
                   <ul>
                      <li><Link to="/">Home</Link></li>
                      { this.state.loggedIn && ( 
-                      <li><a href="#" onClick={this.handleLogout}>logout</a></li>
+                      <li><a href="/login" onClick={this.handleLogout}>logout</a></li>
                       )}
-                     <li>My Cart {this.state.cartedProducts.length}</li>
+                     <li>My Cart: </li>
                   </ul>
                 </nav>
 
@@ -104,7 +106,7 @@ function ProtectedRoute(props) {
 
               <Route path="/">
                 <Home 
-                  handlePurchase={this.selectProduct}
+                  addToCart={this.addToCart}
                   />
               </Route>
 

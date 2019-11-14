@@ -5,26 +5,42 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
      this.state = {
-      
+      myCart: []
      }
+   }
+
+   getMyItems() {
+
+    const newArray = []
+
+    Object.keys(localStorage).forEach(function(key){
+       newArray.push(localStorage.getItem(key));
+    });
+
+    this.setState({
+      myCart: newArray
+    })
+    console.log(localStorage.length);
+   }
+
+   componentDidMount(){
+    this.getMyItems();
    }
 
 render (){
 
   return  (<div>
 
-    <div>Checkout page</div>
+    <h1> My Shopping Cart:</h1>
 
-    <h1>You are purchasing:</h1>
-      <p>{this.props.selectedProduct.title}</p>
-
-      <p>{this.props.cartedProducts.length}</p>
-
+          {this.state.myCart.map((item) => {
+            return( <h6>{JSON.parse(item).title}...${JSON.parse(item).price}</h6> )
+          })}
 
     </div>
 
     )
-}
+  }
 
 }
 

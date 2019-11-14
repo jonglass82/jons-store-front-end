@@ -1,14 +1,13 @@
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Link } from "react-router-dom";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 class Product extends React.Component {
 
   constructor(props) {
+
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
-    // this.purchase = this.purchase.bind(this);
     this.state = {
         modal: false
      }
@@ -20,8 +19,8 @@ class Product extends React.Component {
     }));
   }
 
-  purchase = () => {
-    this.props.handlePurchase(this.props.product);
+  carted = () => {
+    this.props.addToCart(this.props.product.title, this.props.product);
     this.modalToggle();
   }
 
@@ -61,20 +60,13 @@ class Product extends React.Component {
 
           <ModalFooter>
 
-            <Link to="/purchase">
-              <Button outline color="primary" onClick={this.purchase}>
-                Purchase
-              </Button>
-            </Link>{' '}
-
-
-           <Button outline color="info" onClick={this.modalToggle}>
+            <Button outline color="primary" onClick={this.carted}>
               Add To Cart
             </Button>
 
-          <Button color="secondary" onClick={this.modalToggle}>
-              Cancel
-          </Button>
+            <Button color="secondary" onClick={this.modalToggle}>
+                Cancel
+            </Button>
 
         </ModalFooter>
       </Modal>

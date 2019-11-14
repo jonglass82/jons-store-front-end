@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Product from './product';
 
 
@@ -109,7 +108,7 @@ class Products extends React.Component {
                             title = {product.title}
                             description = {product.description}
                             price = {product.price}
-                            handlePurchase={this.props.handlePurchase}
+                            addToCart={this.props.addToCart}
                           />
                         )
                         

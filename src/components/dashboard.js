@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import AdminProduct from './AdminProduct'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 class Dashboard extends React.Component {
@@ -93,20 +92,6 @@ createProduct = () => {
   handleSubmit = () => {
     this.createProduct();
   }
-
-
-  getProducts() {
-      axios.get('http://localhost:3001/api/products').then(res => {
-      const products = res.data;
-      this.setState((state, props) => ({
-        products: products
-      }));
-    })
-  };
-
-  componentDidMount() {
-      this.getProducts();
-  };
 
 
 render() {

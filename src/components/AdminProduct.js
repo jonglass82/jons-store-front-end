@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 
 
 class AdminProduct extends React.Component{

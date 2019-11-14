@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { Alert, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+
 
 class Login extends React.Component {
 
@@ -39,8 +40,8 @@ class Login extends React.Component {
           })
         }
     })
-  };
 
+  };
 
   render () {
     return this.props.loggedIn ?
