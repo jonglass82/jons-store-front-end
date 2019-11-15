@@ -20,7 +20,7 @@ class Product extends React.Component {
   }
 
   carted = () => {
-    this.props.addToCart(this.props.product.title, this.props.product);
+    this.props.addToCart(this.props.product._id, this.props.product);
     this.modalToggle();
   }
 

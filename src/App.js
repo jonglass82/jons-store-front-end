@@ -16,7 +16,7 @@ function Home(props) {
 
 
 function Purchase(props) {
-  return <Checkout cartedProducts={props.cartedProducts} selectedProduct={props.selectedProduct}></Checkout>
+  return <Checkout></Checkout>
 }
 
 
@@ -34,9 +34,7 @@ function ProtectedRoute(props) {
     constructor(props) {
       super(props);
         this.state = {
-          selectedProduct: '',
           loggedIn: false,
-          cartedProducts: []
       }
     }
 
@@ -69,9 +67,9 @@ function ProtectedRoute(props) {
       })
     }
 
-    addToCart = (itemName, item) => {
-      console.log(item);
-      localStorage.setItem(JSON.stringify(itemName), JSON.stringify(item));
+    addToCart = (itemKey, item) => {
+
+      localStorage.setItem(JSON.stringify(itemKey), JSON.stringify(item));
     }
 
     render (){
@@ -86,7 +84,8 @@ function ProtectedRoute(props) {
                      { this.state.loggedIn && ( 
                       <li><a href="/login" onClick={this.handleLogout}>logout</a></li>
                       )}
-                     <li>My Cart: </li>
+                     <li>My Cart:</li>
+                     <li> <a href="purchase">Checkout</a></li>
                   </ul>
                 </nav>
 
@@ -101,7 +100,7 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/purchase">
-                <Purchase cartedProducts={this.state.cartedProducts} selectedProduct={this.state.selectedProduct}/>
+                <Purchase/>
               </Route>
 
               <Route path="/">
