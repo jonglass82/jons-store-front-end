@@ -16,7 +16,7 @@ function Home(props) {
 
 
 function Purchase(props) {
-  return <Checkout></Checkout>
+  return <Checkout updateCartCount={props.updateCartCount}></Checkout>
 }
 
 
@@ -35,6 +35,8 @@ function ProtectedRoute(props) {
       super(props);
         this.state = {
           loggedIn: false,
+          cartCount: 0,
+          message: ""
       }
     }
 
@@ -70,6 +72,16 @@ function ProtectedRoute(props) {
     addToCart = (itemKey, item) => {
 
       localStorage.setItem(JSON.stringify(itemKey), JSON.stringify(item));
+      
+       this.setState(prevState => {
+         return {cartCount: prevState.cartCount + 1}
+      })
+    }
+
+    updateCartCount = (items) => {
+      this.setState({
+        cartCount: items
+      })
     }
 
     render (){
@@ -85,7 +97,7 @@ function ProtectedRoute(props) {
                       <li><a href="/login" onClick={this.handleLogout}>logout</a></li>
                       )}
                      <li>My Cart:</li>
-                     <li> <a href="purchase">Checkout</a></li>
+                     <li> <Link to="/purchase">Checkout {this.state.cartCount}</Link></li>
                   </ul>
                 </nav>
 
@@ -100,7 +112,7 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/purchase">
-                <Purchase/>
+                <Purchase updateCartCount={this.updateCartCount}/>
               </Route>
 
               <Route path="/">

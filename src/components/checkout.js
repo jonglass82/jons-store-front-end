@@ -27,10 +27,11 @@ class Checkout extends React.Component {
         products: products,
         myCart: newArray
       }));
+      this.props.updateCartCount(newArray.length);
     })
   };
 
-  componentDidMount(){
+   componentDidMount(){
     this.getProducts();
    }
 
