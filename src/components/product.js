@@ -24,6 +24,18 @@ class Product extends React.Component {
     this.modalToggle();
   }
 
+  addToCartButton = (props) => {
+    const inCart = localStorage.getItem(JSON.stringify(props))
+
+    if(inCart){
+      return <Button outline color="primary" disabled={true}>Already added to cart!</Button>
+    }
+        return <Button outline color="primary" onClick={this.carted}>
+              Add To Cart
+            </Button>
+  }
+
+
 
   render () {
 
@@ -51,21 +63,21 @@ class Product extends React.Component {
           <ModalBody>
 
             <h3>Description:</h3>
+
               {product.description}
 
             <h3>Price:</h3>
+
               {product.price}
 
           </ModalBody>
 
           <ModalFooter>
 
-            <Button outline color="primary" onClick={this.carted}>
-              Add To Cart
-            </Button>
+            {this.addToCartButton(this.props.product._id)}
 
             <Button color="secondary" onClick={this.modalToggle}>
-                Cancel
+                Back
             </Button>
 
         </ModalFooter>
