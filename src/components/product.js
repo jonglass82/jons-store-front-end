@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
 
 
 class Product extends React.Component {
@@ -61,6 +61,8 @@ class Product extends React.Component {
             {this.props.title}
           </ModalHeader>
           <ModalBody>
+
+          <UncontrolledCarousel items={[]}/>
 
             <h3>Description:</h3>
 

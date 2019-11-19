@@ -16,7 +16,7 @@ li{
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
   padding: 10px;
   margin: auto;
 }
@@ -24,6 +24,10 @@ li{
 .message {
   color: green;
   font-size: 18pt;
+}
+
+.checkout{
+  font-size: 20pt;
 }
 
 

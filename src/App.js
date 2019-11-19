@@ -119,8 +119,7 @@ function ProtectedRoute(props) {
                      { this.state.loggedIn && ( 
                       <li><a href="/login" onClick={this.handleLogout}>logout</a></li>
                       )}
-                     <li>My Cart:</li>
-                     <li> <Link to="/purchase">Checkout {this.state.cartCount}</Link></li>
+                     <li className="checkout"> <Link to="/purchase">Checkout {this.state.cartCount}</Link></li>
                   </ul>
                 </nav>
 
