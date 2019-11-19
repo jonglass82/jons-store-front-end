@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import axios from 'axios';
 import Products from './components/products.js';
 import Header from './components/header.js';
 import Login from './components/login.js';
@@ -36,7 +37,7 @@ function ProtectedRoute(props) {
         this.state = {
           loggedIn: false,
           cartCount: 0,
-          message: ""
+          products: []
       }
     }
 
@@ -47,7 +48,28 @@ function ProtectedRoute(props) {
           loggedIn: true
         })
       }
+      this.getProducts();
     }
+
+    getProducts() {
+        axios.get('http://localhost:3001/api/products').then(res => {
+
+        const products = res.data;
+        let newCount = 0
+
+        products.map((product) => {
+        if( localStorage.getItem(JSON.stringify(product._id))){
+          newCount = newCount + 1
+        }
+      })
+
+        this.setState((state, props) => ({
+          products: products,
+          cartCount: newCount
+        }));
+        
+      })
+    };
 
     selectProduct = (product) => {
       this.setState({ 
@@ -83,6 +105,7 @@ function ProtectedRoute(props) {
         cartCount: items
       })
     }
+
 
     render (){
 
