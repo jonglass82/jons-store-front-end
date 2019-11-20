@@ -14,6 +14,15 @@ constructor(props){
     productTitle: "",
     productDescription: "",
     productPrice: "",
+    productShipping: "",
+    productSold: "no",
+    productAvailable: "yes",
+    productCategory: "",
+    productImage1: "",
+    productImage2: "",
+    productImage3: "",
+    productImage4: "",
+    productImage5: "",
     modal: false, 
     selectedProduct: [],
     message: ''
@@ -79,9 +88,17 @@ createProduct = () => {
   const params = {
     title: this.state.productTitle,
     description: this.state.productDescription,
-    price: this.state.productPrice, 
+    price: this.state.productPrice,
+    shipping: this.state.productShipping,
+    sold: this.state.productSold,
+    available: this.state.productAvailable, 
+    category: this.state.productCategory, 
+    image1: this.state.productImage1, 
+    image2: this.state.productImage2,
+    image3: this.state.productImage3,
+    image4: this.state.productImage4,
+    image5: this.state.productImage5, 
     auth: localStorage.getItem('token')
-
   }
 
   instance.post('http://localhost:3001/api/create', params).then(res => {   
@@ -127,6 +144,72 @@ render() {
           Price:
           <Input type="text" name="productPrice" value={this.state.productPrice} onChange={this.onChange} />
         </Label>
+      </FormGroup>
+
+      <FormGroup>
+        <Label>
+          Shipping:
+          <Input type="text" name="productShipping" value={this.state.productShipping} onChange={this.onChange} />
+        </Label>
+      </FormGroup>
+
+      <FormGroup>
+        <Label>
+          Sold?
+          <Input type="select" name="productSold" onChange={this.onChange}>
+          <option value="no" >No</option>
+          <option value="yes" >Yes</option>
+          </Input>
+        </Label>
+      </FormGroup>
+
+            {this.state.productAvailable}
+
+      <FormGroup>
+        <Label>
+          Available?
+          <Input type="select" name="productAvailable" value={this.state.productAvailable} onChange={this.onChange}>
+          <option value="yes" >Yes</option>
+          <option value="no" >No</option>
+          </Input>
+        </Label>
+      </FormGroup>
+
+      <FormGroup>
+        <Label>
+          Category
+          <Input type="select" name="productCategory" onChange={this.onChange}>
+          <option value="" selected="selected" disabled>Select a category:</option>
+          <option value="clothing" >Clothing</option>
+          <option value="collectibles" >Collectibles</option>
+          <option value="artwork" >Artwork</option>
+          </Input>
+        </Label>
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="exampleFile">Image 1</Label>
+        <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
+
+            <FormGroup>
+        <Label for="exampleFile">Image 2</Label>
+        <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
+
+            <FormGroup>
+        <Label for="exampleFile">Image 3</Label>
+        <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
+
+            <FormGroup>
+        <Label for="exampleFile">Image 4</Label>
+        <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
+
+            <FormGroup>
+        <Label for="exampleFile">Image 5</Label>
+        <Input type="file" name="file" id="exampleFile" />
       </FormGroup>
 
         <input type="submit" value="Submit" />
