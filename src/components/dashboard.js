@@ -1,7 +1,9 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import axios from 'axios'
 import AdminProduct from './AdminProduct'
 import { Form, FormGroup, Label, Input } from 'reactstrap';
+import {Image, Transformation} from 'cloudinary-react';
 
 
 class Dashboard extends React.Component {
@@ -18,11 +20,7 @@ constructor(props){
     productSold: "no",
     productAvailable: "yes",
     productCategory: "",
-    productImage1: "",
-    productImage2: "",
-    productImage3: "",
-    productImage4: "",
-    productImage5: "",
+    images: [],
     modal: false, 
     selectedProduct: [],
     message: ''
@@ -79,6 +77,7 @@ constructor(props){
       this.getProducts();
   };
 
+
 createProduct = () => {
 
   const instance = axios.create({
@@ -93,11 +92,7 @@ createProduct = () => {
     sold: this.state.productSold,
     available: this.state.productAvailable, 
     category: this.state.productCategory, 
-    image1: this.state.productImage1, 
-    image2: this.state.productImage2,
-    image3: this.state.productImage3,
-    image4: this.state.productImage4,
-    image5: this.state.productImage5, 
+    images: this.state.images,  
     auth: localStorage.getItem('token')
   }
 
@@ -106,9 +101,30 @@ createProduct = () => {
   })
 }
 
+
   handleSubmit = () => {
     this.createProduct();
   }
+
+  addImage = (event) => {
+    const newImage = React.createElement('Input', {type:'file', name:'file', id:'exampleFile', onChange:this.addImage}, 'upload an image');
+    const newImageArray = [...this.state.images]
+    newImageArray.push(URL.createObjectURL(event.target.files[0]))
+
+    this.setState({
+      images: newImageArray 
+    })
+    ReactDOM.render(newImage,document.querySelector(".image-upload"))
+  }
+
+  // storeImages = (imageArray) => {
+  //   const newImageArray = []
+  //   imageArray.forEach(function (image){
+  //     //send image to cloudinary and return a cloudinary url
+  //     //add each image url to a new array
+  //     //update the state with the new array of image urls
+  //   })
+  // }
 
 
 render() {
@@ -123,7 +139,7 @@ render() {
 
       <h2>Create a new product</h2>
 
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
 
       <FormGroup>
         <Label>
@@ -163,7 +179,6 @@ render() {
         </Label>
       </FormGroup>
 
-            {this.state.productAvailable}
 
       <FormGroup>
         <Label>
@@ -187,29 +202,17 @@ render() {
         </Label>
       </FormGroup>
 
-      <FormGroup>
-        <Label for="exampleFile">Image 1</Label>
-        <Input type="file" name="file" id="exampleFile" />
-      </FormGroup>
+          <div>
 
-            <FormGroup>
-        <Label for="exampleFile">Image 2</Label>
-        <Input type="file" name="file" id="exampleFile" />
-      </FormGroup>
+            {this.state.images.map((image) => {
+              return <img src={image} height={200}></img>
+            })}
 
-            <FormGroup>
-        <Label for="exampleFile">Image 3</Label>
-        <Input type="file" name="file" id="exampleFile" />
-      </FormGroup>
+          </div>
 
-            <FormGroup>
-        <Label for="exampleFile">Image 4</Label>
-        <Input type="file" name="file" id="exampleFile" />
-      </FormGroup>
-
-            <FormGroup>
-        <Label for="exampleFile">Image 5</Label>
-        <Input type="file" name="file" id="exampleFile" />
+      <FormGroup className="image-upload">
+        <Label for="exampleFile">Upload Your Images</Label>
+        <Input type="file" name="file" id="exampleFile" onChange={this.addImage}/>
       </FormGroup>
 
         <input type="submit" value="Submit" />
