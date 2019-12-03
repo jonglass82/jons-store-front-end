@@ -108,6 +108,7 @@ class Products extends React.Component {
                             title = {product.title}
                             description = {product.description}
                             price = {product.price}
+                            images = {product.images}
                             addToCart={this.props.addToCart}
                           />
                         )

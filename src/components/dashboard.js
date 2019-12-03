@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import AdminProduct from './AdminProduct'
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import {Image, Transformation} from 'cloudinary-react';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 
 class Dashboard extends React.Component {
@@ -106,25 +105,22 @@ createProduct = () => {
     this.createProduct();
   }
 
-  addImage = (event) => {
-    const newImage = React.createElement('Input', {type:'file', name:'file', id:'exampleFile', onChange:this.addImage}, 'upload an image');
-    const newImageArray = [...this.state.images]
-    newImageArray.push(URL.createObjectURL(event.target.files[0]))
 
+  showWidget = () => {
+    let widget = window.cloudinary.createUploadWidget({ 
+       cloudName: `${process.env.REACT_APP_CLOUDNAME}`, 
+       uploadPreset: `${process.env.REACT_APP_UPLOAD_PRESET}` }, 
+    (error, result) => {
+      if (!error && result && result.event === "success") { 
+      console.log('Done! Here is the image info: ', result.info.url); 
+      const newImageArray = [...this.state.images];
+      newImageArray.push(result.info.url);
     this.setState({
-      images: newImageArray 
-    })
-    ReactDOM.render(newImage,document.querySelector(".image-upload"))
+       images: newImageArray 
+      })
+    }});
+    widget.open()
   }
-
-  // storeImages = (imageArray) => {
-  //   const newImageArray = []
-  //   imageArray.forEach(function (image){
-  //     //send image to cloudinary and return a cloudinary url
-  //     //add each image url to a new array
-  //     //update the state with the new array of image urls
-  //   })
-  // }
 
 
 render() {
@@ -210,10 +206,11 @@ render() {
 
           </div>
 
-      <FormGroup className="image-upload">
-        <Label for="exampleFile">Upload Your Images</Label>
-        <Input type="file" name="file" id="exampleFile" onChange={this.addImage}/>
-      </FormGroup>
+        <FormGroup>
+
+          <Button onClick={this.showWidget} color="primary">Upload Photos</Button>
+
+        </FormGroup>
 
         <input type="submit" value="Submit" />
 

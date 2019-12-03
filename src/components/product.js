@@ -9,7 +9,8 @@ class Product extends React.Component {
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
     this.state = {
-        modal: false
+        modal: false,
+        images: [this.props.images]
      }
    }
 
@@ -18,6 +19,8 @@ class Product extends React.Component {
       modal: !prevState.modal
     }));
   }
+
+
 
   carted = () => {
     this.props.addToCart(this.props.product._id, this.props.product);
@@ -60,9 +63,16 @@ class Product extends React.Component {
           <ModalHeader toggle={this.modalToggle}>
             {this.props.title}
           </ModalHeader>
+
           <ModalBody>
 
-          <UncontrolledCarousel items={[]}/>
+          {console.log(this.state.images[0])}
+     
+          {this.state.images[0] && this.state.images[0].length && 
+          <UncontrolledCarousel items={this.state.images[0].map(image => {
+            return { src: image };
+          })}/>
+        }
 
             <h3>Description:</h3>
 
