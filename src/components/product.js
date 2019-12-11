@@ -10,8 +10,12 @@ class Product extends React.Component {
     this.modalToggle = this.modalToggle.bind(this);
     this.state = {
         modal: false,
-        images: [this.props.images]
+        images: []
      }
+   }
+
+   componetDidMount() {
+
    }
 
   modalToggle() {
@@ -49,10 +53,10 @@ class Product extends React.Component {
 
         <div>
         <ul>
+        <li>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={300} height={300}></img> }</li>
       <li><h2>{this.props.title}</h2></li>
-      <li>{this.props.description}</li>
       <li>${this.props.price}</li>
-        <Button outline color="primary" onClick={this.modalToggle}>View
+        <Button outline color="primary" onClick={this.modalToggle} block>View
         </Button>
         </ul>
 
@@ -65,11 +69,9 @@ class Product extends React.Component {
           </ModalHeader>
 
           <ModalBody>
-
-          {console.log(this.state.images[0])}
      
-          {this.state.images[0] && this.state.images[0].length && 
-          <UncontrolledCarousel items={this.state.images[0].map(image => {
+          {this.props.images && this.props.images.length && 
+          <UncontrolledCarousel items={this.props.images.map(image => {
             return { src: image };
           })}/>
         }

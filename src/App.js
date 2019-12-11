@@ -4,6 +4,8 @@ import axios from 'axios';
 import Products from './components/products.js';
 import Header from './components/header.js';
 import Login from './components/login.js';
+import Info from './components/info.js';
+import Payment from './components/payment.js';
 import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
@@ -18,6 +20,14 @@ function Home(props) {
 
 function Purchase(props) {
   return <Checkout updateCartCount={props.updateCartCount}></Checkout>
+}
+
+function EnterInfo(props){
+  return <Info></Info>
+}
+
+function PaymentInfo(props){
+  return <Payment></Payment>
 }
 
 
@@ -135,6 +145,14 @@ function ProtectedRoute(props) {
 
               <Route path="/purchase">
                 <Purchase updateCartCount={this.updateCartCount}/>
+              </Route>
+
+              <Route path="/purchase-info">
+                <EnterInfo/>
+              </Route>
+
+              <Route path="/payment-info">
+                <PaymentInfo/>
               </Route>
 
               <Route path="/">

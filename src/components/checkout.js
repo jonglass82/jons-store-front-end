@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios';
+import { Button } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 class Checkout extends React.Component {
 
@@ -55,6 +57,12 @@ render (){
 
       </ul>
     })}
+
+    <h3>Total</h3>
+    
+        <Link to="/purchase-info">
+        <Button color="primary">Checkout</Button>
+        </Link>
 
     </div>
 
