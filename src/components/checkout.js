@@ -65,7 +65,6 @@ render (){
         </Link>
 
     </div>
-
     )
   }
 

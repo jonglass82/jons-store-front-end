@@ -1,43 +1,113 @@
 import React from 'react'
-import { Button } from 'reactstrap';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import axios from 'axios';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class Info extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-
+      products: [],
+      myCart: []
     }
 }
+
+  getProducts() {
+      axios.get('http://localhost:3001/api/products').then(res => {
+
+      const products = res.data;
+      const newArray = [...this.state.myCart]
+
+      products.map((product) => {
+        if( localStorage.getItem(JSON.stringify(product._id))){
+          newArray.push(product);
+        }
+      })
+
+      this.setState((state, props) => ({
+        products: products,
+        myCart: newArray
+      }));
+    })
+  };
+
+   componentDidMount(){
+     this.getProducts();
+   }
+
   render(){
-    return <div>
+    return <div className="container">
 
-    <h1>Enter your info here</h1>
+              <h3>Order Summary:</h3>
 
-    <ul>
-    <li>first name</li>
-    <li>last name</li>
-    <li>email</li>
-    <li>phone number</li>
-    </ul>
+                  {this.state.myCart.map((product) => {
+      return <ul>
 
-    <ul>
-      <li>address</li>
-      <li>apt number suite optional</li>
-      <li>city</li>
-      <li>state</li>
-      <li>zip</li>
-      <li>country</li>
-    </ul>
+      <li><h4>{product.title}</h4></li>
 
-    <h3>Order Summary</h3>
+      </ul>
+    })}
 
-    <h4>Notes or instructions (optional)</h4>
+    <h1>Enter your info:</h1>
 
-        <Link to="/payment-info">
-          <Button color="primary">Checkout</Button>
-        </Link>
+    <Form>
+
+     <FormGroup>
+      <Label for="firstName">First Name</Label>
+        <Input type="text" name="firstName" id="firstName" placeholder="First Name" />
+      </FormGroup>
+
+           <FormGroup>
+      <Label for="lastName">Last Name</Label>
+        <Input type="text" name="lastName" id="lastName" placeholder="Last Name" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="Email">Email</Label>
+        <Input type="email" name="email" id="Email" placeholder="Email" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="firstName">Phone Number</Label>
+          <Input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"/>
+      </FormGroup>
+
+      <h1>Shipping address:</h1>
+
+      <FormGroup>
+        <Label for="address">Address</Label>
+          <Input type="text" name="address" id="address" placeholder="Address" />
+      </FormGroup>
+
+        <FormGroup>
+          <Label for="aptNo">Apt number/suite (optional)</Label>
+            <Input type="text" name="aptNo" id="aptNo" placeholder="aptNo" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="city">City</Label>
+        <Input type="text" name="city" id="city" placeholder="city" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="state">State</Label>
+          <Input type="text" name="state" id="state" placeholder="state"/>
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="zip">Zip Code</Label>
+          <Input type="text" name="zip" id="zip" placeholder="zip code"/>
+      </FormGroup>
+
+         <h4>Notes or instructions (optional)</h4>
+
+      <FormGroup>
+        <Input type="textarea" name="text" id="exampleText" placeholder="Notes or instructions (optional)"/>
+      </FormGroup>
+
+      </Form>
+
+          <Button color="primary">Enter Payment Info</Button>
 
     </div>
  }
