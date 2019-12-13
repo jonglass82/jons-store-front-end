@@ -9,6 +9,8 @@ import Payment from './components/payment.js';
 import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import {StripeProvider} from 'react-stripe-elements';
+
 
 function Home(props) {
   return <div>
@@ -23,7 +25,10 @@ function Purchase(props) {
 }
 
 function EnterInfo(props){
-  return <Info></Info>
+   return <StripeProvider apiKey="123">
+      <Info></Info>
+    </StripeProvider>
+  
 }
 
 function PaymentInfo(props){
