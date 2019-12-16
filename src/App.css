@@ -42,5 +42,14 @@ li{
   background: white;
 }
 
+.payment-form{
+  max-width: 600px;
+}
+
+.shopping-cart{
+  align-content: center;
+  text-align: center;
+}
+
 
 

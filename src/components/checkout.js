@@ -46,24 +46,27 @@ class Checkout extends React.Component {
 
 render (){
 
-  return  (<div>
+  return  (<div className="container">
 
     <h1> My Shopping Cart:</h1>
+
+    <div className="shopping-cart">
 
     {this.state.myCart.map((product) => {
       return <ul>
 
-      <li><h3>{product.title}<button onClick={()=>this.removeProduct(product._id)}> X </button></h3></li>
+      <li><b>{product.title}<button onClick={()=>this.removeProduct(product._id)}> X </button></b></li>
 
       </ul>
     })}
 
-    <h3>Total</h3>
+    <h3>Total: $</h3>
     
         <Link to="/purchase-info">
-        <Button color="primary">Checkout</Button>
+        <Button outline color="primary" block>Checkout</Button>
         </Link>
 
+    </div>
     </div>
     )
   }

@@ -1,12 +1,27 @@
 import React from 'react';
 import {injectStripe} from 'react-stripe-elements';
 import CardSection from './CardSection';
+import { Col, Row, Button, Form, FormGroup, Label, Input, FormText,
+Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 class CheckoutForm extends React.Component {
+
+  constructor(props){
+      super(props);
+      this.modalToggle = this.modalToggle.bind(this);
+      this.state = {
+        modal: false
+      }
+  }
+
   handleSubmit = (ev) => {
+
+    console.log("your order has been placed!!!")
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
+
+    this.modalToggle();
 
     // Use Elements to get a reference to the Card Element mounted somewhere
     // in your <Elements> tree. Elements will know how to find your Card Element
@@ -67,17 +82,106 @@ class CheckoutForm extends React.Component {
         name: 'Jenny Rosen',
       },
     });
+    
   };
 
+  modalToggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
+
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
+    return (<div className="payment-form">
 
-        <CardSection />
+      <Form>
 
-        <button>Confirm order</button>
+      <FormGroup>
 
-      </form>
+        <Label for="name">Name</Label>
+        <Input type="text" name="name" id="name" placeholder="Name" />
+
+        <Label for="email">Email</Label>
+        <Input type="text" name="email" id="email" placeholder="Email" />
+
+        <Label for="phone">Phone Number</Label>
+        <Input type="text" name="phone" id="phone" placeholder="Phone Number (optional)" />
+
+      </FormGroup>
+
+      <h1>Shipping Address:</h1>
+
+        <FormGroup>
+      
+        <Label for="address">Address</Label>
+        <Input size="lg" type="text" name="address" id="address" placeholder="Address" />
+         </FormGroup>
+
+         <FormGroup>
+
+<Row form>
+        <Col sm={6}>
+          <FormGroup>
+            <Label for="exampleCity">City</Label>
+            <Input type="text" name="city" id="exampleCity"/>
+          </FormGroup>
+        </Col>
+        <Col sm={4}>
+          <FormGroup>
+            <Label for="exampleState">State</Label>
+            <Input type="text" name="state" id="exampleState"/>
+          </FormGroup>
+        </Col>
+        <Col sm={2}>
+          <FormGroup>
+            <Label for="exampleZip">Zip</Label>
+            <Input type="text" name="zip" id="exampleZip"/>
+          </FormGroup>  
+        </Col>
+      </Row>
+
+      </FormGroup>
+
+         <Button outline color="primary" onClick={this.modalToggle} block>Enter Payment information
+        </Button>
+
+
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle}>
+          <ModalHeader toggle={this.modalToggle}>
+           Payment Information
+          </ModalHeader>
+
+          <ModalBody>
+
+          {this.props.myCart.map((product) => {
+            return <ul>
+
+              <li><b>{product.title}</b></li>
+
+            </ul>
+          })}
+
+          <FormGroup>
+            <Label for="cardholder-name">Carholder Name</Label>
+            <Input type="text" name="cardholder-name" id="cardholder-name"/>
+          </FormGroup>
+
+            <CardSection />
+
+          </ModalBody>
+
+          <ModalFooter>
+
+
+            <Button outline color="secondary" onClick={this.handleSubmit} block>
+                Make Payment
+            </Button>
+
+        </ModalFooter>
+      </Modal>
+
+      </Form>
+    </div>
     );
   }
 }

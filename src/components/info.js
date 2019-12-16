@@ -11,8 +11,7 @@ class Info extends React.Component {
     this.modalToggle = this.modalToggle.bind(this);
     this.state = {
       products: [],
-      myCart: [],
-      modal: false
+      myCart: []
     }
 }
 
@@ -48,8 +47,18 @@ class Info extends React.Component {
   render(){
     return <div className="container">
 
+    <h1>Review Your Order:</h1>
+
+        {this.state.myCart.map((product) => {
+      return <ul>
+
+      <li><b>{product.title}</b></li>
+
+      </ul>
+    })}
+
       <Elements>
-        <InjectedCheckoutForm/>
+        <InjectedCheckoutForm myCart={this.state.myCart}/>
       </Elements>
 
     </div>
