@@ -25,10 +25,7 @@ function Purchase(props) {
 }
 
 function EnterInfo(props){
-   return <StripeProvider apiKey="123">
-      <Info></Info>
-    </StripeProvider>
-  
+   return <Info></Info>
 }
 
 function PaymentInfo(props){
