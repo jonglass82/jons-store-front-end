@@ -38,9 +38,24 @@ class Checkout extends React.Component {
    }
 
    removeProduct = (item) => {
-    localStorage.removeItem(JSON.stringify(item));
-    this.getProducts();
-    window.location.href="/purchase"
+      localStorage.removeItem(JSON.stringify(item));
+      this.getProducts();
+      window.location.href="/purchase"
+   }
+
+   getTotal = (cart) => {
+    if(cart.length === 0){
+      return "$ 0.00"
+    }
+    else{
+      let total = 0; 
+      this.state.myCart.forEach((item)=>{
+        total += parseFloat(item.price);
+      })
+      const tax = total * 0.0925;
+      total = total + tax;
+      return total.toFixed(2);
+    }
    }
 
 
@@ -48,26 +63,26 @@ render (){
 
   return  (<div className="container">
 
-    <h1> My Shopping Cart:</h1>
+               <h2> My Shopping Cart:</h2>
 
-    <div className="shopping-cart">
+                  <div className="shopping-cart">
 
-    {this.state.myCart.map((product) => {
-      return <ul>
+                  {this.state.myCart.length > 0 ? this.state.myCart.map((product) => {
+                    return <ul>
 
-      <li><b>{product.title}<button onClick={()=>this.removeProduct(product._id)}> X </button></b></li>
+                    <li><b>{product.title}<button onClick={()=>this.removeProduct(product._id)}> X </button></b></li>
 
-      </ul>
-    })}
+                    </ul>
+                  }) : <div> There are no items in your cart </div>}
 
-    <h3>Total: $</h3>
-    
-        <Link to="/purchase-info">
-        <Button outline color="primary" block>Checkout</Button>
-        </Link>
+                  <h3>Total: {this.getTotal(this.state.myCart)}</h3>
+                  
+                      <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
+                        <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout</Button>
+                      </Link>
 
-    </div>
-    </div>
+                  </div>
+          </div>
     )
   }
 

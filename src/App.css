@@ -51,5 +51,9 @@ li{
   text-align: center;
 }
 
+.result-message-hidden{
+  visibility: hidden;
+}
+
 
 

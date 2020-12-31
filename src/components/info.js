@@ -8,12 +8,11 @@ class Info extends React.Component {
 
   constructor(props){
     super(props);
-    this.modalToggle = this.modalToggle.bind(this);
     this.state = {
       products: [],
       myCart: []
     }
-}
+  }
 
   getProducts() {
       axios.get('http://localhost:3001/api/products').then(res => {
@@ -38,27 +37,37 @@ class Info extends React.Component {
      this.getProducts();
    }
 
-  modalToggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
+   getTotal = (cart) => {
+    if(cart.length === 0){
+      return "$ 0.00"
+    }
+    else{
+      let total = 0; 
+      this.state.myCart.forEach((item)=>{
+        total += parseFloat(item.price);
+      })
+      const tax = total * 0.0925;
+      total = total + tax;
+      return total.toFixed(2);
+    }
+   }
+
 
   render(){
     return <div className="container">
 
-    <h1>Review Your Order:</h1>
-
         {this.state.myCart.map((product) => {
-      return <ul>
+            return <ul>
 
-      <li><b>{product.title}</b></li>
+            <li><b>{product.title}</b></li>
 
-      </ul>
-    })}
+            </ul>
+        })}
+
+        {"$" + this.getTotal(this.state.myCart)}
 
       <Elements>
-        <InjectedCheckoutForm myCart={this.state.myCart}/>
+        <InjectedCheckoutForm myCart={this.state.myCart} total={this.getTotal(this.state.myCart)}/>
       </Elements>
 
     </div>
