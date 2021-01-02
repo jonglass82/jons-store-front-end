@@ -5,7 +5,6 @@ import Products from './components/products.js';
 import Header from './components/header.js';
 import Login from './components/login.js';
 import Info from './components/info.js';
-// import Payment from './components/payment.js';
 import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
@@ -24,7 +23,7 @@ function Purchase(props) {
 }
 
 function EnterInfo(props){
-   return <Info></Info>
+   return <Info updateCartCount={props.updateCartCount}></Info>
 }
 
 

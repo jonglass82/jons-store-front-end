@@ -14,17 +14,11 @@ class Product extends React.Component {
      }
    }
 
-   componetDidMount() {
-
-   }
-
   modalToggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
-
-
 
   carted = () => {
     this.props.addToCart(this.props.product._id, this.props.product);

@@ -45,14 +45,14 @@ class Checkout extends React.Component {
 
    getTotal = (cart) => {
     if(cart.length === 0){
-      return "$ 0.00"
+      return "0.00"
     }
     else{
       let total = 0; 
       this.state.myCart.forEach((item)=>{
         total += parseFloat(item.price);
       })
-      const tax = total * 0.0925;
+      const tax = total * 0.0725;
       total = total + tax;
       return total.toFixed(2);
     }
@@ -75,7 +75,7 @@ render (){
                     </ul>
                   }) : <div> There are no items in your cart </div>}
 
-                  <h3>Total: {this.getTotal(this.state.myCart)}</h3>
+                  <h3>Total: $ {this.getTotal(this.state.myCart)}</h3>
                   
                       <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
                         <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout</Button>

@@ -33,20 +33,26 @@ class Info extends React.Component {
     })
   };
 
+  clearCart = () => {
+    this.setState({
+      myCart: []
+    })
+  }
+
    componentDidMount(){
      this.getProducts();
    }
 
    getTotal = (cart) => {
     if(cart.length === 0){
-      return "$ 0.00"
+      return "0.00"
     }
     else{
       let total = 0; 
       this.state.myCart.forEach((item)=>{
         total += parseFloat(item.price);
       })
-      const tax = total * 0.0925;
+      const tax = total * 0.0725;
       total = total + tax;
       return total.toFixed(2);
     }
@@ -56,18 +62,12 @@ class Info extends React.Component {
   render(){
     return <div className="container">
 
-        {this.state.myCart.map((product) => {
-            return <ul>
-
-            <li><b>{product.title}</b></li>
-
-            </ul>
-        })}
-
-        {"$" + this.getTotal(this.state.myCart)}
-
       <Elements>
-        <InjectedCheckoutForm myCart={this.state.myCart} total={this.getTotal(this.state.myCart)}/>
+        <InjectedCheckoutForm 
+              myCart={this.state.myCart} 
+              clearCart={this.clearCart}
+              updateCartCount={this.props.updateCartCount}
+              total={this.getTotal(this.state.myCart)}/>
       </Elements>
 
     </div>

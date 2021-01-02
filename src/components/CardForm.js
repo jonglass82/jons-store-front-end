@@ -40,52 +40,88 @@ class CardForm extends React.Component{
     });
   };
 
-  handleSubmit = async (ev) => {
-
-    //check if all cart items are still available
-    //if yes....
-    //run payment
-    //if payment suceeds....
-    //mark all items as sold
-    //render payment confirmation screen
-
-    const {elements, stripe, myCart} = this.props;
+  checkout = (ev) => {
 
     ev.preventDefault();
 
-    const cartedItems = {'cartedItems': myCart};
+    let cartedItemsCheck; 
 
-    axios.post('/check-carted-items', cartedItems).then((res)=>{
+    //this.setState({processing: true});
+
+    const cartedItems = {'cartedItems': this.props.myCart};
+
+    axios.post("/check-carted-items", cartedItems).then((res)=>{
       console.log('res from server: ', res.data);
+      cartedItemsCheck = res.data;
+      console.log('cartedItemsCheck value: ', cartedItemsCheck);
+        if(cartedItemsCheck.status){
+          this.handleSubmit(ev);
+        }
+        else{
+          console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
+          this.setState({
+            error: 'some of the items in your cart have already been sold or are unavailable.'
+          });
+        }
     })
 
-    // this.setState({processing: true});
+  }
 
-    // const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
-    //   payment_method: {
-    //     card: elements.getElement(CardElement)
-    //   }
-    // });
+  handleSubmit = async (ev) => {
 
-    // console.log('here is the payload: ', payload);
+    const {elements, stripe, customerInfo} = this.props;
 
-    // if (payload.error) {
-    //   this.setState({
-    //     error: `Payment failed ${payload.error.message}`,
-    //     processing: false
-    //   })
-    // } else {
-    //   this.setState({
-    //     error: null,
-    //     processing: false,
-    //     succeeded: true
-    //   })
-    // }
+     ev.preventDefault();
+
+    this.setState({processing: true});
+
+    const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement)
+      }
+    });
+
+    console.log('here is the payload: ', payload);
+
+    if (payload.error) {
+      this.setState({
+        error: `Payment failed ${payload.error.message}`,
+        processing: false
+      })
+    } else {
+      this.setState({
+        error: null,
+        processing: false,
+        succeeded: true
+      })
+
+      const order = {
+        auth: `${process.env.REACT_APP_EXHIBITA}`,
+        name: customerInfo.name,
+        email: customerInfo.email,
+        phone: customerInfo.phone,
+        address: customerInfo.address,
+        city: customerInfo.city,
+        state: customerInfo.state,
+        zip: customerInfo.zip,
+        message: customerInfo.message,
+        items: this.props.myCart,
+        total: this.props.total
+      };
+
+      axios.post("/create-order", order)
+      .then(res => {
+       console.log('response from create-order route:', res.data);
+      });
+
+      this.props.setStep(4);
+    }
 
   };
 
   getPaymentIntent = () => {
-      const total = {'total': parseInt(this.props.total)}
+      const total = {'total': parseFloat(this.props.total)}
+      console.log('total sent:', total);
       axios.post("/create-payment-intent", total)
             .then(res => {
              console.log('got the payment intent:', res);
@@ -101,7 +137,20 @@ class CardForm extends React.Component{
 
   render(){
 
-     return   <form id="payment-form" onSubmit={this.handleSubmit}>
+     return   <form id="payment-form" onSubmit={this.checkout}>
+
+
+                  {this.state.error && (
+                    <div className="card-error" role="alert">
+                      {this.state.error}
+                    </div>
+                  )}
+
+
+                  <p className={this.state.succeeded ? "result-message" : "result-message-hidden"}>
+                    Payment succeeded, see the result in your <a href={`https://dashboard.stripe.com/test/payments`}>{" "}Stripe dashboard.</a> 
+                    Refresh the page to pay again.
+                  </p>   
 
                   <CardElement id="card-element" options={this.cardStyle} onChange={this.handleChange} />
 
@@ -117,20 +166,7 @@ class CardForm extends React.Component{
                           </span>
                       </button>
 
-                  {/* Show any error that happens when processing the payment */}
 
-                          {this.state.error && (
-                            <div className="card-error" role="alert">
-                              {this.state.error}
-                            </div>
-                          )}
-
-                  {/* Show a success message upon completion */}
-
-                          <p className={this.state.succeeded ? "result-message" : "result-message-hidden"}>
-                            Payment succeeded, see the result in your <a href={`https://dashboard.stripe.com/test/payments`}>{" "}Stripe dashboard.</a> 
-                            Refresh the page to pay again.
-                          </p>   
             </form>
   }
 }
@@ -143,6 +179,7 @@ const InjectedCardForm = (props) => {
                   stripe={stripe}  
                   myCart={props.myCart}
                   customerInfo={props.customerInfo} 
+                  setStep={props.setStep}
                   total={props.total} />
       )}
     </ElementsConsumer>
