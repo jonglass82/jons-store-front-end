@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import Products from './components/products.js';
+import Navbar from './components/Navbar.js';
 import Header from './components/header.js';
 import Login from './components/login.js';
 import Info from './components/info.js';
@@ -119,15 +120,11 @@ function ProtectedRoute(props) {
             <Router>
               <div className="App">
 
-                <nav>
-                  <ul>
-                     <li><Link to="/">Home</Link></li>
-                     { this.state.loggedIn && ( 
-                      <li><a href="/login" onClick={this.handleLogout}>logout</a></li>
-                      )}
-                     <li className="checkout"> <Link to="/purchase">Checkout {this.state.cartCount}</Link></li>
-                  </ul>
-                </nav>
+                <Navbar
+                    cartCount={this.state.cartCount}
+                > </Navbar>
+
+
 
             <Switch>
 

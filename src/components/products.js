@@ -39,7 +39,10 @@ class Products extends React.Component {
 
   render() {
 
-    return (
+    return (<div>
+                <div className="header">
+                  A Cool Breeze
+                </div>
           
         <div id="all-products"> 
             
@@ -156,6 +159,7 @@ class Products extends React.Component {
 
           </div>
 
+      </div>
       </div>
     )
   }

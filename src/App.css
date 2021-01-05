@@ -8,16 +8,18 @@ li{
   list-style-type: none;
 }
 
-#header{
-  align-content: center;
+.header{
+  background-color: darkblue; 
+  height: 190px; 
+  padding: 70px; 
   text-align: center;
-  height: 150px;
+  color: white;
+  font-size: 18pt
 }
 
 .grid-container {
   display: grid;
-/*  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
-*/    
+/*  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));*/    
   grid-template-columns: auto auto auto;
   padding: 10px;
   margin: auto;
@@ -54,6 +56,14 @@ li{
 .result-message-hidden{
   visibility: hidden;
 }
+
+.nav-tabs {
+  color: #3c5a78;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+style={{}}
 
 
 
