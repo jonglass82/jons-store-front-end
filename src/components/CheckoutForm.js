@@ -3,7 +3,7 @@ import CardForm from './CardForm';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
-import { Col, Row, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
+import { Container, Col, Row, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
 import { Link } from "react-router-dom";
 
 
@@ -20,7 +20,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 1
+        step: 3
       }
       this.promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_TEST_KEY}`);
   }
@@ -66,19 +66,9 @@ class CheckoutForm extends React.Component {
 
     switch(step){
       case 1:
-          return <div>
+          return <div className="checkoutStep">
 
-                  {this.props.myCart.map((product) => {
-                      return <ul>
-
-                      <li><b>{product.title}</b></li>
-                      <li><b>available: {product.available}</b></li>
-                      <li><b>sold: {product.sold}</b></li>
-
-                      </ul>
-                    })}
-
-                  {"$" + this.props.total}
+                  <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
                   <h5>Buyer Info</h5>
 
@@ -91,25 +81,15 @@ class CheckoutForm extends React.Component {
                     <Label for="phone">Phone Number</Label>
                     <Input type="text" name="phone" value={this.state.phone} onChange={this.onChange} id="phone" placeholder="Phone Number (optional)" />
 
+                  <div className="checkoutFooter">
                     <button onClick={()=>{this.nextStep()}}>nextStep</button>
-
+                  </div>
           </div>
 
       case 2: 
-      return <div>
+      return <div className="checkoutStep">
 
-
-                  {this.props.myCart.map((product) => {
-                      return <ul>
-
-                      <li><b>{product.title}</b></li>
-                      <li><b>{product.available}</b></li>
-                      <li><b>{product.sold}</b></li>
-
-                      </ul>
-                    })}
-
-                  {"$" + this.props.total}
+            <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
               <h5>Shipping Address:</h5>
               
@@ -137,28 +117,38 @@ class CheckoutForm extends React.Component {
                           </Col>
                   </Row>
 
-                <Label for="address">Message: </Label>
+                <Label for="address">Special Message (optional): </Label>
                 <Input type="textbox" name="message" value={this.state.message} onChange={this.onChange} id="address" placeholder="Address" />
                   
-                  <button onClick={()=>{this.prevStep()}}>prevStep</button>
-                  <button onClick={()=>{this.nextStep()}}>nextStep</button>
+                  <div className="checkoutFooter">
+                    <button onClick={()=>{this.prevStep()}}>prevStep</button>
+                    <button onClick={()=>{this.nextStep()}}>nextStep</button>
+                  </div>
 
               </div>
         case 3:
           return <div>
 
+              <div className="itemReviewLastStep">
+                    {this.props.myCart.map((product) => {
+                        return <ul>
 
-                  {this.props.myCart.map((product) => {
-                      return <ul>
+                      <Container>
+                        <Row xs="3" className="checkoutItem">
+                          <Col style={{padding:'5px'}}><img src={product.images[0]} width={80}/></Col>
+                          <Col>{product.title}</Col>
+                          <Col>${product.price}</Col>
+                        </Row>
+                      </Container>
 
-                      <li><b>{product.title}</b></li>
-                      <li><b>{product.available}</b></li>
-                      <li><b>{product.sold}</b></li>
+                        </ul>
+                      })}
+              </div>
 
-                      </ul>
-                    })}
 
-                  {"$" + this.props.total}
+              <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
+
+              <Container>
 
                 <Elements stripe={this.promise} >
                     <CardForm customerInfo={this.state} 
@@ -166,6 +156,8 @@ class CheckoutForm extends React.Component {
                               setStep={this.setStep}
                               myCart={this.props.myCart} />
                 </ Elements>
+
+                </Container>
 
                 <button onClick={()=>{this.prevStep()}}>prevStep</button>
           </div>

@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios';
-import { Button } from 'reactstrap';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { Button, Container, Row, Col } from 'reactstrap';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 class Checkout extends React.Component {
@@ -61,27 +63,46 @@ class Checkout extends React.Component {
 
 render (){
 
-  return  (<div className="checkout">
+  return  (<div>
 
-               <h2> My Shopping Cart:</h2>
+             <div className="checkout">
 
                   <div className="shopping-cart">
 
                   {this.state.myCart.length > 0 ? this.state.myCart.map((product) => {
-                    return <ul>
+                    return <div>
 
-                    <li><b>{product.title}<button onClick={()=>this.removeProduct(product._id)}> X </button></b></li>
+                    <Container>
+                      <Row xs="4" className="checkoutItem">
+                        <Col style={{padding:'5px'}}><img src={product.images[0]} width={120}/></Col>
+                        <Col>{product.title}</Col>
+                        <Col>${product.price}</Col>
+                        <Col style={{textAlign:'right', padding:'5px'}}><Button onClick={()=>{this.removeProduct(product._id)}}>Remove</Button></Col>
+                      </Row>
+                    </Container>
 
-                    </ul>
-                  }) : <div> There are no items in your cart </div>}
+                  </div>
 
-                  <h3>Total: $ {this.getTotal(this.state.myCart)}</h3>
+                  }) : <div className="noItemsDiv"> There are no items in your cart </div>}
+
+
+
+                  </div>
+
+             </div>
+
+                  <div className="checkoutFooter">
+
+                  <div className="total">
+                    <h3>Total: $ {this.getTotal(this.state.myCart)}</h3>
+                  </div>
                   
                       <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
-                        <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout</Button>
+                        <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout $<strong>{this.getTotal(this.state.myCart)}</strong></Button>
                       </Link>
 
                   </div>
+
           </div>
     )
   }

@@ -1,4 +1,8 @@
-
+.App{
+  background-color: black;
+  height: 100vh;
+  color: white;
+}
 
 .all-products{
   align-content: center;
@@ -21,15 +25,14 @@ li{
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 3fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(150px, 3fr)); 
   grid-gap: 1rem;
   padding: 10px;
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
   align-content: center;
-/*  background-color: black;
-*/}
+}
 
 .product{
 /*  background-color: blue;
@@ -70,11 +73,6 @@ li{
   max-width: 600px;
 }
 
-.shopping-cart{
-  align-content: center;
-  text-align: center;
-}
-
 .result-message-hidden{
   visibility: hidden;
 }
@@ -86,9 +84,75 @@ li{
 }
 
 .checkout{
+  padding: 90px 5px 17px 5px;
+  height: 100vh;
+  max-height: 600px;
+  overflow: scroll;
+}
+
+.checkoutItem{
   background-color: red;
-  margin-top: 6%;
-  padding: 10%;
+  padding: 10px;
+  margin: 8px;
+}
+
+.shopping-cart{
+  align-content: center;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14pt;
+}
+
+.checkoutFooter{
+  padding: 20px;
+  background-color: black;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 100;
+}
+
+.checkoutFooter button{
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.noItemsDiv{
+  background-color: red;
+  height: 200px;
+  padding-top: 50px;
+}
+
+.total{
+/*  padding: 5px;
+*/  text-align: center;
+}
+
+.checkoutStep{
+  background-color: red;
+  padding: 110px 20px 20px 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.itemReviewLastStep{
+  max-height: 300px;
+  overflow: scroll;
+  padding-top: 50px;
+  margin-top: 20px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+#payment-form{
+  background-color: yellow;
+}
+
+#card-element{
+  width: 100%;
 }
 
 

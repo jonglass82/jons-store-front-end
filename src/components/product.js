@@ -47,7 +47,7 @@ class Product extends React.Component {
 
         <div className="productDetails">
 
-            <div style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={175} height={175}></img> }</div>
+            <div style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={150} height={150}></img> }</div>
             <div>{this.props.title}</div>
             <div>${this.props.price}</div>
 

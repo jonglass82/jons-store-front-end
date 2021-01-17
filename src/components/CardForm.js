@@ -18,6 +18,7 @@ class CardForm extends React.Component{
       style: {
         base: {
           color: "#32325d",
+          width: '80px',
           fontFamily: 'Arial, sans-serif',
           fontSmoothing: "antialiased",
           fontSize: "16px",
