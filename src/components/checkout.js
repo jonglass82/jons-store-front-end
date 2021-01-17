@@ -61,7 +61,7 @@ class Checkout extends React.Component {
 
 render (){
 
-  return  (<div className="container">
+  return  (<div className="checkout">
 
                <h2> My Shopping Cart:</h2>
 

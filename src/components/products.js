@@ -44,7 +44,7 @@ class Products extends React.Component {
                   A Cool Breeze
                 </div>
           
-        <div id="all-products"> 
+        <div className="all-products"> 
             
           <div>
               
@@ -102,6 +102,37 @@ class Products extends React.Component {
 
                     <div className="grid-container">
 
+                        {this.state.products.map((product) => {
+                          
+                          return ( 
+                            <Product
+                              key={product._id}
+                              product = {product}
+                              title = {product.title}
+                              description = {product.description}
+                              price = {product.price}
+                              images = {product.images}
+                              addToCart={this.props.addToCart}
+                            />
+                          )
+                          
+                        })}
+
+                    </div>
+                      
+                </Col>
+              </Row>
+            </TabPane>
+
+
+            <TabPane tabId="2">
+              <Row>    
+                <Col sm="12">
+
+                      <h1>All Clothing</h1>
+
+                      <div className="grid-container">
+
                       {this.state.products.map((product) => {
                         
                         return ( 
@@ -119,17 +150,6 @@ class Products extends React.Component {
                       })}
 
                     </div>
-                      
-                </Col>
-              </Row>
-            </TabPane>
-
-
-            <TabPane tabId="2">
-              <Row>    
-                <Col sm="12">
-
-                      <h1>All Clothing</h1>
                 </Col>
               </Row>
              </TabPane>
@@ -140,6 +160,26 @@ class Products extends React.Component {
                 <Col sm="12">
 
                       <h1>All collectibles</h1>
+
+                      <div className="grid-container">
+
+                        {this.state.products.map((product) => {
+                          
+                          return ( 
+                            <Product
+                              key={product._id}
+                              product = {product}
+                              title = {product.title}
+                              description = {product.description}
+                              price = {product.price}
+                              images = {product.images}
+                              addToCart={this.props.addToCart}
+                            />
+                          )
+                        
+                      })}
+
+                    </div>
                 </Col>
               </Row>
              </TabPane>
@@ -150,6 +190,26 @@ class Products extends React.Component {
                 <Col sm="12">
 
                       <h1>All artwork</h1>
+
+                      <div className="grid-container">
+
+                        {this.state.products.map((product) => {
+                          
+                          return ( 
+                            <Product
+                              key={product._id}
+                              product = {product}
+                              title = {product.title}
+                              description = {product.description}
+                              price = {product.price}
+                              images = {product.images}
+                              addToCart={this.props.addToCart}
+                            />
+                          )
+                        
+                      })}
+
+                    </div>
 
                 </Col>
               </Row>

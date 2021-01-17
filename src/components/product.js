@@ -43,40 +43,43 @@ class Product extends React.Component {
     const product = this.props.product;
 
     return (
-      <div>
+      <div className="product">
 
-        <div>
-        <ul>
-        <li>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={300} height={300}></img> }</li>
-      <li><h2>{this.props.title}</h2></li>
-      <li>${this.props.price}</li>
-        <Button outline color="primary" onClick={this.modalToggle} block>View
-        </Button>
-        </ul>
+        <div className="productDetails">
+
+            <div style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={175} height={175}></img> }</div>
+            <div>{this.props.title}</div>
+            <div>${this.props.price}</div>
+
+            <Button outline color="primary" onClick={this.modalToggle} block>View</Button>
 
         </div>
 
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="sm">
+          
           <ModalHeader toggle={this.modalToggle}>
             {this.props.title}
           </ModalHeader>
 
           <ModalBody>
      
-          {this.props.images && this.props.images.length && 
-          <UncontrolledCarousel items={this.props.images.map(image => {
-            return { src: image };
-          })}/>
-        }
+            <div className="modalImageContainer">
+                {this.props.images && this.props.images.length && 
+                <UncontrolledCarousel items={this.props.images.map(image => {
+                  return { src: image };
+                    })}/>
+                  }
 
-            <h3>Description:</h3>
+            </div>
 
-              {product.description}
+                  <span>Description:</span>
 
-            <h3>Price:</h3>
+                    {product.description}
 
-              {product.price}
+                  <h5>Price:</h5>
+
+                    {product.price}
 
           </ModalBody>
 
@@ -89,8 +92,11 @@ class Product extends React.Component {
             </Button>
 
         </ModalFooter>
+
       </Modal>
     </div>
+
+
     )
   }
 

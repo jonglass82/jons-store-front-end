@@ -1,7 +1,9 @@
-#all-products{
-  font-size: 20pt;
+
+
+.all-products{
   align-content: center;
   text-align: center;
+  background-color: black;
 }
 
 li{
@@ -9,7 +11,7 @@ li{
 }
 
 .header{
-  background-color: darkblue; 
+  background-color: black; 
   height: 190px; 
   padding: 70px; 
   text-align: center;
@@ -19,10 +21,30 @@ li{
 
 .grid-container {
   display: grid;
-/*  grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));*/    
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 3fr)); 
+  grid-gap: 1rem;
   padding: 10px;
-  margin: auto;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+  align-content: center;
+/*  background-color: black;
+*/}
+
+.product{
+/*  background-color: blue;
+*/}
+
+.modalImageContainer{
+  text-align: center;
+  align-content: center;
+}
+
+.productDetails{
+  background-color: red;
+  padding: 20px;
+  height: 100%;
+  border-radius: 8px;
 }
 
 .message {
@@ -63,7 +85,13 @@ li{
   font-weight: bold;
 }
 
-style={{}}
+.checkout{
+  background-color: red;
+  margin-top: 6%;
+  padding: 10%;
+}
+
+
 
 
 
