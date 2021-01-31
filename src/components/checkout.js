@@ -45,6 +45,23 @@ class Checkout extends React.Component {
       window.location.href="/purchase"
    }
 
+   getTax = (cart) => {
+      let total = 0; 
+      this.state.myCart.forEach((item)=>{
+        total += parseFloat(item.price);
+      })
+      const tax = total * 0.0725;
+      return tax.toFixed(2);
+   }
+
+   getSubTotal = (cart) => {
+      let subtotal = 0; 
+      this.state.myCart.forEach((item)=>{
+        subtotal += parseFloat(item.price);
+      })
+      return subtotal.toFixed(2);
+   }
+
    getTotal = (cart) => {
     if(cart.length === 0){
       return "0.00"
@@ -64,6 +81,10 @@ class Checkout extends React.Component {
 render (){
 
   return  (<div>
+
+              <div style={{textAlign:'center', padding:'10px', fontSize:'18pt'}}>
+                Items: ({this.state.myCart.length})
+              </div>
 
              <div className="checkout">
 
@@ -85,23 +106,27 @@ render (){
 
                   }) : <div className="noItemsDiv"> There are no items in your cart </div>}
 
-
-
                   </div>
 
              </div>
 
-                  <div className="checkoutFooter">
+              <div className="checkoutFooter">
 
-                  <div className="total">
-                    <h3>Total: $ {this.getTotal(this.state.myCart)}</h3>
-                  </div>
-                  
-                      <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
-                        <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout $<strong>{this.getTotal(this.state.myCart)}</strong></Button>
-                      </Link>
+                <div className="breakdownHeader"></div>
 
-                  </div>
+                <div className="checkoutBreakdown">
+                      <ul>
+                        <li>Sub Total: ${this.getSubTotal(this.state.myCart)}</li>
+                        <li>Sales Tax (9.25%): ${this.getTax(this.state.myCart)}</li>
+                        <li style={{fontSize:'25px'}}><strong>Total: ${this.getTotal(this.state.myCart)}</strong></li> 
+                      </ul>
+                </div>
+              
+                  <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
+                    <Button disabled={this.state.myCart.length > 0 ? false : true} outline color="primary" block>Checkout $<strong>{this.getTotal(this.state.myCart)}</strong></Button>
+                  </Link>
+
+              </div>
 
           </div>
     )

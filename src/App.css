@@ -2,6 +2,7 @@
   background-color: black;
   height: 100vh;
   color: white;
+  padding-top: 100px;
 }
 
 .all-products{
@@ -20,7 +21,7 @@ li{
   padding: 70px; 
   text-align: center;
   color: white;
-  font-size: 18pt
+  font-size: 18pt;
 }
 
 .grid-container {
@@ -84,16 +85,16 @@ li{
 }
 
 .checkout{
-  padding: 90px 5px 17px 5px;
-  height: 100vh;
-  max-height: 600px;
+  height: 400px;
+  padding: 12px;
   overflow: scroll;
 }
 
 .checkoutItem{
   background-color: red;
-  padding: 10px;
-  margin: 8px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
 }
 
 .shopping-cart{
@@ -126,33 +127,42 @@ li{
 }
 
 .total{
-/*  padding: 5px;
-*/  text-align: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
 }
 
 .checkoutStep{
   background-color: red;
-  padding: 110px 20px 20px 20px;
+  padding: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .itemReviewLastStep{
-  max-height: 300px;
+  height: 300px;
   overflow: scroll;
-  padding-top: 50px;
-  margin-top: 20px;
-  width: 400px;
-  margin: 0 auto;
 }
 
 #payment-form{
   background-color: yellow;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 #card-element{
   width: 100%;
+}
+
+.checkoutBreakdown{
+  text-align: right;
+  padding: 10px;
+}
+
+.breakdownHeader{
+  height: 2px;
+  background-color: white;
 }
 
 

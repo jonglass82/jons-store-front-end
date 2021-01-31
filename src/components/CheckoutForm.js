@@ -103,13 +103,13 @@ class CheckoutForm extends React.Component {
                               <Input type="text" name="city" value={this.state.city} onChange={this.onChange} id="exampleCity"/>
                             </FormGroup>
                           </Col>
-                          <Col sm={4}>
+                          <Col sm={3}>
                             <FormGroup>
                               <Label for="exampleState">State</Label>
                               <Input type="text" name="state" value={this.state.state} onChange={this.onChange} id="exampleState"/>
                             </FormGroup>
                           </Col>
-                          <Col sm={2}>
+                          <Col sm={3}>
                             <FormGroup>
                               <Label for="exampleZip">Zip</Label>
                               <Input type="text" name="zip" value={this.state.zip} onChange={this.onChange} id="exampleZip"/>

@@ -40,6 +40,7 @@ class Products extends React.Component {
   render() {
 
     return (<div>
+      
                 <div className="header">
                   A Cool Breeze
                 </div>
@@ -98,7 +99,10 @@ class Products extends React.Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <h1>All Items:</h1>
+
+              <div style={{padding:'20px'}}>
+                <h3>All Items:</h3>
+              </div>
 
                     <div className="grid-container">
 
@@ -129,7 +133,9 @@ class Products extends React.Component {
               <Row>    
                 <Col sm="12">
 
-                      <h1>All Clothing</h1>
+                      <div style={{padding:'20px'}}>
+                          <h3>All Clothing</h3>
+                      </div>
 
                       <div className="grid-container">
 
@@ -159,7 +165,9 @@ class Products extends React.Component {
               <Row>    
                 <Col sm="12">
 
-                      <h1>All collectibles</h1>
+                      <div style={{padding:'20px'}}>
+                          <h3>All collectibles</h3>
+                      </div>
 
                       <div className="grid-container">
 
@@ -189,7 +197,9 @@ class Products extends React.Component {
               <Row>    
                 <Col sm="12">
 
-                      <h1>All artwork</h1>
+                      <div style={{padding:'20px'}}>
+                          <h3>All artwork</h3>
+                      </div>
 
                       <div className="grid-container">
 

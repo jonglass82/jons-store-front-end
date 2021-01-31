@@ -14,7 +14,6 @@ import {StripeProvider} from 'react-stripe-elements';
 
 function Home(props) {
   return <div>
-            <Header></Header>
             <Products addToCart={props.addToCart}></Products>
         </div>
 }
@@ -123,8 +122,6 @@ function ProtectedRoute(props) {
                 <Navbar
                     cartCount={this.state.cartCount}
                 > </Navbar>
-
-
 
             <Switch>
 

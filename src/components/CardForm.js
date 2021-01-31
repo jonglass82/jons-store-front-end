@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button } from 'reactstrap';
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
 
 
@@ -155,7 +156,7 @@ class CardForm extends React.Component{
 
                   <CardElement id="card-element" options={this.cardStyle} onChange={this.handleChange} />
 
-                      <button
+                      <Button
                         disabled={this.state.processing || this.state.disabled || this.state.succeeded}
                         id="submit"
                       >
@@ -165,8 +166,7 @@ class CardForm extends React.Component{
                             ) : ("Pay" + " " + "$" + this.props.total)
                           }
                           </span>
-                      </button>
-
+                      </Button>
 
             </form>
   }
