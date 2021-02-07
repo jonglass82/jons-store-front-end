@@ -20,7 +20,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 3
+        step: 4
       }
       this.promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_TEST_KEY}`);
   }
@@ -127,40 +127,43 @@ class CheckoutForm extends React.Component {
 
               </div>
         case 3:
-          return <div>
+          return <div className="paymentStep">
 
               <div className="itemReviewLastStep">
+
                     {this.props.myCart.map((product) => {
-                        return <ul>
+                        return <Container>
+                                  <Row xs="3" className="checkoutItem">
+                                    <Col style={{padding:'5px'}}><img src={product.images[0]} width={80}/></Col>
+                                    <Col>{product.title}</Col>
+                                    <Col>${product.price}</Col>
+                                  </Row>
+                              </Container>
 
-                      <Container>
-                        <Row xs="3" className="checkoutItem">
-                          <Col style={{padding:'5px'}}><img src={product.images[0]} width={80}/></Col>
-                          <Col>{product.title}</Col>
-                          <Col>${product.price}</Col>
-                        </Row>
-                      </Container>
-
-                        </ul>
                       })}
+
               </div>
 
+              <div className="orderDetails">
 
-              <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
+                  <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-              <Container>
+                  <Container>
 
-                <Elements stripe={this.promise} >
-                    <CardForm customerInfo={this.state} 
-                              total={this.props.total} 
-                              setStep={this.setStep}
-                              myCart={this.props.myCart} />
-                </ Elements>
+                    <Elements stripe={this.promise} >
+                        <CardForm customerInfo={this.state} 
+                                  total={this.props.total} 
+                                  setStep={this.setStep}
+                                  myCart={this.props.myCart} />
+                    </ Elements>
 
-                </Container>
+                  </Container>
 
-                <button onClick={()=>{this.prevStep()}}>prevStep</button>
-          </div>
+                    <button onClick={()=>{this.prevStep()}}>prevStep</button>
+                  </div>
+              
+              </div>
+
         case 4:
           return <div>
 

@@ -141,13 +141,11 @@ class CardForm extends React.Component{
 
      return   <form id="payment-form" onSubmit={this.checkout}>
 
-
                   {this.state.error && (
                     <div className="card-error" role="alert">
                       {this.state.error}
                     </div>
                   )}
-
 
                   <p className={this.state.succeeded ? "result-message" : "result-message-hidden"}>
                     Payment succeeded, see the result in your <a href={`https://dashboard.stripe.com/test/payments`}>{" "}Stripe dashboard.</a> 
@@ -160,12 +158,13 @@ class CardForm extends React.Component{
                         disabled={this.state.processing || this.state.disabled || this.state.succeeded}
                         id="submit"
                       >
-                          <span id="button-text">
-                            {this.state.processing ? (
-                              <div className="spinner" id="spinner"></div>
-                            ) : ("Pay" + " " + "$" + this.props.total)
-                          }
-                          </span>
+                              <span id="button-text">
+                                {this.state.processing ? (
+                                  <div className="spinner" id="spinner"></div>
+                                ) : ("Pay" + " " + "$" + this.props.total)
+                              }
+                              </span>
+
                       </Button>
 
             </form>

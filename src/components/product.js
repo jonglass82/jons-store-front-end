@@ -56,7 +56,7 @@ class Product extends React.Component {
         </div>
 
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="sm">
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="sm" centered="true" style={{width:'100%'}}>
           
           <ModalHeader toggle={this.modalToggle}>
             {this.props.title}
@@ -66,7 +66,7 @@ class Product extends React.Component {
      
             <div className="modalImageContainer">
                 {this.props.images && this.props.images.length && 
-                <UncontrolledCarousel items={this.props.images.map(image => {
+                <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
                   return { src: image };
                     })}/>
                   }

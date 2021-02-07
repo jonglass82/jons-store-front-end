@@ -10,11 +10,12 @@ import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import {StripeProvider} from 'react-stripe-elements';
+import { Alert } from 'reactstrap';
 
 
 function Home(props) {
   return <div>
-            <Products addToCart={props.addToCart}></Products>
+            <Products message={props.message} addToCart={props.addToCart}></Products>
         </div>
 }
 
@@ -43,8 +44,9 @@ function ProtectedRoute(props) {
         this.state = {
           loggedIn: false,
           cartCount: 0,
-          products: []
-      }
+          products: [], 
+          message:''      
+        }
     }
 
     componentDidMount() {
@@ -100,10 +102,16 @@ function ProtectedRoute(props) {
     addToCart = (itemKey, item) => {
 
       localStorage.setItem(JSON.stringify(itemKey), JSON.stringify(item));
-      
-       this.setState(prevState => {
-         return {cartCount: prevState.cartCount + 1}
-      })
+
+       const cartCount = this.state.cartCount + 1;
+       this.setState({
+         cartCount: cartCount,
+         message: <Alert style={{transition:'0.3s', textAlign:'center', position:'fixed', zIndex:'100', width:'100%', top:'8%'}} color='success'><strong>Item has been added to your cart!</strong></Alert>
+       })
+
+       setTimeout(()=>{
+        this.setState({message: ''})
+       }, 2000);
     }
 
     updateCartCount = (items) => {
@@ -122,6 +130,9 @@ function ProtectedRoute(props) {
                 <Navbar
                     cartCount={this.state.cartCount}
                 > </Navbar>
+
+
+                {this.state.message}
 
             <Switch>
 
@@ -144,6 +155,7 @@ function ProtectedRoute(props) {
               <Route path="/">
                 <Home 
                   addToCart={this.addToCart}
+                  message={this.state.message}
                   />
               </Route>
 

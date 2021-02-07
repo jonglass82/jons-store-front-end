@@ -95,6 +95,7 @@ li{
   border-radius: 5px;
   padding: 5px;
   font-size: 12px;
+  margin: 5px;
 }
 
 .shopping-cart{
@@ -134,21 +135,28 @@ li{
 
 .checkoutStep{
   background-color: red;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  border-radius: 5px;
 }
 
 .itemReviewLastStep{
-  height: 300px;
+  height: auto;
+  max-height: 300px;
   overflow: scroll;
+  padding: 10px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 #payment-form{
-  background-color: yellow;
+  background-color: green;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 4px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 #card-element{
@@ -163,6 +171,10 @@ li{
 .breakdownHeader{
   height: 2px;
   background-color: white;
+}
+
+.orderDetails{
+  background-color: purple;
 }
 
 
