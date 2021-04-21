@@ -25,11 +25,14 @@ class Product extends React.Component {
     this.modalToggle();
   }
 
-  addToCartButton = (props) => {
+  addToCartButton = (props, isSold) => {
     const inCart = localStorage.getItem(JSON.stringify(props))
 
     if(inCart){
-      return <Button outline color="primary" disabled={true}>Already added to cart!</Button>
+      return <Button outline color="primary" disabled={true}>Already added to cart</Button>
+    }
+    else if(isSold){
+      return <Button disabled={true}>SOLD OUT</Button>
     }
         return <Button outline color="primary" onClick={this.carted}>
               Add To Cart
@@ -41,17 +44,20 @@ class Product extends React.Component {
   render () {
 
     const product = this.props.product;
+    const sold = product.sold === "yes";
 
     return (
       <div className="product">
 
         <div className="productDetails">
 
-            <div style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={150} height={150}></img> }</div>
-            <div>{this.props.title}</div>
+            
+        <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+            <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img src={this.props.images[0]} width={160} height={160}></img> }</div>
+            <div className="productTitle">{this.props.title}</div>
             <div>${this.props.price}</div>
 
-            <Button outline color="primary" onClick={this.modalToggle} block>View</Button>
+            <Button className="viewProductButton" outline color="primary" onClick={this.modalToggle} block>View</Button>
 
         </div>
 
@@ -63,6 +69,9 @@ class Product extends React.Component {
           </ModalHeader>
 
           <ModalBody>
+
+                  <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+
      
             <div className="modalImageContainer">
                 {this.props.images && this.props.images.length && 
@@ -73,19 +82,16 @@ class Product extends React.Component {
 
             </div>
 
-                  <span>Description:</span>
 
                     {product.description}
 
-                  <h5>Price:</h5>
-
-                    {product.price}
+                    <h4>$ {product.price}</h4>
 
           </ModalBody>
 
           <ModalFooter>
 
-            {this.addToCartButton(this.props.product._id)}
+            {this.addToCartButton(this.props.product._id, sold)}
 
             <Button color="secondary" onClick={this.modalToggle}>
                 Back

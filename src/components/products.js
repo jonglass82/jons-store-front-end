@@ -30,20 +30,22 @@ class Products extends React.Component {
       this.setState((state, props) => ({
         products: products
       }));
+      console.log(this.state.products);
     })
   };
 
   componentDidMount() {
       this.getProducts();
+
   };
 
   render() {
 
     return (<div>
       
-                <div className="header">
-                  A Cool Breeze
-                </div>
+          <div className="header">
+              A Cool Breeze
+          </div>
           
         <div className="all-products"> 
             

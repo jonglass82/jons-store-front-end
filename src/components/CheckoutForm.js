@@ -20,7 +20,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 4
+        step: 1
       }
       this.promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_TEST_KEY}`);
   }
