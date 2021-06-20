@@ -102,10 +102,6 @@ class Products extends React.Component {
             <Row>
               <Col sm="12">
 
-              <div style={{padding:'20px'}}>
-                <h3>All Items:</h3>
-              </div>
-
                     <div className="grid-container">
 
                         {this.state.products.map((product) => {
@@ -135,9 +131,6 @@ class Products extends React.Component {
               <Row>    
                 <Col sm="12">
 
-                      <div style={{padding:'20px'}}>
-                          <h3>All Clothing</h3>
-                      </div>
 
                       <div className="grid-container">
 
@@ -167,10 +160,6 @@ class Products extends React.Component {
               <Row>    
                 <Col sm="12">
 
-                      <div style={{padding:'20px'}}>
-                          <h3>All collectibles</h3>
-                      </div>
-
                       <div className="grid-container">
 
                         {this.state.products.map((product) => {
@@ -198,10 +187,6 @@ class Products extends React.Component {
             <TabPane tabId="4">
               <Row>    
                 <Col sm="12">
-
-                      <div style={{padding:'20px'}}>
-                          <h3>All artwork</h3>
-                      </div>
 
                       <div className="grid-container">
 

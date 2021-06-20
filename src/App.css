@@ -1,9 +1,19 @@
-.App{
+body{
   height: 100vh;
+  background: linear-gradient(90deg, rgba(58,132,180,1) 0%, rgba(142,226,200,1) 50%, rgba(90,69,252,1) 100%);
+}
+
+#root{
+  height: 100%;
+}
+
+.App{
   padding-top: 100px;
+  color: white;
 }
 
 .all-products{
+  height: 100%;
   align-content: center;
   text-align: center;
   max-width: 800px;
@@ -32,6 +42,10 @@ li{
   align-content: center;
 }
 
+.MuiAppBar-root{
+  z-index: 1 !important;
+}
+
 .modalImageContainer{
   text-align: center;
   align-content: center;
@@ -46,7 +60,7 @@ li{
 }
 
 .productDetails{
-  background-color: white;
+  background-color: #484848;
   padding: 10px;
   height: 100%;
   border-radius: 8px;
@@ -80,18 +94,20 @@ li{
   background: white;
 }
 
-.payment-form{
-  max-width: 600px;
-}
-
 .result-message-hidden{
   visibility: hidden;
 }
 
 .nav-tabs {
-  color: #3c5a78;
+  color: white !important;
   font-size: 14px;
   font-weight: bold;
+}
+
+.nav-link.active{
+  color: white !important;
+  background-color: #484848 !important;
+  border: none !important;
 }
 
 .checkout{
@@ -101,9 +117,9 @@ li{
 }
 
 .checkoutItem{
-  background-color: red;
+  background-color: black;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   font-size: 12px;
   margin: 5px;
 }
@@ -119,11 +135,8 @@ li{
 .checkoutFooter{
   padding: 20px;
   background-color: black;
-  bottom: 0;
-  position: fixed;
   width: 100%;
   margin: 0 auto;
-  z-index: 100;
 }
 
 .checkoutFooter button{
@@ -132,7 +145,7 @@ li{
 }
 
 .noItemsDiv{
-  background-color: red;
+  background-color: black;
   height: 200px;
   padding-top: 50px;
 }
@@ -144,12 +157,19 @@ li{
 }
 
 .checkoutStep{
-  background-color: red;
+  background-color: black;
   padding: 15px;
   width: 100%;
-  max-width: 600px;
   margin: 0 auto;
   border-radius: 5px;
+}
+
+#payment-form{
+  background-color: green;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 450px;
+  margin: 0 auto;
 }
 
 .itemReviewLastStep{
@@ -157,14 +177,6 @@ li{
   max-height: 300px;
   overflow: scroll;
   padding: 10px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-#payment-form{
-  background-color: green;
-  padding: 10px;
-  border-radius: 4px;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -184,7 +196,10 @@ li{
 }
 
 .orderDetails{
-  background-color: purple;
+  background-color: black;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 4px;
 }
 
 .soldTag{

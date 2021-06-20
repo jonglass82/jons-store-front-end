@@ -31,7 +31,7 @@ class NavBar extends React.Component{
 
   render(){
     return  <div >
-      <AppBar position="fixed">
+      <AppBar style={{backgroundColor:'White', color:'Black'}}>
 
         <Toolbar>
 
@@ -72,7 +72,7 @@ class NavBar extends React.Component{
                   <Grid item sm={2}>
 
                       <IconButton href="/purchase" aria-label="cart">
-                            Checkout
+                            Checkout    
                         <Badge badgeContent={this.props.cartCount} color="secondary">
 
                            <ShoppingCartIcon />
