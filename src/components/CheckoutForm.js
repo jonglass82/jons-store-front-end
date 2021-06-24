@@ -1,10 +1,12 @@
 import React from 'react';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import CardForm from './CardForm';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
-import { Container, Col, Row, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
+import { Container, Col, Row, Button, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
 import { Link } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
 
 
 class CheckoutForm extends React.Component {
@@ -72,14 +74,11 @@ class CheckoutForm extends React.Component {
 
                   <h5>Buyer Info</h5>
 
-                    <Label for="name">Name</Label>
-                    <Input type="text" name="name" value={this.state.name} onChange={this.onChange} id="name" placeholder="Name" />
+                    <TextField type="text" label="Name" name="name" value={this.state.name} onChange={this.onChange} id="name" />
 
-                    <Label for="email">Email</Label>
-                    <Input type="text" name="email" value={this.state.email} onChange={this.onChange} id="email" placeholder="Email" />
+                    <TextField type="text" label="Email" name="email" value={this.state.email} onChange={this.onChange} id="email" />
 
-                    <Label for="phone">Phone Number</Label>
-                    <Input type="text" name="phone" value={this.state.phone} onChange={this.onChange} id="phone" placeholder="Phone Number (optional)" />
+                    <TextField type="text" label="Phone" name="Phone" value={this.state.phone} onChange={this.onChange} id="phone" />
 
                   <div className="checkoutFooter">
                     <button onClick={()=>{this.nextStep()}}>nextStep</button>
@@ -167,13 +166,22 @@ class CheckoutForm extends React.Component {
         case 4:
           return <div>
 
-            <h1>Your purchase has been completed!</h1>
+                <div id="checkoutConfirmation">
 
-            <p>An email receipt has been sent to {this.state.email}</p>
+                  <h2>Your purchase is complete!</h2>
 
-                <Link to="/">
-                Back Home
-                </Link>
+                  <div style={{padding: "20px 0px 20px 0px"}}>
+                    <CheckCircleOutlinedIcon style={{fontSize:'150px', color:'green'}}></CheckCircleOutlinedIcon>
+                  </div>
+
+                  <p>An email receipt has been sent to "customer email" {this.state.email}</p>
+
+                  <Link to="/">
+                  Back Home
+                  </Link>
+
+                </div>
+
           </div>
     }
 

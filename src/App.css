@@ -117,7 +117,7 @@ li{
 }
 
 .checkoutItem{
-  background-color: black;
+  background-color: #484848;
   border-radius: 5px;
   padding: 10px;
   font-size: 12px;
@@ -134,7 +134,7 @@ li{
 
 .checkoutFooter{
   padding: 20px;
-  background-color: black;
+  background-color: #484848;
   width: 100%;
   margin: 0 auto;
 }
@@ -145,7 +145,7 @@ li{
 }
 
 .noItemsDiv{
-  background-color: black;
+  background-color: #484848;
   height: 200px;
   padding-top: 50px;
 }
@@ -157,15 +157,17 @@ li{
 }
 
 .checkoutStep{
-  background-color: black;
+  background-color: white;
+  color: #484848;
   padding: 15px;
   width: 100%;
   margin: 0 auto;
   border-radius: 5px;
+  max-width: 600px;
 }
 
 #payment-form{
-  background-color: green;
+  background-color: #484848;
   padding: 10px;
   border-radius: 4px;
   max-width: 450px;
@@ -196,7 +198,7 @@ li{
 }
 
 .orderDetails{
-  background-color: black;
+  background-color: #484848;
   max-width: 480px;
   margin: 0 auto;
   border-radius: 4px;
@@ -207,6 +209,20 @@ li{
   color: white;
   text-align: center;
   border-radius: 2px;
+}
+
+#checkoutConfirmation{
+  color: #484848;
+  background-color: white;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px;
+}
+
+.MuiTextField-root{
+  width: 100% !important;
 }
 
 

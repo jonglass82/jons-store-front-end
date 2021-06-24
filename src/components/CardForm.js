@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Button } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
 
 
@@ -48,24 +49,24 @@ class CardForm extends React.Component{
 
     let cartedItemsCheck; 
 
-    //this.setState({processing: true});
+    this.setState({processing: true});
 
     const cartedItems = {'cartedItems': this.props.myCart};
 
-    axios.post("/check-carted-items", cartedItems).then((res)=>{
-      console.log('res from server: ', res.data);
-      cartedItemsCheck = res.data;
-      console.log('cartedItemsCheck value: ', cartedItemsCheck);
-        if(cartedItemsCheck.status){
-          this.handleSubmit(ev);
-        }
-        else{
-          console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
-          this.setState({
-            error: 'some of the items in your cart have already been sold or are unavailable.'
-          });
-        }
-    })
+    // axios.post("/check-carted-items", cartedItems).then((res)=>{
+    //   console.log('res from server: ', res.data);
+    //   cartedItemsCheck = res.data;
+    //   console.log('cartedItemsCheck value: ', cartedItemsCheck);
+    //     if(cartedItemsCheck.status){
+    //       this.handleSubmit(ev);
+    //     }
+    //     else{
+    //       console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
+    //       this.setState({
+    //         error: 'some of the items in your cart have already been sold or are unavailable.'
+    //       });
+    //     }
+    // })
 
   }
 
@@ -160,7 +161,7 @@ class CardForm extends React.Component{
                       >
                               <span id="button-text">
                                 {this.state.processing ? (
-                                  <div className="spinner" id="spinner"></div>
+                                  <Spinner size="sm" color="primary" />
                                 ) : ("Pay" + " " + "$" + this.props.total)
                               }
                               </span>

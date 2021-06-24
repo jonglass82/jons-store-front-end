@@ -42,7 +42,7 @@ class Checkout extends React.Component {
    removeProduct = (item) => {
       localStorage.removeItem(JSON.stringify(item));
       this.getProducts();
-      window.location.href="/purchase"
+      window.location.href="/purchase";
    }
 
    getTax = (cart) => {
