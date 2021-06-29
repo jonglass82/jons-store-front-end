@@ -134,9 +134,10 @@ li{
 
 .checkoutFooter{
   padding: 20px;
-  background-color: #484848;
   width: 100%;
   margin: 0 auto;
+  text-align: right;
+  align-content: right;
 }
 
 .checkoutFooter button{
@@ -159,10 +160,9 @@ li{
 .checkoutStep{
   background-color: white;
   color: #484848;
-  padding: 15px;
+  padding: 35px;
   width: 100%;
   margin: 0 auto;
-  border-radius: 5px;
   max-width: 600px;
 }
 
@@ -223,6 +223,11 @@ li{
 
 .MuiTextField-root{
   width: 100% !important;
+  padding: 5px !important;
+}
+
+.MuiInputLabel-animated{
+  padding: 5px !important;
 }
 
 

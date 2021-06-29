@@ -22,7 +22,16 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 1
+        step: 1,
+        nameError: true,
+        emailError: false,
+        phoneError: false,
+        addressError: false,
+        cityError: false,
+        stateError: false,
+        zipError: false,
+        messageError: false,
+        amountError: false
       }
       this.promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_TEST_KEY}`);
   }
@@ -61,6 +70,11 @@ class CheckoutForm extends React.Component {
     this.props.updateCartCount(0);
   }
 
+  validateName = () => {
+    this.state.name == "" ? this.setState({nameError: true}) : this.setState({nameError: false});
+  }
+
+
 
   render() {
 
@@ -72,13 +86,34 @@ class CheckoutForm extends React.Component {
 
                   <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-                  <h5>Buyer Info</h5>
+                  <h3 style={{padding: '5px'}}>Buyer Info</h3>
 
-                    <TextField type="text" label="Name" name="name" value={this.state.name} onChange={this.onChange} id="name" />
+                    <TextField 
+                      error = {this.state.nameError ? "true" : ""} 
+                      type="text" 
+                      label="Name" 
+                      name="name" 
+                      value={this.state.name} 
+                      onChange={this.onChange} 
+                      helperText={this.state.nameError ? "Required." : ""}
+                      id="name" />
 
-                    <TextField type="text" label="Email" name="email" value={this.state.email} onChange={this.onChange} id="email" />
 
-                    <TextField type="text" label="Phone" name="Phone" value={this.state.phone} onChange={this.onChange} id="phone" />
+                    <TextField 
+                      type="text" 
+                      label="Email" 
+                      name="email" 
+                      value={this.state.email} 
+                      onChange={this.onChange} 
+                      id="email" />
+
+                    <TextField 
+                      type="text" 
+                      label="Phone" 
+                      name="Phone" 
+                      value={this.state.phone} 
+                      onChange={this.onChange} 
+                      id="phone" />
 
                   <div className="checkoutFooter">
                     <button onClick={()=>{this.nextStep()}}>nextStep</button>
