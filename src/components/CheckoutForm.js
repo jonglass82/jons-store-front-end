@@ -22,10 +22,11 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 1,
-        nameError: true,
+        step: 2,
+        nameError: false,
         emailError: false,
         phoneError: false,
+        phoneErrorMessage: '',
         addressError: false,
         cityError: false,
         stateError: false,
@@ -43,8 +44,23 @@ class CheckoutForm extends React.Component {
   }
 
   nextStep = () => {
-    const nextStep = this.state.step + 1;
-    this.setState({step: nextStep});
+    if(this.state.step == 1){
+      if(this.validateName() && this.validateEmail() && this.validatePhone()){
+        const nextStep = this.state.step + 1;
+        this.setState({step: nextStep});
+      }
+    }
+    else if(this.state.step == 2){
+      if(this.validateStep2()){
+        const nextStep = this.state.step + 1;
+        this.setState({step: nextStep});   
+      }
+    }
+    else{
+      const nextStep = this.state.step + 1;
+      this.setState({step: nextStep});
+    }
+
   }
 
   prevStep = () => {
@@ -71,9 +87,91 @@ class CheckoutForm extends React.Component {
   }
 
   validateName = () => {
-    this.state.name == "" ? this.setState({nameError: true}) : this.setState({nameError: false});
+     if(this.state.name == ""){
+        this.setState({nameError: true});
+        return false;
+      }
+      else{
+        this.setState({nameError: false});
+        return true;
+      }
   }
 
+  validateEmail = () => {
+    if(this.state.email == ""){
+        this.setState({emailError: true});
+        return false; 
+    }
+    else{
+        this.setState({emailError: false});
+        return true;
+    }
+  }
+
+  validatePhone = () => {
+    const regex = new RegExp(/^[0-9]*$/);
+    const onlyNumbers = regex.test(this.state.phone);  
+
+    if(this.state.phone == ""){
+      this.setState({phoneError: true, phoneErrorMessage: 'Required'});
+      return false;
+    }
+
+    if(!onlyNumbers){
+      this.setState({phoneError: true, phoneErrorMessage: 'Only numbers allowed'});
+      return false;
+    }
+
+    this.setState({
+      phoneError: false,
+      phoneErrorMessage: ''
+    });
+    return true;
+  }
+
+  validateStep2 = () => {
+    if(this.state.address == ""){
+        this.setState({addressError: true});
+        return false;
+    }
+    else{
+      this.setState({addressError: false});
+    }
+
+    if(this.state.city == ""){
+        this.setState({cityError: true});
+        return false;
+    }
+    else{
+      this.setState({cityError: false});
+    }
+
+    if(this.state.state == ""){
+        this.setState({stateError: true});
+        return false;
+    }
+    else{
+      this.setState({stateError: false});
+    }
+
+    if(this.state.zip == ""){
+        this.setState({zipError: true});
+        return false;
+    }
+    else{
+      this.setState({zipError: false});
+    }
+
+    this.setState({
+      addressError: false,
+      cityError: false, 
+      stateError: false,
+      zipError: false
+    });
+    return true;
+
+
+  }
 
 
   render() {
@@ -100,19 +198,23 @@ class CheckoutForm extends React.Component {
 
 
                     <TextField 
+                      error = {this.state.emailError ? "true" : ""}
                       type="text" 
                       label="Email" 
                       name="email" 
                       value={this.state.email} 
                       onChange={this.onChange} 
+                      helperText={this.state.emailError ? "Required." : ""}
                       id="email" />
 
                     <TextField 
+                      error = {this.state.phoneError ? "true" : ""}
                       type="text" 
                       label="Phone" 
-                      name="Phone" 
+                      name="phone" 
                       value={this.state.phone} 
-                      onChange={this.onChange} 
+                      onChange={this.onChange}
+                      helperText={this.state.phoneErrorMessage}
                       id="phone" />
 
                   <div className="checkoutFooter">
@@ -125,34 +227,69 @@ class CheckoutForm extends React.Component {
 
             <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-              <h5>Shipping Address:</h5>
-              
-                <Label for="address">Address</Label>
-                <Input type="text" name="address" value={this.state.address} onChange={this.onChange} id="address" placeholder="Address" />
+              <h3 style={{padding: '5px'}}>Shipping Address:</h3>
 
+                    <TextField 
+                      error = {this.state.addressError ? "true" : ""}
+                      type="text" 
+                      label="Address" 
+                      name="address" 
+                      value={this.state.address} 
+                      onChange={this.onChange}
+                      helperText={this.state.addressError ? "Required." : ""}
+                      id="address" />             
+            
                   <Row>
-                          <Col sm={6}>
-                            <FormGroup>
-                              <Label for="exampleCity">City</Label>
-                              <Input type="text" name="city" value={this.state.city} onChange={this.onChange} id="exampleCity"/>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={3}>
-                            <FormGroup>
-                              <Label for="exampleState">State</Label>
-                              <Input type="text" name="state" value={this.state.state} onChange={this.onChange} id="exampleState"/>
-                            </FormGroup>
-                          </Col>
-                          <Col sm={3}>
-                            <FormGroup>
-                              <Label for="exampleZip">Zip</Label>
-                              <Input type="text" name="zip" value={this.state.zip} onChange={this.onChange} id="exampleZip"/>
-                            </FormGroup>  
-                          </Col>
+                      <Col sm={6}>
+
+                        <TextField
+                          error = {this.state.cityError ? "true" : ""}
+                          type = "text"
+                          label = "City" 
+                          name = "city"
+                          value = {this.state.city}
+                          onChange={this.onChange}
+                          helperText={this.state.cityError ? "Required." : ""}
+                          id = "city"
+                          />
+
+                      </Col>
+
+                      <Col sm={3}>
+
+                        <TextField
+                          error = {this.state.stateError ? "true" : ""}
+                          type = "text"
+                          label = "State" 
+                          name = "state"
+                          value = {this.state.state}
+                          onChange={this.onChange}
+                          helperText={this.state.stateError ? "Required." : ""}
+                          id = "state"
+                          />
+
+                      </Col>
+
+                      <Col sm={3}>
+
+                        <TextField
+                          error = {this.state.zipError ? "true" : ""}
+                          type = "text"
+                          label = "Zip Code" 
+                          name = "zip"
+                          value = {this.state.zip}
+                          onChange={this.onChange}
+                          helperText={this.state.zipError ? "Required." : ""}
+                          id = "zip"
+                          /> 
+
+                      </Col>
                   </Row>
 
+                  <div style={{'height': '30px'}}></div>
+
                 <Label for="address">Special Message (optional): </Label>
-                <Input type="textbox" name="message" value={this.state.message} onChange={this.onChange} id="address" placeholder="Address" />
+                <Input style={{'height': '150px'}} type="textbox" name="message" value={this.state.message} onChange={this.onChange} />
                   
                   <div className="checkoutFooter">
                     <button onClick={()=>{this.prevStep()}}>prevStep</button>
