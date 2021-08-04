@@ -4,9 +4,10 @@ import CardForm from './CardForm';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
-import { Container, Col, Row, Button, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
+import { Container, Col, Row, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 class CheckoutForm extends React.Component {
@@ -22,7 +23,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 2,
+        step: 1,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -218,7 +219,7 @@ class CheckoutForm extends React.Component {
                       id="phone" />
 
                   <div className="checkoutFooter">
-                    <button onClick={()=>{this.nextStep()}}>nextStep</button>
+                    <Button variant="outlined" color="primary" onClick={()=>{this.nextStep()}}>nextStep</Button>
                   </div>
           </div>
 
@@ -292,8 +293,8 @@ class CheckoutForm extends React.Component {
                 <Input style={{'height': '150px'}} type="textbox" name="message" value={this.state.message} onChange={this.onChange} />
                   
                   <div className="checkoutFooter">
-                    <button onClick={()=>{this.prevStep()}}>prevStep</button>
-                    <button onClick={()=>{this.nextStep()}}>nextStep</button>
+                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>prevStep</Button>
+                    <Button variant="outlined" color="primary" className="rightButton" onClick={()=>{this.nextStep()}}>nextStep</Button>
                   </div>
 
               </div>
@@ -330,7 +331,10 @@ class CheckoutForm extends React.Component {
 
                   </Container>
 
-                    <button onClick={()=>{this.prevStep()}}>prevStep</button>
+                    <div >
+                      <button onClick={()=>{this.prevStep()}}>prevStep</button>
+                    </div>
+
                   </div>
               
               </div>

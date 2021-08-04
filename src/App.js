@@ -101,7 +101,8 @@ function ProtectedRoute(props) {
 
     addToCart = (itemKey, item) => {
 
-      localStorage.setItem(JSON.stringify(itemKey), JSON.stringify(item));
+      var obj = {value: item.title, timestamp: new Date().getTime() + 1000}
+      localStorage.setItem(JSON.stringify(itemKey), JSON.stringify(obj));
 
        const cartCount = this.state.cartCount + 1;
        this.setState({
