@@ -1,6 +1,7 @@
 import React from 'react';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import CardForm from './CardForm';
+import PurchaseConfirmation from './PurchaseConfirmation';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
@@ -23,7 +24,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 1,
+        step: 4,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -83,8 +84,6 @@ class CheckoutForm extends React.Component {
         message: '',
         amount: ''
     });
-    this.props.clearCart();
-    this.props.updateCartCount(0);
   }
 
   validateName = () => {
@@ -298,6 +297,7 @@ class CheckoutForm extends React.Component {
                   </div>
 
               </div>
+              
         case 3:
           return <div className="paymentStep">
 
@@ -340,25 +340,8 @@ class CheckoutForm extends React.Component {
               </div>
 
         case 4:
-          return <div>
+          return <PurchaseConfirmation updateCartCount={this.props.updateCartCount}/>
 
-                <div id="checkoutConfirmation">
-
-                  <h2>Your purchase is complete!</h2>
-
-                  <div style={{padding: "20px 0px 20px 0px"}}>
-                    <CheckCircleOutlinedIcon style={{fontSize:'150px', color:'green'}}></CheckCircleOutlinedIcon>
-                  </div>
-
-                  <p>An email receipt has been sent to "customer email" {this.state.email}</p>
-
-                  <Link to="/">
-                  Back Home
-                  </Link>
-
-                </div>
-
-          </div>
     }
 
   }

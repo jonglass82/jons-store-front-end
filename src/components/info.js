@@ -33,12 +33,6 @@ class Info extends React.Component {
     })
   };
 
-  clearCart = () => {
-    this.setState({
-      myCart: []
-    })
-  }
-
    componentDidMount(){
      this.getProducts();
    }
@@ -65,8 +59,8 @@ class Info extends React.Component {
       <Elements>
         <InjectedCheckoutForm 
               myCart={this.state.myCart} 
-              clearCart={this.clearCart}
               updateCartCount={this.props.updateCartCount}
+              products={this.products}
               total={this.getTotal(this.state.myCart)}/>
       </Elements>
 

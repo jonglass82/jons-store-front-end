@@ -150,14 +150,11 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/purchase-info">
-                <EnterInfo/>
+                <EnterInfo updateCartCount={this.updateCartCount} />
               </Route>
 
               <Route path="/">
-                <Home 
-                  addToCart={this.addToCart}
-                  message={this.state.message}
-                  />
+                <Home addToCart={this.addToCart} message={this.state.message}/>
               </Route>
 
             </Switch>

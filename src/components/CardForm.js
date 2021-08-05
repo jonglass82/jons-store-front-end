@@ -53,20 +53,20 @@ class CardForm extends React.Component{
 
     const cartedItems = {'cartedItems': this.props.myCart};
 
-    // axios.post("/check-carted-items", cartedItems).then((res)=>{
-    //   console.log('res from server: ', res.data);
-    //   cartedItemsCheck = res.data;
-    //   console.log('cartedItemsCheck value: ', cartedItemsCheck);
-    //     if(cartedItemsCheck.status){
-    //       this.handleSubmit(ev);
-    //     }
-    //     else{
-    //       console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
-    //       this.setState({
-    //         error: 'some of the items in your cart have already been sold or are unavailable.'
-    //       });
-    //     }
-    // })
+    axios.post("/check-carted-items", cartedItems).then((res)=>{
+      console.log('res from server: ', res.data);
+      cartedItemsCheck = res.data;
+      console.log('cartedItemsCheck value: ', cartedItemsCheck);
+        if(cartedItemsCheck.status){
+          this.handleSubmit(ev);
+        }
+        else{
+          console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
+          this.setState({
+            error: 'some of the items in your cart have already been sold or are unavailable.'
+          });
+        }
+    })
 
   }
 
@@ -76,49 +76,50 @@ class CardForm extends React.Component{
 
      ev.preventDefault();
 
-    this.setState({processing: true});
+    // this.setState({processing: true});
 
-    const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement)
-      }
-    });
+    // const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardElement)
+    //   }
+    // });
 
-    console.log('here is the payload: ', payload);
+    // console.log('here is the payload: ', payload);
 
-    if (payload.error) {
-      this.setState({
-        error: `Payment failed ${payload.error.message}`,
-        processing: false
-      })
-    } else {
-      this.setState({
-        error: null,
-        processing: false,
-        succeeded: true
-      })
+    // if (payload.error) {
+    //   this.setState({
+    //     error: `Payment failed ${payload.error.message}`,
+    //     processing: false
+    //   })
+    // } 
+    // else {
+    //   this.setState({
+    //     error: null,
+    //     processing: false,
+    //     succeeded: true
+    //   })
 
-      const order = {
-        auth: `${process.env.REACT_APP_EXHIBITA}`,
-        name: customerInfo.name,
-        email: customerInfo.email,
-        phone: customerInfo.phone,
-        address: customerInfo.address,
-        city: customerInfo.city,
-        state: customerInfo.state,
-        zip: customerInfo.zip,
-        message: customerInfo.message,
-        items: this.props.myCart,
-        total: this.props.total
-      };
+      // const order = {
+      //   auth: `${process.env.REACT_APP_EXHIBITA}`,
+      //   name: customerInfo.name,
+      //   email: customerInfo.email,
+      //   phone: customerInfo.phone,
+      //   address: customerInfo.address,
+      //   city: customerInfo.city,
+      //   state: customerInfo.state,
+      //   zip: customerInfo.zip,
+      //   message: customerInfo.message,
+      //   items: this.props.myCart,
+      //   total: this.props.total
+      // };
 
-      axios.post("/create-order", order)
-      .then(res => {
-       console.log('response from create-order route:', res.data);
-      });
+      // axios.post("/create-order", order)
+      // .then(res => {
+      //  console.log('response from create-order route:', res.data);
+      // });
 
       this.props.setStep(4);
-    }
+    // }
 
   };
 

@@ -136,7 +136,7 @@ class Products extends React.Component {
                       <div className="grid-container">
 
                       {this.state.products.map((product) => {
-                        if(product.category == "clothing"){
+                        if(product.category === "clothing"){
                           return ( 
                             <Product
                               key={product._id}
@@ -148,6 +148,9 @@ class Products extends React.Component {
                               addToCart={this.props.addToCart}
                             />
                           )
+                        }
+                        else{
+                          return null;
                         }
                         
                       })}
@@ -165,7 +168,7 @@ class Products extends React.Component {
                       <div className="grid-container">
 
                         {this.state.products.map((product) => {
-                          if(product.category == "collectibles"){
+                          if(product.category === "collectibles"){
                           return ( 
                             <Product
                               key={product._id}
@@ -177,10 +180,9 @@ class Products extends React.Component {
                               addToCart={this.props.addToCart}
                             />
                           )
-
                         }
                         else{
-                          return;
+                          return null;
                         }
                         
                       })}
@@ -198,7 +200,7 @@ class Products extends React.Component {
                       <div className="grid-container">
 
                         {this.state.products.map((product) => {
-                          if(product.category == "artwork"){
+                          if(product.category === "artwork"){
                           return ( 
                             <Product
                               key={product._id}
