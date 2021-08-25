@@ -43,11 +43,13 @@ class Info extends React.Component {
     }
     else{
       let total = 0; 
+      let shipping = 0;
       this.state.myCart.forEach((item)=>{
         total += parseFloat(item.price);
+        shipping += parseFloat(item.shipping);
       })
-      const tax = total * 0.0725;
-      total = total + tax;
+      const tax = total * 0.0625;
+      total = total + tax + shipping;
       return total.toFixed(2);
     }
    }

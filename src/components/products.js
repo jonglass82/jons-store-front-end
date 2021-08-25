@@ -27,11 +27,9 @@ class Products extends React.Component {
   getProducts() {
       axios.get('http://localhost:3001/api/products').then(res => {
       const products = res.data;
-      console.log(products);
       this.setState((state, props) => ({
         products: products
       }));
-      console.log(this.state.products);
     })
   };
 
@@ -135,8 +133,8 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                      {this.state.products.map((product) => {
-                        if(product.category === "clothing"){
+                      {this.state.products.filter((p)=>{return p.category == "clothing"}).map((product) => {
+
                           return ( 
                             <Product
                               key={product._id}
@@ -148,10 +146,6 @@ class Products extends React.Component {
                               addToCart={this.props.addToCart}
                             />
                           )
-                        }
-                        else{
-                          return null;
-                        }
                         
                       })}
 
@@ -167,8 +161,8 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.state.products.map((product) => {
-                          if(product.category === "collectibles"){
+                        {this.state.products.filter((p)=>{return p.category == "collectibles"}).map((product) => {
+
                           return ( 
                             <Product
                               key={product._id}
@@ -180,10 +174,6 @@ class Products extends React.Component {
                               addToCart={this.props.addToCart}
                             />
                           )
-                        }
-                        else{
-                          return null;
-                        }
                         
                       })}
 
@@ -199,8 +189,8 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.state.products.map((product) => {
-                          if(product.category === "artwork"){
+                        {this.state.products.filter((p)=>{return p.category == "artwork"}).map((product) => {
+
                           return ( 
                             <Product
                               key={product._id}
@@ -212,7 +202,6 @@ class Products extends React.Component {
                               addToCart={this.props.addToCart}
                             />
                           )
-                        }
                         
                       })}
 

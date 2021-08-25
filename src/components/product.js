@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
-
+import { Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
+import Button from '@material-ui/core/Button';
 
 class Product extends React.Component {
 
@@ -29,14 +29,19 @@ class Product extends React.Component {
     const inCart = localStorage.getItem(JSON.stringify(props))
 
     if(inCart){
-      return <Button outline color="primary" disabled={true}>Already added to cart</Button>
+      return <Button variant="contained" color="primary" disabled={true}>Already added to cart</Button>
     }
     else if(isSold){
       return <Button disabled={true}>SOLD OUT</Button>
     }
-        return <Button outline color="primary" onClick={this.carted}>
+        return <Button variant="contained" color="primary" onClick={this.carted}>
               Add To Cart
             </Button>
+  }
+
+  pricePlusShipping = (item, shipping) => {
+    const total = parseFloat(item) + parseFloat(shipping);
+    return total.toFixed(2);
   }
 
 
@@ -51,13 +56,12 @@ class Product extends React.Component {
 
         <div className="productDetails">
 
-            
         <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
             <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={160} height={160}></img> }</div>
             <div className="productTitle">{this.props.title}</div>
             <div>${this.props.price}</div>
 
-            <Button className="viewProductButton" outline color="primary" onClick={this.modalToggle} block>View</Button>
+            <Button variant="outlined" color="primary" fullWidth="true" className="viewProductButton" color="primary" onClick={this.modalToggle} block>View</Button>
 
         </div>
 
@@ -83,19 +87,29 @@ class Product extends React.Component {
             </div>
 
 
-                    {product.description}
+                    <p style={{'padding': '10px 5px 0px 5px'}}>{product.description}</p>
 
-                    <h4>$ {product.price}</h4>
+                    <ul style={{'textAlign':'right'}}>
+
+                      <li>Price $<strong>{product.price}</strong></li>
+
+                      <li>+ Shipping <strong>${product.shipping}</strong></li>
+
+                      <li>_________________</li>
+
+                      <li style={{'fontSize': '2rem'}}>$ {this.pricePlusShipping(product.price, product.shipping)}</li>
+
+                    </ul>
 
           </ModalBody>
 
           <ModalFooter>
 
-            {this.addToCartButton(this.props.product._id, sold)}
-
-            <Button color="secondary" onClick={this.modalToggle}>
+            <Button variant="contained" color="secondary" onClick={this.modalToggle}>
                 Back
             </Button>
+
+            {this.addToCartButton(this.props.product._id, sold)}
 
         </ModalFooter>
 

@@ -41,20 +41,20 @@ class NavBar extends React.Component{
 
                         <IconButton edge="start" color="inherit" aria-label="menu" size="medium">
 
-                            <MenuIcon fontSize="large" onClick={()=>{this.openDrawer()}} />
+                            <MenuIcon fontSize="medium" onClick={()=>{this.openDrawer()}} />
 
                               <Drawer anchor="left" variant="temporary" onClick={()=>{this.openDrawer()}} open={this.state.drawerOpen}>
                                 <List style={{width:'300px', padding:'10px'}}>
                                   <ListItem button>
                                     <ListItemText primary={'Close'} onClick={()=>{this.openDrawer()}} />
                                   </ListItem>
-                                  <ListItem button  component={Link} to="/" >
+                                  <ListItem button component={Link} to="/" >
                                     <ListItemText primary={'Home'}/>
                                   </ListItem>
                                   <ListItem button>
                                     <ListItemText primary={'Music'} />
                                   </ListItem>
-                                  <ListItem button>
+                                  <ListItem button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
                                     <ListItemText primary={'Instagram'} />
                                   </ListItem>
                                   </List>
@@ -71,8 +71,8 @@ class NavBar extends React.Component{
 
                   <Grid item sm={2}>
 
-                      <IconButton href="/purchase" aria-label="cart">
-                            Checkout    
+                      <IconButton style={{float:'right'}} disabled={this.props.cartCount > 0 ? false : true} href="/purchase" aria-label="cart">
+
                         <Badge badgeContent={this.props.cartCount} color="secondary">
 
                            <ShoppingCartIcon />

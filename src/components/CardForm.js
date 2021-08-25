@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button } from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
-
+import { Alert } from 'reactstrap';
 
 class CardForm extends React.Component{
 
@@ -16,24 +16,6 @@ class CardForm extends React.Component{
       disabled: '',
       clientSecret: ''
     }
-    this.cardStyle = {
-      style: {
-        base: {
-          color: "#32325d",
-          width: '80px',
-          fontFamily: 'Arial, sans-serif',
-          fontSmoothing: "antialiased",
-          fontSize: "16px",
-          "::placeholder": {
-            color: "#32325d"
-          }
-        },
-          invalid: {
-            color: "#fa755a",
-            iconColor: "#fa755a"
-          }
-        }
-    };
   }
 
   handleChange = async (event) => {
@@ -54,14 +36,11 @@ class CardForm extends React.Component{
     const cartedItems = {'cartedItems': this.props.myCart};
 
     axios.post("/check-carted-items", cartedItems).then((res)=>{
-      console.log('res from server: ', res.data);
       cartedItemsCheck = res.data;
-      console.log('cartedItemsCheck value: ', cartedItemsCheck);
         if(cartedItemsCheck.status){
           this.handleSubmit(ev);
         }
         else{
-          console.log('items are unavailable', cartedItemsCheck.itemsNotFound);
           this.setState({
             error: 'some of the items in your cart have already been sold or are unavailable.'
           });
@@ -74,63 +53,69 @@ class CardForm extends React.Component{
 
     const {elements, stripe, customerInfo} = this.props;
 
-     ev.preventDefault();
+    ev.preventDefault();
 
-    // this.setState({processing: true});
+    this.setState({processing: true});
 
-    // const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
-    //   payment_method: {
-    //     card: elements.getElement(CardElement)
-    //   }
-    // });
+    const payload = await stripe.confirmCardPayment(this.state.clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement)
+      }
+    });
 
-    // console.log('here is the payload: ', payload);
+    if (payload.error) {
 
-    // if (payload.error) {
-    //   this.setState({
-    //     error: `Payment failed ${payload.error.message}`,
-    //     processing: false
-    //   })
-    // } 
-    // else {
-    //   this.setState({
-    //     error: null,
-    //     processing: false,
-    //     succeeded: true
-    //   })
+      //if payment error, set the error message and dont proceed with creating an order. 
+        this.setState({
+          error: `Payment failed ${payload.error.message}`,
+          processing: false
+        })
+    } 
+    else {
 
-      // const order = {
-      //   auth: `${process.env.REACT_APP_EXHIBITA}`,
-      //   name: customerInfo.name,
-      //   email: customerInfo.email,
-      //   phone: customerInfo.phone,
-      //   address: customerInfo.address,
-      //   city: customerInfo.city,
-      //   state: customerInfo.state,
-      //   zip: customerInfo.zip,
-      //   message: customerInfo.message,
-      //   items: this.props.myCart,
-      //   total: this.props.total
-      // };
+      //if payment success, proceed with creating the order. 
+      this.createOrder(customerInfo);
 
-      // axios.post("/create-order", order)
-      // .then(res => {
-      //  console.log('response from create-order route:', res.data);
-      // });
+      this.setState({
+        error: null,
+        processing: false,
+        succeeded: true
+      })
 
       this.props.setStep(4);
-    // }
+
+    }
 
   };
 
   getPaymentIntent = () => {
       const total = {'total': parseFloat(this.props.total)}
-      console.log('total sent:', total);
       axios.post("/create-payment-intent", total)
             .then(res => {
              console.log('got the payment intent:', res);
              const clientSecret = res.data.clientSecret;
              this.setState({clientSecret: clientSecret})
+      });
+  }
+
+  createOrder = (orderInfo) => {
+      const order = {
+        auth: `${process.env.REACT_APP_EXHIBITA}`,
+        name: orderInfo.name,
+        email: orderInfo.email,
+        phone: orderInfo.phone,
+        address: orderInfo.address,
+        city: orderInfo.city,
+        state: orderInfo.state,
+        zip: orderInfo.zip,
+        message: orderInfo.message,
+        items: this.props.myCart,
+        total: this.props.total
+      };
+
+      axios.post("/create-order", order)
+      .then(res => {
+       console.log('response from create-order route:', res.data);
       });
   }
 
@@ -144,21 +129,17 @@ class CardForm extends React.Component{
      return   <form id="payment-form" onSubmit={this.checkout}>
 
                   {this.state.error && (
-                    <div className="card-error" role="alert">
+                    <Alert color="danger">
                       {this.state.error}
-                    </div>
-                  )}
-
-                  <p className={this.state.succeeded ? "result-message" : "result-message-hidden"}>
-                    Payment succeeded, see the result in your <a href={`https://dashboard.stripe.com/test/payments`}>{" "}Stripe dashboard.</a> 
-                    Refresh the page to pay again.
-                  </p>   
+                    </Alert>
+                  )}  
 
                   <CardElement id="card-element" options={this.cardStyle} onChange={this.handleChange} />
 
                       <Button
                         disabled={this.state.processing || this.state.disabled || this.state.succeeded}
                         id="submit"
+                        className="btn-block"
                       >
                               <span id="button-text">
                                 {this.state.processing ? (

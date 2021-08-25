@@ -9,6 +9,7 @@ import { Container, Col, Row, Form, FormGroup, Input, Label, FormText} from 'rea
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Alert } from 'reactstrap';
 
 
 class CheckoutForm extends React.Component {
@@ -24,7 +25,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 4,
+        step: 1,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -170,7 +171,6 @@ class CheckoutForm extends React.Component {
     });
     return true;
 
-
   }
 
 
@@ -184,7 +184,7 @@ class CheckoutForm extends React.Component {
 
                   <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-                  <h3 style={{padding: '5px'}}>Buyer Info</h3>
+                  <h4 style={{padding: '5px'}}>Buyer Info</h4>
 
                     <TextField 
                       error = {this.state.nameError ? "true" : ""} 
@@ -218,7 +218,7 @@ class CheckoutForm extends React.Component {
                       id="phone" />
 
                   <div className="checkoutFooter">
-                    <Button variant="outlined" color="primary" onClick={()=>{this.nextStep()}}>nextStep</Button>
+                    <Button variant="contained" color="secondary" onClick={()=>{this.nextStep()}}>Continue to Shipping</Button>
                   </div>
           </div>
 
@@ -227,7 +227,12 @@ class CheckoutForm extends React.Component {
 
             <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-              <h3 style={{padding: '5px'}}>Shipping Address:</h3>
+              <h4 style={{padding: '5px'}}>Shipping Address:</h4>
+
+              <Alert color="info">
+                  <strong>Please Note:</strong> All orders are shipped via USPS or Fedex depending on size and weight. Tracking information will be sent to the email provided. Combined shipping discounts are available for orders with multiple items to the same address. Only domestic US shipping offered at this time. 
+              </Alert>
+              
 
                     <TextField 
                       error = {this.state.addressError ? "true" : ""}
@@ -288,12 +293,12 @@ class CheckoutForm extends React.Component {
 
                   <div style={{'height': '30px'}}></div>
 
-                <Label for="address">Special Message (optional): </Label>
-                <Input style={{'height': '150px'}} type="textbox" name="message" value={this.state.message} onChange={this.onChange} />
+                <Label for="address">Special Message (optional)</Label>
+                <textarea  style={{'height': '150px', 'width': '100%', 'resize': 'none'}} type="textbox" name="message" value={this.state.message} onChange={this.onChange} />
                   
                   <div className="checkoutFooter">
-                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>prevStep</Button>
-                    <Button variant="outlined" color="primary" className="rightButton" onClick={()=>{this.nextStep()}}>nextStep</Button>
+                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
+                    <Button variant="contained" color="secondary" className="rightButton" onClick={()=>{this.nextStep()}}>Continue to Payment</Button>
                   </div>
 
               </div>
@@ -301,14 +306,23 @@ class CheckoutForm extends React.Component {
         case 3:
           return <div className="paymentStep">
 
+          <h4 style={{padding: '5px'}}>Payment</h4>
+
+          <h5 style={{'text-align':'center'}}>{this.props.myCart.length} item(s)</h5>
+
               <div className="itemReviewLastStep">
 
                     {this.props.myCart.map((product) => {
                         return <Container>
                                   <Row xs="3" className="checkoutItem">
                                     <Col style={{padding:'5px'}}><img src={product.images[0]} width={80}/></Col>
-                                    <Col>{product.title}</Col>
-                                    <Col>${product.price}</Col>
+                                    <Col style={{'textAlign':'left'}}>{product.title}</Col>
+                                    <Col style={{'textAlign':'left'}}>
+                                      <ul>
+                                       <li>${product.price}</li>
+                                       <li style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></li>
+                                      </ul>
+                                    </Col>
                                   </Row>
                               </Container>
 
@@ -331,9 +345,9 @@ class CheckoutForm extends React.Component {
 
                   </Container>
 
-                    <div >
-                      <button onClick={()=>{this.prevStep()}}>prevStep</button>
-                    </div>
+                  <div style={{'padding': '50px 10px 70px 20px'}}>
+                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
+                   </div> 
 
                   </div>
               

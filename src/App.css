@@ -33,9 +33,9 @@ li{
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 3fr)); 
+  grid-template-columns: repeat(3, minmax(150px, 3fr)); 
   grid-gap: 1rem;
-  padding: 10px;
+  padding-top: 14px;
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
@@ -60,10 +60,10 @@ li{
 }
 
 .productDetails{
-  background-color: #484848;
+  background-color: white;
+  color: black;
   padding: 10px;
   height: 100%;
-  border-radius: 8px;
 }
 
 .productTitle{
@@ -95,19 +95,19 @@ li{
 }
 
 .nav-tabs {
-  color: white !important;
+  color: black !important;
   font-size: 14px;
   font-weight: bold;
 }
 
 .nav-link.active{
-  color: white !important;
-  background-color: #484848 !important;
+  color: black !important;
+  background-color: transparent !important;
   border: none !important;
 }
 
 .checkout{
-  height: 400px;
+  min-height: 250px;
   padding: 12px;
   overflow: scroll;
 }
@@ -115,10 +115,9 @@ li{
 .checkoutItem{
   background-color: white;
   color: black;
-  border-radius: 5px;
   padding: 10px;
-  font-size: 18px;
   margin: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 8px;
 }
 
 .shopping-cart{
@@ -130,7 +129,7 @@ li{
 }
 
 .checkoutFooter{
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   width: 100%;
   margin: 0 auto;
   text-align: right;
@@ -151,21 +150,21 @@ li{
 
 .total{
   text-align: center;
-  padding: 10px;
-  font-size: 25px;
+  padding: 15px;
+  font-size: 35px;
 }
 
 .checkoutStep{
   background-color: white;
   color: #484848;
-  padding: 35px;
+  padding: 20px 15px 40px 15px;
   width: 100%;
   margin: 0 auto;
   max-width: 600px;
 }
 
 #payment-form{
-  background-color: red;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 8px;
   padding: 20px;
   max-width: 450px;
   margin: 0 auto;
@@ -198,7 +197,6 @@ li{
   background-color: red;
   color: white;
   text-align: center;
-  border-radius: 2px;
 }
 
 #checkoutConfirmation{
@@ -223,7 +221,7 @@ li{
 .paymentStep{
   background-color: white;
   color: #484848;
-  padding: 35px;
+/*  padding: 35px;*/
   width: 100%;
   margin: 0 auto;
   max-width: 600px;
@@ -236,6 +234,22 @@ li{
 .rightButton{
   float: right;
 }
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 3fr)); 
+  }
+
+  .checkoutFooter button{
+    display: block;
+  }
+
+  .checkoutFooter{
+    padding: 50px 0px 20px 0px;
+  }
+}
+
+
 
 
 
