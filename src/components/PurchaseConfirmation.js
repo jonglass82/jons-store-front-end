@@ -11,7 +11,7 @@ class PurchaseConfirmation extends React.Component{
 	}
 
 	clearCart() {
-        axios.get('http://localhost:3001/api/products').then(res => {
+        axios.get('https://jons-store.herokuapp.com/api/products').then(res => {
 
 	        const products = res.data;
 
