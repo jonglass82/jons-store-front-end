@@ -57,6 +57,7 @@ class Product extends React.Component {
         <div className="productDetails">
 
         <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+
             <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={160} height={160}></img> }</div>
             <div className="productTitle">{this.props.title}</div>
             <div>${this.props.price}</div>
@@ -66,7 +67,7 @@ class Product extends React.Component {
         </div>
 
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="sm" centered="true" style={{width:'100%'}}>
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered="true" style={{width:'100%'}}>
           
           <ModalHeader toggle={this.modalToggle}>
             {this.props.title}
@@ -75,31 +76,29 @@ class Product extends React.Component {
           <ModalBody>
 
                   <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
-
      
-            <div className="modalImageContainer">
-                {this.props.images && this.props.images.length && 
-                <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
-                  return { src: image };
-                    })}/>
-                  }
+                  <div className="modalImageContainer">
+                      {this.props.images && this.props.images.length && 
+                      <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
+                        return { src: image };
+                          })}/>
+                        }
 
-            </div>
+                  </div>
 
+                  <p style={{'padding': '10px 5px 0px 5px'}}>{product.description}</p>
 
-                    <p style={{'padding': '10px 5px 0px 5px'}}>{product.description}</p>
+                  <ul style={{'textAlign':'right'}}>
 
-                    <ul style={{'textAlign':'right'}}>
+                    <li>Price $<strong>{product.price}</strong></li>
 
-                      <li>Price $<strong>{product.price}</strong></li>
+                    <li>+ Shipping <strong>${product.shipping}</strong></li>
 
-                      <li>+ Shipping <strong>${product.shipping}</strong></li>
+                    <li>_________________</li>
 
-                      <li>_________________</li>
+                    <li style={{'fontSize': '2rem'}}>$ {this.pricePlusShipping(product.price, product.shipping)}</li>
 
-                      <li style={{'fontSize': '2rem'}}>$ {this.pricePlusShipping(product.price, product.shipping)}</li>
-
-                    </ul>
+                  </ul>
 
           </ModalBody>
 

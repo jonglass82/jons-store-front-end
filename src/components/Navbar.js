@@ -24,12 +24,18 @@ class NavBar extends React.Component{
     }
   }
 
-    openDrawer = () => {
+  openDrawer = () => {
    this.state.drawerOpen ? this.setState({drawerOpen: false}) : this.setState({drawerOpen: true})
   }
 
 
   render(){
+
+    const flexContainer = {
+      display: 'flex',
+      flexDirection: 'row'
+    };
+
     return  <div >
       <AppBar style={{backgroundColor:'White', color:'Black'}}>
 
@@ -37,7 +43,7 @@ class NavBar extends React.Component{
 
                 <Grid justify="space-between" container spacing={12}>
 
-                    <Grid item sm={10}>
+                    <Grid item lg={8}>
 
                         <IconButton edge="start" color="inherit" aria-label="menu" size="medium">
 
@@ -69,17 +75,38 @@ class NavBar extends React.Component{
 
                   </Grid>
 
-                  <Grid item sm={2}>
 
-                      <IconButton style={{float:'right'}} disabled={this.props.cartCount > 0 ? false : true} href="/purchase" aria-label="cart">
+                  <Grid item lg={4}>
 
-                        <Badge badgeContent={this.props.cartCount} color="secondary">
+                    <List style={flexContainer}>
 
-                           <ShoppingCartIcon />
-                        
-                        </Badge>
+                        <ListItem button component={Link} to="/" className="desktopNav" >
+                          <ListItemText primary={'Home'}/>
+                        </ListItem>
+                        <ListItem button className="desktopNav">
+                          <ListItemText primary={'Music'} />
+                        </ListItem>
+                        <ListItem className="desktopNav" button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
+                          <ListItemText primary={'Instagram'} />
+                        </ListItem>
 
-                     </IconButton>
+                        <ListItem>
+
+                        <IconButton style={{float:'right'}} disabled={this.props.cartCount > 0 ? false : true} href="/purchase" aria-label="cart">
+
+                            <Badge badgeContent={this.props.cartCount} color="secondary">
+
+                               <ShoppingCartIcon />
+                            
+                            </Badge>
+
+                        </IconButton>
+
+                         </ListItem> 
+
+                      </List>
+
+
 
                  </Grid>
 

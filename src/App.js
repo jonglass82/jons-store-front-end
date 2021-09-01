@@ -160,6 +160,9 @@ function ProtectedRoute(props) {
             </Switch>
 
           </div>
+
+          <div style={{'height': '200px'}}></div>
+
         </Router>
   )
  }

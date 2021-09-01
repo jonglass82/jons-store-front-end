@@ -95,7 +95,7 @@ createProduct = () => {
     auth: localStorage.getItem('token')
   }
 
-  instance.post('http://localhost:3001/api/create', params).then(res => {   
+  instance.post('https://jons-store.herokuapp.com/api/create', params).then(res => {   
     console.log("Product created!");
   })
 }

@@ -82,8 +82,7 @@ class Checkout extends React.Component {
         total += parseFloat(item.price);
         shipping += parseFloat(item.shipping);
       })
-      const tax = total * 0.0625;
-      total = total + tax + shipping;
+      total = total + shipping;
       return total.toFixed(2);
     }
    }
@@ -139,8 +138,7 @@ render (){
                 <div className="checkoutBreakdown">
                       <ul>
                         <li>Item Total: ${this.getSubTotal(this.state.myCart)}</li>
-                        <li>Sales Tax (6.25%): ${this.getTax(this.state.myCart)}</li>
-                        <li>Shipping Total {this.getShipping(this.state.myCart)}</li>
+                        <li>Shipping ${this.getShipping(this.state.myCart)}</li>
                         <li style={{'marginTop':'-10px'}}>___________________________</li>
                         <li style={{fontSize:'25px'}}><strong>Order Total: ${this.getTotal(this.state.myCart)}</strong></li> 
                       </ul>

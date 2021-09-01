@@ -64,7 +64,7 @@ class AdminProduct extends React.Component{
       newPrice: this.state.newPriceValue
     }
 
-    instance.put('http://localhost:3001/api/update/'+ id, params).then(res => {   
+    instance.put('https://jons-store.herokuapp.com/api/update/'+ id, params).then(res => {   
         const message = res.data;
         const newProduct = {
           _id: id,
