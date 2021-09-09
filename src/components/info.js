@@ -48,8 +48,7 @@ class Info extends React.Component {
         total += parseFloat(item.price);
         shipping += parseFloat(item.shipping);
       })
-      const tax = total * 0.0625;
-      total = total + tax + shipping;
+      total = total + shipping;
       return total.toFixed(2);
     }
    }
