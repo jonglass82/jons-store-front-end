@@ -30,7 +30,7 @@ class Login extends React.Component {
         password: this.state.password
       };
 
-      axios.post('https://jons-store.herokuapp.com/api/login', params).then(res => {
+      axios.post(`${process.env.REACT_APP_API_STR}/api/login`, params).then(res => {
         console.log(res.data);
         if (res.data.authenticated) {
           this.props.handleLogin(res.data.token);

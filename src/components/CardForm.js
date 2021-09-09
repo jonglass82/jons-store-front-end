@@ -35,7 +35,7 @@ class CardForm extends React.Component{
 
     const cartedItems = {'cartedItems': this.props.myCart};
 
-    axios.post("https://jons-store.herokuapp.com/api/check-carted-items", cartedItems).then((res)=>{
+    axios.post(`${process.env.REACT_APP_API_STR}/api/check-carted-items`, cartedItems).then((res)=>{
       cartedItemsCheck = res.data;
         if(cartedItemsCheck.status){
           this.handleSubmit(ev);
@@ -90,7 +90,7 @@ class CardForm extends React.Component{
 
   getPaymentIntent = () => {
       const total = {'total': parseFloat(this.props.total)}
-      axios.post("https://jons-store.herokuapp.com/api/create-payment-intent", total)
+      axios.post(`${process.env.REACT_APP_API_STR}/api/create-payment-intent`, total)
             .then(res => {
              console.log('got the payment intent:', res);
              const clientSecret = res.data.clientSecret;
@@ -113,7 +113,7 @@ class CardForm extends React.Component{
         total: this.props.total
       };
 
-      axios.post("https://jons-store.herokuapp.com/api/create-order", order)
+      axios.post(`${process.env.REACT_APP_API_STR}/api/create-order`, order)
       .then(res => {
        console.log('response from create-order route:', res.data);
       });

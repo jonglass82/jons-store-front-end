@@ -64,7 +64,7 @@ constructor(props){
   }
 
   getProducts() {
-      axios.get('https://jons-store.herokuapp.com/api/products').then(res => {
+      axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
       const products = res.data;
       this.setState((state, props) => ({
         products: products
@@ -95,7 +95,7 @@ createProduct = () => {
     auth: localStorage.getItem('token')
   }
 
-  instance.post('https://jons-store.herokuapp.com/api/create', params).then(res => {   
+  instance.post(`${process.env.REACT_APP_API_STR}/api/create`, params).then(res => {   
     console.log("Product created!");
   })
 }
