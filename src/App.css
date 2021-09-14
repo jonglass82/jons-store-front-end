@@ -248,6 +248,10 @@ li{
   float: right;
 }
 
+.MuiListItem-root{
+  width: auto !important;
+}
+
 @media only screen and (max-width: 600px) {
   .grid-container {
     grid-template-columns: repeat(auto-fill, minmax(150px, 3fr)); 

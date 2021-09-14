@@ -4,6 +4,11 @@ import axios from 'axios';
 import Products from './components/products.js';
 import Navbar from './components/Navbar.js';
 import Header from './components/header.js';
+
+import MusicPage from './components/MusicPage.js';
+import Collection from './components/Collection.js';
+import Projects from './components/Projects.js';
+
 import Login from './components/login.js';
 import Info from './components/info.js';
 import Dashboard from './components/dashboard.js';
@@ -25,6 +30,18 @@ function Purchase(props) {
 
 function EnterInfo(props){
    return <Info updateCartCount={props.updateCartCount}></Info>
+}
+
+function Music(props){
+  return <MusicPage></MusicPage>
+}
+
+function NotForSale(props){
+  return <Collection></Collection>
+}
+
+function MyProjects(props){
+  return <Projects></Projects>
 }
 
 
@@ -147,6 +164,18 @@ function ProtectedRoute(props) {
 
               <Route path="/purchase">
                 <Purchase updateCartCount={this.updateCartCount}/>
+              </Route>
+
+              <Route path="/music">
+                <Music/>
+              </Route>
+
+              <Route path="/not-for-sale">
+                <NotForSale/>
+              </Route>
+
+              <Route path="/projects">
+                <MyProjects/>
               </Route>
 
               <Route path="/purchase-info">

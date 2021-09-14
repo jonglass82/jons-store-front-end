@@ -51,7 +51,7 @@ class CardForm extends React.Component{
 
   handleSubmit = async (ev) => {
 
-    const {elements, stripe, customerInfo} = this.props;
+     const {elements, stripe, customerInfo} = this.props;
 
     ev.preventDefault();
 
@@ -74,7 +74,7 @@ class CardForm extends React.Component{
     else {
 
       //if payment success, proceed with creating the order. 
-      this.createOrder(customerInfo);
+       this.createOrder(customerInfo);
 
       this.setState({
         error: null,
@@ -112,6 +112,8 @@ class CardForm extends React.Component{
         items: this.props.myCart,
         total: this.props.total
       };
+
+      console.log('here is the order:', order);
 
       axios.post(`${process.env.REACT_APP_API_STR}/api/create-order`, order)
       .then(res => {

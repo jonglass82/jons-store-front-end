@@ -57,9 +57,18 @@ class NavBar extends React.Component{
                                   <ListItem button component={Link} to="/" >
                                     <ListItemText primary={'Home'}/>
                                   </ListItem>
-                                  <ListItem button>
+                                  <ListItem button component={Link} to="/music" >
                                     <ListItemText primary={'Music'} />
                                   </ListItem>
+
+                                  <ListItem button component={Link} to="/projects" >
+                                    <ListItemText primary={'Projects'} />
+                                  </ListItem>
+
+                                  <ListItem button component={Link} to="/not-for-sale" >
+                                    <ListItemText primary={'Not For Sale'} />
+                                  </ListItem>
+
                                   <ListItem button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
                                     <ListItemText primary={'Instagram'} />
                                   </ListItem>
@@ -83,9 +92,18 @@ class NavBar extends React.Component{
                         <ListItem button component={Link} to="/" className="desktopNav" >
                           <ListItemText primary={'Home'}/>
                         </ListItem>
-                        <ListItem button className="desktopNav">
+                        <ListItem button className="desktopNav" component="a" href="/music">
                           <ListItemText primary={'Music'} />
                         </ListItem>
+
+                        <ListItem button className="desktopNav" component="a" href="/projects">
+                          <ListItemText primary={'Projects'} />
+                        </ListItem>
+
+                        <ListItem button className="desktopNav" component="a" href="/not-for-sale">
+                          <ListItemText primary={'Not For Sale'} />
+                        </ListItem>
+
                         <ListItem className="desktopNav" button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
                           <ListItemText primary={'Instagram'} />
                         </ListItem>
