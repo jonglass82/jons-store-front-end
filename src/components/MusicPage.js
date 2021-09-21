@@ -9,7 +9,7 @@ class MusicPage extends React.Component{
 	}
 
 	render (){
-		return <h1>This is the MusicPage</h1>
+		return <h1>This is the Music Page</h1>
 	}
 
 }

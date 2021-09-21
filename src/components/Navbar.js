@@ -13,6 +13,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 class NavBar extends React.Component{
@@ -72,6 +74,11 @@ class NavBar extends React.Component{
                                   <ListItem button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
                                     <ListItemText primary={'Instagram'} />
                                   </ListItem>
+
+                                  <ListItem button component="a" href="https://github.com/jonglass82">
+                                    <ListItemText primary={'GitHub'} />
+                                  </ListItem>
+
                                   </List>
                               </ Drawer>
 
@@ -105,7 +112,11 @@ class NavBar extends React.Component{
                         </ListItem>
 
                         <ListItem className="desktopNav" button component="a" href="https://www.instagram.com/jonglasss/?hl=en">
-                          <ListItemText primary={'Instagram'} />
+                          <ListItemText primary={<InstagramIcon/>} />
+                        </ListItem>
+
+                        <ListItem className="desktopNav" button component="a" href="https://github.com/jonglass82">
+                          <ListItemText primary={<GitHubIcon/>} />
                         </ListItem>
 
                         <ListItem>

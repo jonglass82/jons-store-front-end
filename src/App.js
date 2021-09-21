@@ -4,11 +4,9 @@ import axios from 'axios';
 import Products from './components/products.js';
 import Navbar from './components/Navbar.js';
 import Header from './components/header.js';
-
 import MusicPage from './components/MusicPage.js';
 import Collection from './components/Collection.js';
 import Projects from './components/Projects.js';
-
 import Login from './components/login.js';
 import Info from './components/info.js';
 import Dashboard from './components/dashboard.js';

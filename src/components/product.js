@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
 import Button from '@material-ui/core/Button';
 
 class Product extends React.Component {
@@ -8,6 +8,7 @@ class Product extends React.Component {
 
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
+    this.showProductControls = this.showProductControls.bind(this);
     this.state = {
         modal: false,
         images: []
@@ -44,6 +45,10 @@ class Product extends React.Component {
     return total.toFixed(2);
   }
 
+  showProductControls = () => {
+    console.log(this);
+  }
+
 
 
   render () {
@@ -56,53 +61,75 @@ class Product extends React.Component {
 
         <div className="productDetails">
 
-        <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+            <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
 
             <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={160} height={160}></img> }</div>
-            <div className="productTitle">{this.props.title}</div>
-            <div>${this.props.price}</div>
+            
+            <div className="productControlsDiv" onMouseOver={this.showProductControls()}>
 
-            <Button variant="outlined" color="primary" fullWidth="true" className="viewProductButton" color="primary" onClick={this.modalToggle} block>View</Button>
+              <div className="productTitle">{this.props.title}</div>
+              <div>${this.props.price}</div>
+
+              <button onClick={this.modalToggle} block>View</button>
+
+            </div>
 
         </div>
 
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered="true" style={{width:'100%'}}>
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered="true" style={{height: 'auto'}}>
           
-          <ModalHeader toggle={this.modalToggle}>
+          <ModalHeader toggle={this.modalToggle} style={{'borderBottom': '0'}}>
             {this.props.title}
           </ModalHeader>
 
-          <ModalBody>
+          <ModalBody className="rounded-0">
 
-                  <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
-     
-                  <div className="modalImageContainer">
-                      {this.props.images && this.props.images.length && 
-                      <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
-                        return { src: image };
-                          })}/>
-                        }
+          <Container>
 
-                  </div>
+              <Row>
 
-                  <p style={{'padding': '10px 5px 0px 5px'}}>{product.description}</p>
+                <Col md="6">
 
-                  <ul style={{'textAlign':'right'}}>
+                        <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+           
+                        <div className="modalImageContainer">
+                            {this.props.images && this.props.images.length && 
+                            <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
+                              return { src: image };
+                                })}/>
+                              }
 
-                    <li>Price $<strong>{product.price}</strong></li>
+                        </div>
 
-                    <li>+ Shipping <strong>${product.shipping}</strong></li>
+                  </Col>
 
-                    <li>_________________</li>
+                  <Col md="6">
 
-                    <li style={{'fontSize': '2rem'}}>$ {this.pricePlusShipping(product.price, product.shipping)}</li>
+                        <p style={{'padding': '10px 5px 0px 5px'}}>{product.description}</p>
 
-                  </ul>
+
+                            <ul style={{'textAlign':'right'}}>
+
+                              <li>Price $<strong>{product.price}</strong></li>
+
+                              <li>+ Shipping <strong>${product.shipping}</strong></li>
+
+                              <li><div style={{'height': '1px', 'backgroundColor': 'black', 'marginTop': '5px'}}></div></li>
+
+                              <li style={{'fontSize': '2rem'}}>$ {this.pricePlusShipping(product.price, product.shipping)}</li>
+
+                            </ul>
+
+                  </Col>
+
+              </Row>
+
+              </Container>
 
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter style={{'borderTop': '0'}}>
 
             <Button variant="contained" color="secondary" onClick={this.modalToggle}>
                 Back
