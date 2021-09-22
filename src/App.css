@@ -1,6 +1,6 @@
 body{
   height: 100vh;
-  background: linear-gradient(90deg, rgba(58,132,180,1) 0%, rgba(142,226,200,1) 50%, rgba(90,69,252,1) 100%);
+  background-color: #1c4285 !important;
 }
 
 #root{
@@ -10,6 +10,10 @@ body{
 .App{
   padding-top: 100px;
   color: white;
+}
+
+.product{
+  height: 250px;
 }
 
 .all-products{
@@ -57,21 +61,22 @@ li{
   overflow: hidden;
 }
 
-.productImageContainer{
+/*.productImageContainer{
   padding: 5px;
   overflow: hidden;
-}
+}*/
 
 .productControlsDiv{
-/*  background-color: red;
-  z-index: 10000;*/
-/*  height: 0;*/
+  height: 0px;
+  transition: 0.2s;
 }
 
-/*.productControlsDiv:hover{
-  background-color: green;
-  height: 150px;
-}*/
+.productControlsShow{
+  background-color: black;
+  height: 130px;
+  margin-top: -85px;
+  z-index: 100;
+}
 
 .productDetails{
   background-color: white;
@@ -81,7 +86,7 @@ li{
 }
 
 .productTitle{
-  height: 90px;
+  height: 30px;
 }
 
 .viewProductButton{
@@ -244,7 +249,6 @@ li{
 .paymentStep{
   background-color: white;
   color: #484848;
-/*  padding: 35px;*/
   width: 100%;
   margin: 0 auto;
   max-width: 600px;

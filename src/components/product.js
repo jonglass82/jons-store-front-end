@@ -8,9 +8,9 @@ class Product extends React.Component {
 
     super(props);
     this.modalToggle = this.modalToggle.bind(this);
-    this.showProductControls = this.showProductControls.bind(this);
     this.state = {
         modal: false,
+        visible: false,
         images: []
      }
    }
@@ -46,7 +46,15 @@ class Product extends React.Component {
   }
 
   showProductControls = () => {
-    console.log(this);
+    this.setState({
+      visible: true
+    })
+  }
+
+  hideProductControls = () => {
+    this.setState({
+      visible: false
+    })
   }
 
 
@@ -59,15 +67,16 @@ class Product extends React.Component {
     return (
       <div className="product">
 
-        <div className="productDetails">
+        <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls}>
 
             <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
 
             <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={160} height={160}></img> }</div>
             
-            <div className="productControlsDiv" onMouseOver={this.showProductControls()}>
+            <div style={{visibility: this.state.visible ? 'visible' : 'hidden'}} className={this.state.visible ? "productControlsDiv productControlsShow" : "productControlsDiv"}>
 
               <div className="productTitle">{this.props.title}</div>
+            
               <div>${this.props.price}</div>
 
               <button onClick={this.modalToggle} block>View</button>

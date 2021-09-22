@@ -43,7 +43,7 @@ class Products extends React.Component {
     return (<div>
       
           <div className="header">
-              A Cool Breeze
+              www.jon-glass.com
           </div>
           
         <div className="all-products"> 
