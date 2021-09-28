@@ -67,7 +67,7 @@ class Product extends React.Component {
     return (
       <div className="product">
 
-        <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls}>
+        <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls} onClick={this.modalToggle}>
 
             <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
 
@@ -75,11 +75,15 @@ class Product extends React.Component {
             
             <div style={{visibility: this.state.visible ? 'visible' : 'hidden'}} className={this.state.visible ? "productControlsDiv productControlsShow" : "productControlsDiv"}>
 
-              <div className="productTitle">{this.props.title}</div>
+              <p className="productTitle">
+                <strong>{this.props.title}</strong>
+              </p>
             
-              <div>${this.props.price}</div>
-
-              <button onClick={this.modalToggle} block>View</button>
+              <div style={{paddingTop: '10px'}}>
+               <strong>
+                <h5>${this.props.price}</h5>
+                </strong>
+              </div>
 
             </div>
 

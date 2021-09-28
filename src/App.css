@@ -42,7 +42,7 @@ li{
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(150px, 3fr)); 
-  grid-gap: .25rem;
+  grid-gap: 0.5rem;
   padding-top: 14px;
   margin: 0 auto;
   max-width: 800px;
@@ -51,7 +51,7 @@ li{
 }
 
 .MuiAppBar-root{
-  z-index: 1 !important;
+  z-index: 100 !important;
 }
 
 .modalImageContainer{
@@ -61,21 +61,27 @@ li{
   overflow: hidden;
 }
 
-/*.productImageContainer{
+.productImageContainer{
   padding: 5px;
   overflow: hidden;
-}*/
+  position: relative;
+  z-index: 1;
+}
 
 .productControlsDiv{
+  background-color: white;
   height: 0px;
-  transition: 0.2s;
+  transition: 0.3s;
+  z-index: 2;
+  position: relative;
+  margin-right: -10px !important;
+  margin-left: -10px !important;
 }
 
 .productControlsShow{
-  background-color: black;
-  height: 130px;
-  margin-top: -85px;
-  z-index: 100;
+  height: 100px;
+  margin-top: -45px;
+  z-index: 2;
 }
 
 .productDetails{
@@ -83,6 +89,7 @@ li{
   color: black;
   padding: 10px;
   height: 100%;
+  overflow: hidden;
 }
 
 .productTitle{
@@ -293,6 +300,7 @@ li{
   .desktopNav{
     display: none !important;
   }
+
 }
 
 
