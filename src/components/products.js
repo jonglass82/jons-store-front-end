@@ -27,6 +27,7 @@ class Products extends React.Component {
   getProducts() {
       axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
       const products = res.data;
+      console.log(products);
       this.setState((state, props) => ({
         products: products
       }));
@@ -35,7 +36,6 @@ class Products extends React.Component {
 
   componentDidMount() {
       this.getProducts();
-
   };
 
   render() {

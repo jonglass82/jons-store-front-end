@@ -27,6 +27,7 @@ class PurchaseConfirmation extends React.Component{
 	componentDidMount(){
 		this.clearCart();
 		this.props.updateCartCount(0);
+		window.scrollTo(0, 0);
 	}
 
 	render(){

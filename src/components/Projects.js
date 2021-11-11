@@ -15,9 +15,11 @@ class Projects extends React.Component{
 
 		<div className="projectsDiv">
 
-			<h3>These are my projects</h3>
+			<div className="projectHeader">
+				<h2>Projects</h2>
+			</div>
 
-			<div className="projectItem" style={{'backgroundColor':'red'}}>
+			<div className="projectItem">
 
 				<h5>Blue Dolphin Restoration</h5>
 
@@ -27,7 +29,7 @@ class Projects extends React.Component{
 
 			</div>
 
-			<div className="projectItem" style={{'backgroundColor':'darkBlue'}}>
+			<div className="projectItem">
 			
 				<h5>Lake Zurich Quiz</h5>
 
@@ -40,7 +42,7 @@ class Projects extends React.Component{
 
 			</div>
 
-			<div className="projectItem" style={{'backgroundColor':'green'}}>
+			<div className="projectItem">
 				
 				<h5>Movie Ticket App</h5>
 

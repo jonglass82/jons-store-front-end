@@ -57,7 +57,7 @@ class NavBar extends React.Component{
                                     <ListItemText primary={'Close'} onClick={()=>{this.openDrawer()}} />
                                   </ListItem>
                                   <ListItem button component={Link} to="/" >
-                                    <ListItemText primary={'Home'}/>
+                                    <ListItemText primary={'Shop'}/>
                                   </ListItem>
                                   <ListItem button component={Link} to="/music" >
                                     <ListItemText primary={'Music'} />
@@ -97,7 +97,7 @@ class NavBar extends React.Component{
                     <List style={flexContainer}>
 
                         <ListItem button component={Link} to="/" className="desktopNav" >
-                          <ListItemText primary={'Home'}/>
+                          <ListItemText primary={'Shop'}/>
                         </ListItem>
                         <ListItem button className="desktopNav" component="a" href="/music">
                           <ListItemText primary={'Music'} />

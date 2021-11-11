@@ -1,10 +1,13 @@
 body{
   height: 100vh;
-  background-color: #1c4285 !important;
 }
 
 #root{
   height: 100%;
+}
+
+h2{
+  color: black;
 }
 
 .App{
@@ -37,6 +40,7 @@ li{
   padding: 70px; 
   text-align: center;
   font-size: 18pt;
+  color: black;
 }
 
 .grid-container {
@@ -69,13 +73,13 @@ li{
 }
 
 .productControlsDiv{
-  background-color: white;
   height: 0px;
   transition: 0.3s;
   z-index: 2;
   position: relative;
   margin-right: -10px !important;
   margin-left: -10px !important;
+  background-color: white;
 }
 
 .productControlsShow{
@@ -90,6 +94,27 @@ li{
   padding: 10px;
   height: 100%;
   overflow: hidden;
+  transition: 0.2s;
+}
+
+.productDetails:hover{
+  box-shadow: 0px 5px 14px darkgrey;
+}
+
+.collectibleControlsDiv{
+  background-color: white;
+  height: 0px;
+  transition: 0.3s;
+  z-index: 2;
+  position: relative;
+  margin-right: -10px !important;
+  margin-left: -10px !important;
+}
+
+.collectibleControlsShow{
+  height: 130px;
+  margin-top: -45px;
+  z-index: 2;
 }
 
 .productTitle{
@@ -133,12 +158,13 @@ li{
 }
 
 .nav-link.active{
-  color: white !important;
+  color: #0296f2 !important;
   background-color: transparent !important;
   border-bottom-width: 3px !important;
   border-right-color: transparent !important;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
+  border-bottom-color: #0296f2 !important;
 }
 
 .checkout{
@@ -232,6 +258,8 @@ li{
   background-color: #fa375b;
   color: white;
   text-align: center;
+  width: 160px;
+  margin: 0 auto;
 }
 
 #checkoutConfirmation{
@@ -274,14 +302,26 @@ li{
 }
 
 .projectsDiv{
-  padding: 10px;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.projectItem{
+.projectHeader{
+    margin-top: 10px;
+  margin-bottom: 10px;
   padding: 10px;
-  margin: 5px 0px 0px 5px;
+}
+
+.projectItem{
+  transition: 0.2s;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  color: black;
+}
+
+.projectItem:hover{
+  box-shadow: 0px 5px 14px darkgrey;
 }
 
 @media only screen and (max-width: 600px) {
@@ -299,6 +339,10 @@ li{
 
   .desktopNav{
     display: none !important;
+  }
+
+  .product{
+    height: auto;
   }
 
 }

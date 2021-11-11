@@ -9,7 +9,13 @@ class MusicPage extends React.Component{
 	}
 
 	render (){
-		return <h1>This is the Music Page</h1>
+		return <div className="projectsDiv">
+
+			<h2>Music</h2>
+
+			<p>Coming soon</p>
+
+		</div>
 	}
 
 }

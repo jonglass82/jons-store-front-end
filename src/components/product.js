@@ -46,15 +46,19 @@ class Product extends React.Component {
   }
 
   showProductControls = () => {
-    this.setState({
-      visible: true
-    })
+    if(window.innerWidth > 600){
+      this.setState({
+        visible: true
+      })
+    }
   }
 
   hideProductControls = () => {
-    this.setState({
-      visible: false
-    })
+    if(window.innerWidth > 600){
+      this.setState({
+        visible: false
+      })
+    }
   }
 
 
