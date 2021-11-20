@@ -123,6 +123,7 @@ class CardForm extends React.Component{
 
   componentDidMount(){
     this.getPaymentIntent();
+    window.scrollTo(0, 0);
   };
 
 

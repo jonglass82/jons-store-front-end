@@ -10,6 +10,10 @@ class Projects extends React.Component{
 		this.state = {};
 	}
 
+	componentDidMount(){
+		window.scrollTo(0, 0);
+	}
+
 	render (){
 		return <div>
 

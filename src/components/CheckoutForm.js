@@ -354,7 +354,7 @@ class CheckoutForm extends React.Component {
               </div>
 
         case 4:
-          return <PurchaseConfirmation updateCartCount={this.props.updateCartCount}/>
+          return <PurchaseConfirmation customerEmail={this.state.email} updateCartCount={this.props.updateCartCount}/>
 
     }
 

@@ -45,7 +45,7 @@ class NavBar extends React.Component{
 
                 <Grid justify="space-between" container spacing={12}>
 
-                    <Grid item lg={8}>
+                    <Grid item lg={6}>
 
                         <IconButton edge="start" color="inherit" aria-label="menu" size="medium">
 
@@ -92,7 +92,7 @@ class NavBar extends React.Component{
                   </Grid>
 
 
-                  <Grid item lg={4}>
+                  <Grid item lg={6}>
 
                     <List style={flexContainer}>
 

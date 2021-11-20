@@ -24,20 +24,6 @@ class Products extends React.Component {
     }
   };
 
-  getProducts() {
-      axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
-      const products = res.data;
-      console.log(products);
-      this.setState((state, props) => ({
-        products: products
-      }));
-    })
-  };
-
-  componentDidMount() {
-      this.getProducts();
-  };
-
   render() {
 
     return (<div>
@@ -103,7 +89,7 @@ class Products extends React.Component {
 
                     <div className="grid-container">
 
-                        {this.state.products.map((product) => {
+                        {this.props.products.map((product) => {
                           
                           return ( 
                             <Product
@@ -133,7 +119,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                      {this.state.products.filter((p)=>{return p.category == "clothing"}).map((product) => {
+                      {this.props.products.filter((p)=>{return p.category == "clothing"}).map((product) => {
 
                           return ( 
                             <Product
@@ -161,7 +147,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.state.products.filter((p)=>{return p.category == "collectibles"}).map((product) => {
+                        {this.props.products.filter((p)=>{return p.category == "collectibles"}).map((product) => {
 
                           return ( 
                             <Product
@@ -189,7 +175,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.state.products.filter((p)=>{return p.category == "artwork"}).map((product) => {
+                        {this.props.products.filter((p)=>{return p.category == "artwork"}).map((product) => {
 
                           return ( 
                             <Product

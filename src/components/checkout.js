@@ -38,21 +38,13 @@ class Checkout extends React.Component {
 
    componentDidMount(){
     this.getProducts();
+    window.scrollTo(0, 0);
    }
 
    removeProduct = (item) => {
       localStorage.removeItem(JSON.stringify(item));
       this.getProducts();
       window.location.href="/purchase";
-   }
-
-   getTax = (cart) => {
-      let total = 0; 
-      this.state.myCart.forEach((item)=>{
-        total += parseFloat(item.price);
-      })
-      const tax = total * 0.0625;
-      return tax.toFixed(2);
    }
 
    getShipping = (cart) => {

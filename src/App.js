@@ -18,7 +18,7 @@ import { Alert } from 'reactstrap';
 
 function Home(props) {
   return <div>
-            <Products message={props.message} addToCart={props.addToCart}></Products>
+            <Products message={props.message} products={props.products} addToCart={props.addToCart}></Products>
         </div>
 }
 
@@ -147,7 +147,6 @@ function ProtectedRoute(props) {
                     cartCount={this.state.cartCount}
                 > </Navbar>
 
-
                 {this.state.message}
 
             <Switch>
@@ -181,7 +180,7 @@ function ProtectedRoute(props) {
               </Route>
 
               <Route path="/">
-                <Home addToCart={this.addToCart} message={this.state.message}/>
+                <Home addToCart={this.addToCart} message={this.state.message} products={this.state.products}/>
               </Route>
 
             </Switch>

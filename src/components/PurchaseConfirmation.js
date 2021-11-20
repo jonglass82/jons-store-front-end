@@ -12,15 +12,12 @@ class PurchaseConfirmation extends React.Component{
 
 	clearCart() {
         axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
-
 	        const products = res.data;
-
 	        products.map((product) => {
 		        if(localStorage.getItem(JSON.stringify(product._id))){
 		          localStorage.removeItem(JSON.stringify(product._id));
 		        }
       		})
-	        
 	    })
     };
 
@@ -42,10 +39,10 @@ class PurchaseConfirmation extends React.Component{
                     <CheckCircleOutlinedIcon style={{fontSize:'150px', color:'green'}}></CheckCircleOutlinedIcon>
                   </div>
 
-                  <p>An email receipt has been sent to "customer email" {this.state.email}</p>
+                  <p>An email receipt has been sent to {this.props.email}</p>
 
                   <Link to="/">
-                  Back Home
+                  	Back Home
                   </Link>
 
                 </div>

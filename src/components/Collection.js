@@ -36,6 +36,7 @@ class Collection extends React.Component{
 
 	componentDidMount = () => {
 		this.getCollectibles();
+    window.scrollTo(0, 0);
 	}
 
 	render (){
