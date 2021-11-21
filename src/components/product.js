@@ -75,7 +75,7 @@ class Product extends React.Component {
 
             <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
 
-            <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={160} height={160}></img> }</div>
+            <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={200}></img> }</div>
             
             <div style={{visibility: this.state.visible ? 'visible' : 'hidden'}} className={this.state.visible ? "productControlsDiv productControlsShow" : "productControlsDiv"}>
 

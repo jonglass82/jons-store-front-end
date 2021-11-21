@@ -109,6 +109,7 @@ class Collection extends React.Component{
                               key={collectible._id}
                               title = {collectible.Title}
                               description = {collectible.Description}
+                              image = {collectible.Image}
                             />
 
                           	</div>
@@ -165,6 +166,7 @@ class Collection extends React.Component{
                               key={collectible._id}
                               title = {collectible.Title}
                               description = {collectible.Description}
+                              image = {collectible.Image}
                             />
                           	</div> 
                            
@@ -191,6 +193,7 @@ class Collection extends React.Component{
                               key={collectible._id}
                               title = {collectible.Title}
                               description = {collectible.Description}
+                              image = {collectible.Image}
                             />
                           	</div> 
                             

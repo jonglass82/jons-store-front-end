@@ -41,14 +41,14 @@ class Collectible extends React.Component {
 
   render () {
 
-    const {title, description} = this.props;
+    const {title, description, image} = this.props;
 
     return (
       <div className="product">
 
         <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls} onClick={this.modalToggle}>
 
-            <div className="productImageContainer" style={{textAlign:'center'}}><img alt="" src="http://res.cloudinary.com/dbln7wsqw/image/upload/v1576099500/l3v4jxx37xosn6svlhmc.jpg" width={160} height={160}></img></div>
+            <div className="productImageContainer" style={{textAlign:'center'}}><img alt="" src={image} width={200} height={200}></img></div>
             
             <div style={{visibility: this.state.visible ? 'visible' : 'hidden'}} className={this.state.visible ? "collectibleControlsDiv collectibleControlsShow" : "collectibleControlsDiv"}>
 
@@ -77,7 +77,7 @@ class Collectible extends React.Component {
            
                         <div className="modalImageContainer">
        						
-       						<img src=""/>
+       						<img src={image} width={250}/>
 
                         </div>
 
