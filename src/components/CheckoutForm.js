@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Alert } from 'reactstrap';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 
 
 class CheckoutForm extends React.Component {
@@ -25,7 +27,7 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 1,
+        step: 3,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -171,6 +173,27 @@ class CheckoutForm extends React.Component {
     });
     return true;
 
+  }
+
+  createOrder = (orderInfo) => {
+      const order = {
+        auth: `${process.env.REACT_APP_EXHIBITA}`,
+        name: orderInfo.name,
+        email: orderInfo.email,
+        phone: orderInfo.phone,
+        address: orderInfo.address,
+        city: orderInfo.city,
+        state: orderInfo.state,
+        zip: orderInfo.zip,
+        message: orderInfo.message,
+        items: this.props.myCart,
+        total: this.props.total
+      };
+
+      axios.post(`${process.env.REACT_APP_API_STR}/api/create-order`, order)
+      .then(res => {
+       console.log('response from create-order route:', res.data);
+      });
   }
 
 
@@ -336,12 +359,30 @@ class CheckoutForm extends React.Component {
 
                   <Container>
 
-                    <Elements stripe={this.promise} >
-                        <CardForm customerInfo={this.state} 
-                                  total={this.props.total} 
-                                  setStep={this.setStep}
-                                  myCart={this.props.myCart} />
-                    </ Elements>
+                      <h5>Payment Form</h5>
+
+                      <PayPalScriptProvider 
+                          options={{ "client-id": "AUQXkp5LEYKrU-fKYTs1gPJ3-YfXfY93L4pn88ZNfAraAC31U_09FUZepwSUbpQoujPPEfcygFJkHYs9", components: "buttons,funding-eligibility",
+                          "enable-funding": "venmo", "disable-funding": "credit"}}> 
+                        <PayPalButtons 
+                          style={{ layout: "vertical" }}
+                          createOrder={(data, actions) => {
+                            return actions.order
+                                  .create({
+                                      purchase_units: [
+                                          {
+                                              amount: {
+                                                  currency_code: "USD",
+                                                  value: this.props.total,
+                                              },
+                                          },
+                                      ],
+                                  })
+                                  .then((orderId) => {
+                                    console.log('order placed');
+                                  });
+                          }} />
+                      </PayPalScriptProvider> 
 
                   </Container>
 
