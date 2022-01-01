@@ -30,7 +30,6 @@ class NavBar extends React.Component{
    this.state.drawerOpen ? this.setState({drawerOpen: false}) : this.setState({drawerOpen: true})
   }
 
-
   render(){
 
     const flexContainer = {

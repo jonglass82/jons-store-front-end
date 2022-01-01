@@ -17,9 +17,7 @@ import { Alert } from 'reactstrap';
 
 
 function Home(props) {
-  return <div>
-            <Products message={props.message} products={props.products} addToCart={props.addToCart}></Products>
-        </div>
+  return <Products message={props.message} products={props.products} addToCart={props.addToCart}></Products>
 }
 
 function Purchase(props) {
@@ -72,11 +70,12 @@ function ProtectedRoute(props) {
         })
       }
       this.getProducts();
+      console.log('App.js mounted');
     }
 
     getProducts() {
         axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
-
+          console.log('get products called');
         const products = res.data;
         let newCount = 0
 
@@ -179,7 +178,7 @@ function ProtectedRoute(props) {
                 <EnterInfo updateCartCount={this.updateCartCount} />
               </Route>
 
-              <Route path="/">
+              <Route exact path="/">
                 <Home addToCart={this.addToCart} message={this.state.message} products={this.state.products}/>
               </Route>
 

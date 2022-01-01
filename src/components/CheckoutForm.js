@@ -6,13 +6,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
 import { Container, Col, Row, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
-import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Alert } from 'reactstrap';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
-
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 
 class CheckoutForm extends React.Component {
 
@@ -27,7 +25,8 @@ class CheckoutForm extends React.Component {
         state: '',
         zip: '',
         message: '',
-        step: 3,
+        paypalOrderID: '',
+        step: 1,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -78,14 +77,13 @@ class CheckoutForm extends React.Component {
     this.setState({
         step: newStep,
         name: '',
-        email: '',
         phone: '',
         address: '',
         city: '',
         state: '',
         zip: '',
         message: '',
-        amount: ''
+        paymentDetails: ''
     });
   }
 
@@ -175,29 +173,35 @@ class CheckoutForm extends React.Component {
 
   }
 
-  createOrder = (orderInfo) => {
+  createOrder = (paymentDetails) => {
+
       const order = {
         auth: `${process.env.REACT_APP_EXHIBITA}`,
-        name: orderInfo.name,
-        email: orderInfo.email,
-        phone: orderInfo.phone,
-        address: orderInfo.address,
-        city: orderInfo.city,
-        state: orderInfo.state,
-        zip: orderInfo.zip,
-        message: orderInfo.message,
+        name: this.state.name,
+        email: this.state.email,
+        phone: this.state.phone,
+        address: this.state.address,
+        city: this.state.city,
+        state: this.state.state,
+        zip: this.state.zip,
+        paymentDetails: paymentDetails,
+        message: this.state.message,
         items: this.props.myCart,
         total: this.props.total
       };
 
       axios.post(`${process.env.REACT_APP_API_STR}/api/create-order`, order)
       .then(res => {
-       console.log('response from create-order route:', res.data);
+        this.setStep(4);
       });
   }
 
 
   render() {
+
+    if(this.props.myCart.length === 0){
+      return <Redirect to="/" />
+    }
 
     const {step} = this.state;
 
@@ -327,6 +331,7 @@ class CheckoutForm extends React.Component {
               </div>
               
         case 3:
+
           return <div className="paymentStep">
 
           <h4 style={{padding: '5px'}}>Payment</h4>
@@ -363,25 +368,33 @@ class CheckoutForm extends React.Component {
 
                       <PayPalScriptProvider 
                           options={{ "client-id": "AUQXkp5LEYKrU-fKYTs1gPJ3-YfXfY93L4pn88ZNfAraAC31U_09FUZepwSUbpQoujPPEfcygFJkHYs9", components: "buttons,funding-eligibility",
-                          "enable-funding": "venmo", "disable-funding": "credit"}}> 
-                        <PayPalButtons 
-                          style={{ layout: "vertical" }}
-                          createOrder={(data, actions) => {
-                            return actions.order
-                                  .create({
-                                      purchase_units: [
-                                          {
-                                              amount: {
-                                                  currency_code: "USD",
-                                                  value: this.props.total,
+                          "enable-funding": "venmo", "disable-funding": "credit"}}>
+
+                            <PayPalButtons 
+                              style={{ layout: "vertical" }}
+                              createOrder={(data, actions) => {
+                                return actions.order
+                                      .create({
+                                          purchase_units: [
+                                              {
+                                                  amount: {
+                                                      currency_code: "USD",
+                                                      value: this.props.total,
+                                                  },
                                               },
-                                          },
-                                      ],
-                                  })
-                                  .then((orderId) => {
-                                    console.log('order placed');
-                                  });
-                          }} />
+                                          ],
+                                      })
+                                      .then((orderId) => {
+                                        return orderId;
+                                      });
+                              }} 
+                              onApprove={(data, actions) => {
+                                return actions.order.capture().then((details) => {
+                                 this.createOrder(details);                                 
+                                });
+                              }}
+                            />
+
                       </PayPalScriptProvider> 
 
                   </Container>

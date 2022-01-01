@@ -2,6 +2,8 @@ import React from 'react';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+
 
 class PurchaseConfirmation extends React.Component{
 
@@ -39,11 +41,9 @@ class PurchaseConfirmation extends React.Component{
                     <CheckCircleOutlinedIcon style={{fontSize:'150px', color:'green'}}></CheckCircleOutlinedIcon>
                   </div>
 
-                  <p>An email receipt has been sent to {this.props.email}</p>
+                  <p>An email receipt has been sent to {this.props.customerEmail}</p>
 
-                  <Link to="/">
-                  	Back Home
-                  </Link>
+                  <a href="/">back home</a>
 
                 </div>
 

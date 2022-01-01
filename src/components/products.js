@@ -24,6 +24,10 @@ class Products extends React.Component {
     }
   };
 
+  componentDidmount = () => {
+    console.log('Products.js mounted');
+  }
+
   render() {
 
     return (<div>
