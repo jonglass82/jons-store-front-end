@@ -37,8 +37,6 @@ class Collectible extends React.Component {
     }
   }
 
-
-
   render () {
 
     const {title, description, image} = this.props;
@@ -77,7 +75,7 @@ class Collectible extends React.Component {
            
                         <div className="modalImageContainer">
        						
-       						<img src={image} width={250}/>
+       						         <img src={image} width={250}/>
 
                         </div>
 
@@ -113,7 +111,6 @@ class Collectible extends React.Component {
 
       </Modal>
     </div>
-
 
     )
   }

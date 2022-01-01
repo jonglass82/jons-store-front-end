@@ -3,7 +3,7 @@ import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Product from './product';
-
+import Header from './header';
 
 class Products extends React.Component {
 
@@ -11,7 +11,6 @@ class Products extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state = {
-      products: [],
       activeTab: '1'
     }
   }
@@ -24,17 +23,11 @@ class Products extends React.Component {
     }
   };
 
-  componentDidmount = () => {
-    console.log('Products.js mounted');
-  }
-
   render() {
 
     return (<div>
       
-          <div className="header">
-              www.jon-glass.com
-          </div>
+        <Header />
           
         <div className="all-products"> 
             

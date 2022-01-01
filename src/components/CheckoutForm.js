@@ -1,9 +1,6 @@
 import React from 'react';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import CardForm from './CardForm';
 import PurchaseConfirmation from './PurchaseConfirmation';
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 import axios from 'axios'
 import { Container, Col, Row, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
@@ -38,7 +35,6 @@ class CheckoutForm extends React.Component {
         messageError: false,
         amountError: false
       }
-      this.promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLIC_TEST_KEY}`);
   }
 
   onChange = (e) => {

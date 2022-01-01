@@ -3,10 +3,15 @@ import React from 'react'
 
 class Header extends React.Component {
 
+	constructor(props){
+	  super(props);
+	  this.state={}
+	}
+
     render (){
       return (
 
-      <div id="header">
+      <div className="header">
 
           <h1>www.jon-glass.com</h1>
 

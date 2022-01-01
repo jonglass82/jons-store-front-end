@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import Products from './components/products.js';
 import Navbar from './components/Navbar.js';
-import Header from './components/header.js';
 import MusicPage from './components/MusicPage.js';
 import Collection from './components/Collection.js';
 import Projects from './components/Projects.js';
@@ -70,12 +69,10 @@ function ProtectedRoute(props) {
         })
       }
       this.getProducts();
-      console.log('App.js mounted');
     }
 
     getProducts() {
         axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
-          console.log('get products called');
         const products = res.data;
         let newCount = 0
 
@@ -142,9 +139,7 @@ function ProtectedRoute(props) {
             <Router>
               <div className="App">
 
-                <Navbar
-                    cartCount={this.state.cartCount}
-                > </Navbar>
+                <Navbar cartCount={this.state.cartCount}> </Navbar>
 
                 {this.state.message}
 

@@ -62,7 +62,6 @@ class Product extends React.Component {
   }
 
 
-
   render () {
 
     const product = this.props.product;
@@ -72,8 +71,6 @@ class Product extends React.Component {
       <div className="product">
 
         <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls} onClick={this.modalToggle}>
-
-  
 
             <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={250} height={250}></img> }</div>
             
@@ -158,7 +155,6 @@ class Product extends React.Component {
 
       </Modal>
     </div>
-
 
     )
   }

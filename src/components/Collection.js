@@ -27,7 +27,6 @@ class Collection extends React.Component{
 	getCollectibles = () => {
 		axios.get(`${process.env.REACT_APP_API_STR}/api/collectibles`).then((res)=>{
 			const collectibles = res.data;
-      console.log(collectibles);
 			this.setState({
 				collectibles: collectibles
 			})

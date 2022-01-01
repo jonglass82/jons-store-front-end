@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Elements} from 'react-stripe-elements';
-import InjectedCheckoutForm from './CheckoutForm';
+import CheckoutForm from './CheckoutForm';
 
 class Info extends React.Component {
 
@@ -58,13 +57,11 @@ class Info extends React.Component {
   render(){
     return <div className="container">
 
-      <Elements>
-        <InjectedCheckoutForm 
+        <CheckoutForm 
               myCart={this.state.myCart} 
               updateCartCount={this.props.updateCartCount}
               products={this.products}
               total={this.getTotal(this.state.myCart)}/>
-      </Elements>
 
     </div>
  }

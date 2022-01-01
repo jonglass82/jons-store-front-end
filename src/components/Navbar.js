@@ -134,8 +134,6 @@ class NavBar extends React.Component{
 
                       </List>
 
-
-
                  </Grid>
 
               </Grid>
