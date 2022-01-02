@@ -1,8 +1,6 @@
 import React from 'react';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import { Link } from "react-router-dom";
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
 
 
 class PurchaseConfirmation extends React.Component{
@@ -15,7 +13,7 @@ class PurchaseConfirmation extends React.Component{
 	clearCart() {
         axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
 	        const products = res.data;
-	        products.map((product) => {
+	        products.forEach((product) => {
 		        if(localStorage.getItem(JSON.stringify(product._id))){
 		          localStorage.removeItem(JSON.stringify(product._id));
 		        }
@@ -26,7 +24,6 @@ class PurchaseConfirmation extends React.Component{
 	componentDidMount(){
 		this.clearCart();
 		this.props.updateCartCount(0);
-		window.scrollTo(0, 0);
 	}
 
 	render(){

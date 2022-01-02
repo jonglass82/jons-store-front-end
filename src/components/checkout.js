@@ -1,9 +1,7 @@
 import React from 'react'
 import axios from 'axios';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { Container, Row, Col } from 'reactstrap';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
 class Checkout extends React.Component {
@@ -22,7 +20,7 @@ class Checkout extends React.Component {
       const products = res.data;
       const newArray = [...this.state.myCart]
 
-      products.map((product) => {
+      products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
           newArray.push(product);
         }
@@ -88,7 +86,7 @@ render (){
                 Items: ({this.state.myCart.length})
               </div>
 
-             <div className="checkout">
+             <div className="checkoutStep">
 
                   <div className="shopping-cart">
 
@@ -97,7 +95,7 @@ render (){
 
                     <Container>
                       <Row xs="4" className="checkoutItem">
-                        <Col style={{padding:'5px'}}><img src={product.images[0]} width={120}/></Col>
+                        <Col style={{padding:'5px'}}><img src={product.images[0]} width={120} alt=""/></Col>
                         <Col style={{'textAlign':'left'}}>{product.title}</Col>
                         <Col style={{'textAlign':'left'}}>
                           <ul>
@@ -121,7 +119,6 @@ render (){
 
                   </div>
 
-             </div>
 
               <div className="checkoutFooter">
 
@@ -143,6 +140,9 @@ render (){
               </div>
 
           </div>
+
+      </div>
+
     )
   }
 

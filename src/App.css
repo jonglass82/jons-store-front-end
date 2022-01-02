@@ -32,8 +32,8 @@ li{
 }
 
 .header{
-  height: 150px; 
-  padding: 70px; 
+  height: 80px; 
+  padding: 10px; 
   text-align: center;
   font-size: 18pt;
   color: black;
@@ -57,12 +57,10 @@ li{
 .modalImageContainer{
   text-align: center;
   align-content: center;
-/*  height: 300px;*/
   overflow: hidden;
 }
 
 .productImageContainer{
-/*  padding: 5px;*/
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -277,14 +275,6 @@ li{
 
 .MuiInputLabel-animated{
   padding: 5px !important;
-}
-
-.paymentStep{
-  background-color: white;
-  color: #484848;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 600px;
 }
 
 .leftButton{

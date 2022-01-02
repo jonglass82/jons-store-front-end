@@ -1,13 +1,12 @@
 import React from 'react';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import PurchaseConfirmation from './PurchaseConfirmation';
 import axios from 'axios'
-import { Container, Col, Row, Form, FormGroup, Input, Label, FormText} from 'reactstrap';
+import { Container, Col, Row, Label} from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Alert } from 'reactstrap';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 
 class CheckoutForm extends React.Component {
 
@@ -44,36 +43,39 @@ class CheckoutForm extends React.Component {
   }
 
   nextStep = () => {
-    if(this.state.step == 1){
+    if(this.state.step === 1){
       if(this.validateName() && this.validateEmail() && this.validatePhone()){
         const nextStep = this.state.step + 1;
         this.setState({step: nextStep});
       }
+      window.scrollTo(0, 0);
     }
-    else if(this.state.step == 2){
+    else if(this.state.step === 2){
       if(this.validateStep2()){
         const nextStep = this.state.step + 1;
         this.setState({step: nextStep});   
       }
+      window.scrollTo(0, 0);
     }
     else{
       const nextStep = this.state.step + 1;
       this.setState({step: nextStep});
+      window.scrollTo(0, 0);
     }
-
   }
 
   prevStep = () => {
     const prevStep = this.state.step - 1;
     this.setState({step: prevStep});
+    window.scrollTo(0, 0);
   }
 
-  setStep = (step) => {
-    const newStep = step;
+  setFinalStep = () => {
     this.setState({
-        step: newStep,
+        step: 4,
         name: '',
         phone: '',
+        email: '',
         address: '',
         city: '',
         state: '',
@@ -81,10 +83,11 @@ class CheckoutForm extends React.Component {
         message: '',
         paymentDetails: ''
     });
+    window.scrollTo(0, 0);
   }
 
   validateName = () => {
-     if(this.state.name == ""){
+     if(this.state.name === ""){
         this.setState({nameError: true});
         return false;
       }
@@ -95,7 +98,7 @@ class CheckoutForm extends React.Component {
   }
 
   validateEmail = () => {
-    if(this.state.email == ""){
+    if(this.state.email === ""){
         this.setState({emailError: true});
         return false; 
     }
@@ -109,7 +112,7 @@ class CheckoutForm extends React.Component {
     const regex = new RegExp(/^[0-9]*$/);
     const onlyNumbers = regex.test(this.state.phone);  
 
-    if(this.state.phone == ""){
+    if(this.state.phone === ""){
       this.setState({phoneError: true, phoneErrorMessage: 'Required'});
       return false;
     }
@@ -123,11 +126,12 @@ class CheckoutForm extends React.Component {
       phoneError: false,
       phoneErrorMessage: ''
     });
+
     return true;
   }
 
   validateStep2 = () => {
-    if(this.state.address == ""){
+    if(this.state.address === ""){
         this.setState({addressError: true});
         return false;
     }
@@ -135,7 +139,7 @@ class CheckoutForm extends React.Component {
       this.setState({addressError: false});
     }
 
-    if(this.state.city == ""){
+    if(this.state.city === ""){
         this.setState({cityError: true});
         return false;
     }
@@ -143,7 +147,7 @@ class CheckoutForm extends React.Component {
       this.setState({cityError: false});
     }
 
-    if(this.state.state == ""){
+    if(this.state.state === ""){
         this.setState({stateError: true});
         return false;
     }
@@ -151,7 +155,7 @@ class CheckoutForm extends React.Component {
       this.setState({stateError: false});
     }
 
-    if(this.state.zip == ""){
+    if(this.state.zip === ""){
         this.setState({zipError: true});
         return false;
     }
@@ -165,6 +169,7 @@ class CheckoutForm extends React.Component {
       stateError: false,
       zipError: false
     });
+
     return true;
 
   }
@@ -188,7 +193,7 @@ class CheckoutForm extends React.Component {
 
       axios.post(`${process.env.REACT_APP_API_STR}/api/create-order`, order)
       .then(res => {
-        this.setStep(4);
+        this.setFinalStep();
       });
   }
 
@@ -328,7 +333,7 @@ class CheckoutForm extends React.Component {
               
         case 3:
 
-          return <div className="paymentStep">
+          return <div className="checkoutStep">
 
           <h4 style={{padding: '5px'}}>Payment</h4>
 
@@ -339,7 +344,7 @@ class CheckoutForm extends React.Component {
                     {this.props.myCart.map((product) => {
                         return <Container>
                                   <Row xs="3" className="checkoutItem">
-                                    <Col style={{padding:'5px'}}><img src={product.images[0]} width={80}/></Col>
+                                    <Col style={{padding:'5px'}}><img src={product.images[0]} width={80} alt=""/></Col>
                                     <Col style={{'textAlign':'left'}}>{product.title}</Col>
                                     <Col style={{'textAlign':'left'}}>
                                       <ul>
@@ -405,6 +410,8 @@ class CheckoutForm extends React.Component {
 
         case 4:
           return <PurchaseConfirmation customerEmail={this.state.email} updateCartCount={this.props.updateCartCount}/>
+          default:
+            window.location = '/';
 
     }
 

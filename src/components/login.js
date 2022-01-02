@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 
 
 class Login extends React.Component {

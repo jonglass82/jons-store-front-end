@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
 import AdminProduct from './AdminProduct'
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
@@ -201,7 +200,7 @@ render() {
           <div>
 
             {this.state.images.map((image) => {
-              return <img src={image} height={200}></img>
+              return <img src={image} alt="" height={200}></img>
             })}
 
           </div>

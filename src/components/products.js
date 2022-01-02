@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Product from './product';
 import Header from './header';
+
 
 class Products extends React.Component {
 
@@ -26,7 +26,7 @@ class Products extends React.Component {
   render() {
 
     return (<div>
-      
+
         <Header />
           
         <div className="all-products"> 
@@ -116,7 +116,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                      {this.props.products.filter((p)=>{return p.category == "clothing"}).map((product) => {
+                      {this.props.products.filter((p)=>{return p.category === "clothing"}).map((product) => {
 
                           return ( 
                             <Product
@@ -144,7 +144,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.props.products.filter((p)=>{return p.category == "collectibles"}).map((product) => {
+                        {this.props.products.filter((p)=>{return p.category === "collectibles"}).map((product) => {
 
                           return ( 
                             <Product
@@ -172,7 +172,7 @@ class Products extends React.Component {
 
                       <div className="grid-container">
 
-                        {this.props.products.filter((p)=>{return p.category == "artwork"}).map((product) => {
+                        {this.props.products.filter((p)=>{return p.category === "artwork"}).map((product) => {
 
                           return ( 
                             <Product

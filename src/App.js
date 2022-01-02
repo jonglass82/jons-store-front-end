@@ -10,9 +10,9 @@ import Login from './components/login.js';
 import Info from './components/info.js';
 import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-import {StripeProvider} from 'react-stripe-elements';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Alert } from 'reactstrap';
+
 
 
 function Home(props) {
@@ -76,7 +76,7 @@ function ProtectedRoute(props) {
         const products = res.data;
         let newCount = 0
 
-        products.map((product) => {
+        products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
           newCount = newCount + 1
         }

@@ -75,7 +75,7 @@ class Collectible extends React.Component {
            
                         <div className="modalImageContainer">
        						
-       						         <img src={image} width={250}/>
+       						         <img src={image} alt="" width={250}/>
 
                         </div>
 

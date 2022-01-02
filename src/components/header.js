@@ -13,7 +13,7 @@ class Header extends React.Component {
 
       <div className="header">
 
-          <h1>www.jon-glass.com</h1>
+          <h3>www.jon-glass.com</h3>
 
       </div> 
        

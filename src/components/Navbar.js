@@ -1,11 +1,9 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import Drawer from '@material-ui/core/Drawer';
@@ -37,18 +35,16 @@ class NavBar extends React.Component{
       flexDirection: 'row'
     };
 
-    return  <div >
+    return  <div>
       <AppBar style={{backgroundColor:'White', color:'Black'}}>
 
         <Toolbar>
 
-                <Grid justify="space-between" container spacing={12}>
+                <Grid justifyContent="space-between" container spacing={10}>
 
                     <Grid item lg={6}>
 
-                        <IconButton edge="start" color="inherit" aria-label="menu" size="medium">
-
-                            <MenuIcon fontSize="medium" onClick={()=>{this.openDrawer()}} />
+                            <MenuIcon fontSize="medium" onClick={()=>{this.openDrawer()}}  />
 
                               <Drawer anchor="left" variant="temporary" onClick={()=>{this.openDrawer()}} open={this.state.drawerOpen}>
                                 <List style={{width:'300px', padding:'10px'}}>
@@ -80,8 +76,6 @@ class NavBar extends React.Component{
 
                                   </List>
                               </ Drawer>
-
-                        </IconButton>
 
                        { this.state.loggedIn && ( 
                         <a href="/login" onClick={this.handleLogout}>logout</a>

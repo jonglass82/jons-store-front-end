@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import CheckoutForm from './CheckoutForm';
 
 class Info extends React.Component {
@@ -19,7 +18,7 @@ class Info extends React.Component {
       const products = res.data;
       const newArray = [...this.state.myCart]
 
-      products.map((product) => {
+      products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
           newArray.push(product);
         }

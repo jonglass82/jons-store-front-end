@@ -91,7 +91,7 @@ class Product extends React.Component {
         </div>
 
 
-        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered="true" style={{height: 'auto'}}>
+        <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered={true} style={{height: 'auto'}}>
           
           <ModalHeader toggle={this.modalToggle} style={{'borderBottom': '0'}}>
             {this.props.title}

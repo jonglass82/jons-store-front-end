@@ -131,7 +131,7 @@ class Collection extends React.Component{
 
                       <div className="grid-container">
 
-                      {this.state.collectibles.filter((c)=>{return c.Category == "Skateboards"}).map((collectible) => {
+                      {this.state.collectibles.filter((c)=>{return c.Category === "Skateboards"}).map((collectible) => {
 
                           return (<div>
                           	<Collectible
@@ -158,7 +158,7 @@ class Collection extends React.Component{
 
                       <div className="grid-container">
 
-                        {this.state.collectibles.filter((c)=>{return c.Category == "Oddities"}).map((collectible) => {
+                        {this.state.collectibles.filter((c)=>{return c.Category === "Oddities"}).map((collectible) => {
 
                           return (<div>
                           	<Collectible
@@ -185,7 +185,7 @@ class Collection extends React.Component{
 
                       <div className="grid-container">
 
-                        {this.state.collectibles.filter((p)=>{return p.category == "Artwork"}).map((collectible) => {
+                        {this.state.collectibles.filter((p)=>{return p.category === "Artwork"}).map((collectible) => {
 
                           return (<div>
                           	<Collectible
