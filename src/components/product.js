@@ -94,7 +94,7 @@ class Product extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered={true} style={{height: 'auto'}}>
           
           <ModalHeader toggle={this.modalToggle} style={{'borderBottom': '0'}}>
-            {this.props.title}
+            <b>{this.props.title}</b>
           </ModalHeader>
 
           <ModalBody className="rounded-0">
@@ -145,7 +145,7 @@ class Product extends React.Component {
 
           <ModalFooter style={{'borderTop': '0'}}>
 
-            <Button variant="contained" color="secondary" onClick={this.modalToggle}>
+            <Button variant="contained" color="secondary" style={{margin: '5px'}} onClick={this.modalToggle}>
                 Back
             </Button>
 

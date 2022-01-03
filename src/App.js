@@ -12,8 +12,7 @@ import Dashboard from './components/dashboard.js';
 import Checkout from './components/checkout.js';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Alert } from 'reactstrap';
-
-
+import { Spinner } from 'reactstrap';
 
 function Home(props) {
   return <Products message={props.message} products={props.products} addToCart={props.addToCart}></Products>
@@ -57,7 +56,8 @@ function ProtectedRoute(props) {
           loggedIn: false,
           cartCount: 0,
           products: [], 
-          message:''      
+          message:'',
+          productsReceived: false      
         }
     }
 
@@ -77,14 +77,15 @@ function ProtectedRoute(props) {
         let newCount = 0
 
         products.forEach((product) => {
-        if( localStorage.getItem(JSON.stringify(product._id))){
-          newCount = newCount + 1
-        }
-      })
+          if( localStorage.getItem(JSON.stringify(product._id))){
+            newCount = newCount + 1
+          }
+        })
 
         this.setState((state, props) => ({
           products: products,
-          cartCount: newCount
+          cartCount: newCount,
+          productsReceived: true
         }));
         
       })
@@ -179,6 +180,11 @@ function ProtectedRoute(props) {
 
             </Switch>
 
+          </div>
+
+          <div className='productsSpinnerDiv' style={{display: this.state.productsReceived ? 'none' : ''}}>
+              <h4>Retreiving items...</h4>
+              <Spinner animation="border" style={{height: '80px', width: '80px'}}/>
           </div>
 
           <div style={{'height': '200px'}}></div>

@@ -30,7 +30,7 @@ class Products extends React.Component {
         <Header />
           
         <div className="all-products"> 
-            
+
           <div>
               
               <Nav tabs className="nav nav-tabs nav-justified">
@@ -76,7 +76,6 @@ class Products extends React.Component {
                 </NavItem>
 
         </Nav>
-
         
         <TabContent activeTab={this.state.activeTab}>
 

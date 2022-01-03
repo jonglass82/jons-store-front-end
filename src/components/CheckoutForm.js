@@ -1,7 +1,7 @@
 import React from 'react';
 import PurchaseConfirmation from './PurchaseConfirmation';
 import axios from 'axios'
-import { Container, Col, Row, Label} from 'reactstrap';
+import { Container, Col, Row, Label, Spinner} from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Alert } from 'reactstrap';
@@ -22,7 +22,7 @@ class CheckoutForm extends React.Component {
         zip: '',
         message: '',
         paypalOrderID: '',
-        step: 1,
+        step: 3,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -32,7 +32,8 @@ class CheckoutForm extends React.Component {
         stateError: false,
         zipError: false,
         messageError: false,
-        amountError: false
+        amountError: false, 
+        paymentOptionsReceived: false
       }
   }
 
@@ -204,7 +205,7 @@ class CheckoutForm extends React.Component {
       return <Redirect to="/" />
     }
 
-    const {step} = this.state;
+    const {step, paymentOptionsReceived} = this.state;
 
     switch(step){
       case 1:
@@ -261,7 +262,6 @@ class CheckoutForm extends React.Component {
                   <strong>Please Note:</strong> All orders are shipped via USPS or Fedex depending on size and weight. Tracking information will be sent to the email provided. Combined shipping discounts are available for orders with multiple items to the same address. Only domestic US shipping offered at this time. 
               </Alert>
               
-
                     <TextField 
                       error = {this.state.addressError ? "true" : ""}
                       type="text" 
@@ -337,7 +337,7 @@ class CheckoutForm extends React.Component {
 
           <h4 style={{padding: '5px'}}>Payment</h4>
 
-          <h5 style={{'text-align':'center'}}>{this.props.myCart.length} item(s)</h5>
+          <h6 style={{'text-align':'center'}}>{this.props.myCart.length} item(s)</h6>
 
               <div className="itemReviewLastStep">
 
@@ -363,44 +363,57 @@ class CheckoutForm extends React.Component {
 
                   <div className="total">Order Total: <strong>{"$" + this.props.total}</strong></div>
 
-                  <Container>
+                  <Container className='paymentButtons'>
 
-                      <h5>Payment Form</h5>
+                      <div className='paymentSpinnerDiv' style={{display: paymentOptionsReceived ? 'none' : ''}}>
+                          <h6>Retreiving payment options...</h6>
+                          <Spinner animation="border"/>
+                      </div>
 
-                      <PayPalScriptProvider 
-                          options={{ "client-id": "AUQXkp5LEYKrU-fKYTs1gPJ3-YfXfY93L4pn88ZNfAraAC31U_09FUZepwSUbpQoujPPEfcygFJkHYs9", components: "buttons,funding-eligibility",
-                          "enable-funding": "venmo", "disable-funding": "credit"}}>
+                      <div className="paymentOptionsDiv" style={{display: paymentOptionsReceived ? '' : 'none'}}>
 
-                            <PayPalButtons 
-                              style={{ layout: "vertical" }}
-                              createOrder={(data, actions) => {
-                                return actions.order
-                                      .create({
-                                          purchase_units: [
-                                              {
-                                                  amount: {
-                                                      currency_code: "USD",
-                                                      value: this.props.total,
+                          <PayPalScriptProvider 
+                              options={{ "client-id": `${process.env.REACT_APP_PAYPAL_CLIENTID}`, components: "buttons,funding-eligibility",
+                              "enable-funding": "venmo", "disable-funding": "credit"}}>
+
+                                <PayPalButtons 
+                                  style={{ layout: "vertical" }}
+                                  onInit={(data, actions) => {
+                                      if(data){
+                                        this.setState({paymentOptionsReceived: true});
+                                      };
+                                  }}
+                                  createOrder={(data, actions) => {
+                                    return actions.order
+                                          .create({
+                                              purchase_units: [
+                                                  {
+                                                      amount: {
+                                                          currency_code: "USD",
+                                                          value: this.props.total,
+                                                      },
                                                   },
-                                              },
-                                          ],
-                                      })
-                                      .then((orderId) => {
-                                        return orderId;
-                                      });
-                              }} 
-                              onApprove={(data, actions) => {
-                                return actions.order.capture().then((details) => {
-                                 this.createOrder(details);                                 
-                                });
-                              }}
-                            />
+                                              ],
+                                          })
+                                          .then((orderId) => {
+                                            this.setState({paymentOptionsReceived: true});
+                                            return orderId;
+                                          });
+                                  }} 
+                                  onApprove={(data, actions) => {
+                                    return actions.order.capture().then((details) => {
+                                     this.createOrder(details);                                 
+                                    });
+                                  }}
+                                />
 
-                      </PayPalScriptProvider> 
+                          </PayPalScriptProvider> 
+
+                      </div>
 
                   </Container>
 
-                  <div style={{'padding': '50px 10px 70px 20px'}}>
+                  <div style={{padding: '20px'}}>
                     <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
                    </div> 
 

@@ -62,7 +62,7 @@ class Collectible extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.modalToggle} size="md" centered="true" style={{height: 'auto'}}>
           
           <ModalHeader toggle={this.modalToggle} style={{'borderBottom': '0'}}>
-            {this.props.title}
+            <b>{this.props.title}</b>
           </ModalHeader>
 
           <ModalBody className="rounded-0">
@@ -83,15 +83,7 @@ class Collectible extends React.Component {
 
                   <Col md="6">
 
-                        <p style={{'padding': '10px 5px 0px 5px'}}>{title}</p>
-
-                            <ul style={{'textAlign':'right'}}>
-
-                              <li><div style={{'height': '1px', 'backgroundColor': 'black', 'marginTop': '5px'}}></div></li>
-
-                              <li>{description}</li>
-
-                            </ul>
+                      <li>{description}</li>
 
                   </Col>
 

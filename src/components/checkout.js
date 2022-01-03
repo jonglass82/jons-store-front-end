@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Spinner } from 'reactstrap';
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 
@@ -10,7 +10,8 @@ class Checkout extends React.Component {
     super(props);
      this.state = {
       products: [], 
-      myCart: []
+      myCart: [],
+      productsReceived: false
      }
    }
 
@@ -28,7 +29,8 @@ class Checkout extends React.Component {
 
       this.setState((state, props) => ({
         products: products,
-        myCart: newArray
+        myCart: newArray, 
+        productsReceived: true
       }));
       this.props.updateCartCount(newArray.length);
     })
@@ -88,34 +90,41 @@ render (){
 
              <div className="checkoutStep">
 
-                  <div className="shopping-cart">
-
-                  {this.state.myCart.length > 0 ? this.state.myCart.map((product) => {
-                    return <div>
-
-                    <Container>
-                      <Row xs="4" className="checkoutItem">
-                        <Col style={{padding:'5px'}}><img src={product.images[0]} width={120} alt=""/></Col>
-                        <Col style={{'textAlign':'left'}}>{product.title}</Col>
-                        <Col style={{'textAlign':'left'}}>
-                          <ul>
-                            <li>${product.price}</li>
-                            <li style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></li>
-                          </ul>
-                          </Col>
-                        <Col style={{textAlign:'right', padding:'5px'}}><Button onClick={()=>{this.removeProduct(product._id)}}>Remove</Button></Col>
-                      </Row>
-                    </Container>
-
+                  <div className='productsSpinnerDiv' style={{display: this.state.productsReceived ? 'none' : ''}}>
+                      <h4>Retreiving items...</h4>
+                      <Spinner animation="border" style={{height: '80px', width: '80px'}}/>
                   </div>
 
-                  }) : <div className="noItemsDiv"> 
+                  <div className="shopping-cart" style={{display: this.state.productsReceived ? '' : 'none'}}> 
 
-                  <h4>There are no items in your cart</h4> 
+                    {this.state.myCart.map((product) => {return <div>
 
-                  <Link to="/">Continue shopping</Link>
+                        <Container>
+                          <Row xs="4" className="checkoutItem">
+                            <Col style={{padding:'5px'}}><img src={product.images[0]} width={120} alt=""/></Col>
+                            <Col style={{'textAlign':'left'}}>{product.title}</Col>
+                            <Col style={{'textAlign':'left'}}>
+                              <ul>
+                                <li>${product.price}</li>
+                                <li style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></li>
+                              </ul>
+                              </Col>
+                            <Col style={{textAlign:'right', padding:'5px'}}><Button onClick={()=>{this.removeProduct(product._id)}}>Remove</Button></Col>
+                          </Row>
+                        </Container>
 
-                  </div>}
+                          </div>
+                    })}
+
+
+
+                  <div className="noItemsDiv" style={{display: this.state.myCart.length === 0 ? '' : 'none'}}> 
+
+                    <h4>There are no items in your cart</h4> 
+
+                    <Link to="/">Continue shopping</Link>
+
+                  </div>
 
                   </div>
 

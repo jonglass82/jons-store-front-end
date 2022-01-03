@@ -44,7 +44,7 @@ class NavBar extends React.Component{
 
                     <Grid item lg={6}>
 
-                            <MenuIcon fontSize="medium" onClick={()=>{this.openDrawer()}}  />
+                            <MenuIcon fontSize="large" onClick={()=>{this.openDrawer()}}  />
 
                               <Drawer anchor="left" variant="temporary" onClick={()=>{this.openDrawer()}} open={this.state.drawerOpen}>
                                 <List style={{width:'300px', padding:'10px'}}>
