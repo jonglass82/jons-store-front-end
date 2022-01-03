@@ -149,6 +149,10 @@ li{
   border-bottom-width: 0px !important;
 }
 
+.nav-link{
+  padding: 5px !important;
+}
+
 .nav-link:not(.active):hover{
   border-color: transparent !important;
 }
