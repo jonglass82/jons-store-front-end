@@ -23,7 +23,15 @@ class Checkout extends React.Component {
 
       products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
-          newArray.push(product);
+          let itemExpiration = new Date(JSON.parse(localStorage.getItem(JSON.stringify(product._id)))["timestamp"] + 3600000).toLocaleString();
+          let currentTime = new Date().toLocaleString();
+            
+          if(currentTime > itemExpiration){
+            localStorage.removeItem(JSON.stringify(product._id));
+          }
+          else{
+            newArray.push(product);
+          }
         }
       })
 
@@ -84,10 +92,6 @@ render (){
 
   return  (<div>
 
-              <div style={{textAlign:'center', padding:'10px', fontSize:'18pt'}}>
-                Items: ({this.state.myCart.length})
-              </div>
-
              <div className="checkoutStep">
 
                   <div className='productsSpinnerDiv' style={{display: this.state.productsReceived ? 'none' : ''}}>
@@ -97,17 +101,21 @@ render (){
 
                   <div className="shopping-cart" style={{display: this.state.productsReceived ? '' : 'none'}}> 
 
+              <div style={{textAlign:'center', padding:'10px', fontSize:'14pt'}}>
+               <b>Your Cart: ({this.state.myCart.length})</b>
+              </div>
+
                     {this.state.myCart.map((product) => {return <div>
 
                         <Container>
-                          <Row xs="4" className="checkoutItem">
-                            <Col style={{padding:'5px'}}><img src={product.images[0]} width={120} alt=""/></Col>
+                          <Row xs="1" lg="4" className="checkoutItem">
+                            <Col style={{padding:'5px'}}><img src={product.images[0]} width="100%" alt=""/></Col>
                             <Col style={{'textAlign':'left'}}>{product.title}</Col>
                             <Col style={{'textAlign':'left'}}>
-                              <ul>
-                                <li>${product.price}</li>
-                                <li style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></li>
-                              </ul>
+
+                                <p><b>${product.price}</b></p>
+                                <p style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></p>
+
                               </Col>
                             <Col style={{textAlign:'right', padding:'5px'}}><Button onClick={()=>{this.removeProduct(product._id)}}>Remove</Button></Col>
                           </Row>
@@ -116,35 +124,33 @@ render (){
                           </div>
                     })}
 
+                      <div className="noItemsDiv" style={{display: this.state.myCart.length === 0 ? '' : 'none'}}> 
 
+                        <h4>Your cart is empty</h4> 
 
-                  <div className="noItemsDiv" style={{display: this.state.myCart.length === 0 ? '' : 'none'}}> 
+                        <Link to="/">Continue shopping</Link>
 
-                    <h4>There are no items in your cart</h4> 
-
-                    <Link to="/">Continue shopping</Link>
-
-                  </div>
+                      </div>
 
                   </div>
 
 
               <div className="checkoutFooter">
 
-                <div className="breakdownHeader"></div>
-
                 <div className="checkoutBreakdown">
                       <ul>
                         <li>Item Total: ${this.getSubTotal(this.state.myCart)}</li>
                         <li>Shipping ${this.getShipping(this.state.myCart)}</li>
-                        <li style={{'marginTop':'-10px'}}>___________________________</li>
+                        <li style={{'marginTop':'-5px'}}>___________________________</li>
                         <li style={{fontSize:'25px'}}><strong>Order Total: ${this.getTotal(this.state.myCart)}</strong></li> 
                       </ul>
                 </div>
               
+              <div style={{textAlign: 'right'}}>
                   <Link to={this.state.myCart.length > 0 ? "/purchase-info" : "#"}>
-                    <Button size="large" disabled={this.state.myCart.length > 0 ? false : true} variant="contained" color="secondary" block>Checkout $<strong>{this.getTotal(this.state.myCart)}</strong></Button>
+                    <Button size="large" disabled={this.state.myCart.length > 0 ? false : true} variant="contained" color="secondary">Checkout $<strong>{this.getTotal(this.state.myCart)}</strong></Button>
                   </Link>
+              </div>
 
               </div>
 

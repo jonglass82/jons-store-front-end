@@ -17,7 +17,7 @@ class MusicPage extends React.Component{
 
 			<h2>Music</h2>
 
-			<p>Coming soon</p>
+			<p style={{color: 'black', textAlign:'center', fontSize:'24px'}}>Coming soon</p>
 
 		</div>
 	}

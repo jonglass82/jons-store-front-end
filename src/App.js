@@ -74,11 +74,18 @@ function ProtectedRoute(props) {
     getProducts() {
         axios.get(`${process.env.REACT_APP_API_STR}/api/products`).then(res => {
         const products = res.data;
-        let newCount = 0
+        let newCount = 0;
 
         products.forEach((product) => {
           if( localStorage.getItem(JSON.stringify(product._id))){
-            newCount = newCount + 1
+            let itemExpiration = new Date(JSON.parse(localStorage.getItem(JSON.stringify(product._id)))["timestamp"] + 3600000).toLocaleString();
+            let currentTime = new Date().toLocaleString();
+            if(currentTime > itemExpiration){
+              localStorage.removeItem(JSON.stringify(product._id));
+            }
+            else{
+              newCount = newCount + 1
+            }
           }
         })
 

@@ -76,7 +76,6 @@ class CheckoutForm extends React.Component {
         step: 4,
         name: '',
         phone: '',
-        email: '',
         address: '',
         city: '',
         state: '',
@@ -319,15 +318,18 @@ class CheckoutForm extends React.Component {
                       </Col>
                   </Row>
 
-                  <div style={{'height': '30px'}}></div>
-
-                <Label for="address">Special Message (optional)</Label>
+                <Label for="address">Message (optional)</Label>
                 <textarea  style={{'height': '150px', 'width': '100%', 'resize': 'none'}} type="textbox" name="message" value={this.state.message} onChange={this.onChange} />
                   
                   <div className="checkoutFooter">
-                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
+
                     <Button variant="contained" color="secondary" className="rightButton" onClick={()=>{this.nextStep()}}>Continue to Payment</Button>
+
+                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
+                  
                   </div>
+
+
 
               </div>
               

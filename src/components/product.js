@@ -72,7 +72,9 @@ class Product extends React.Component {
 
         <div className="productDetails" onMouseEnter={this.showProductControls} onMouseLeave={this.hideProductControls} onClick={this.modalToggle}>
 
-            <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width={200} height={200}></img> }</div>
+        <div className={sold ? "soldTag" : ""}> {sold ? "SOLD OUT" : ""} </div>
+
+            <div className="productImageContainer" style={{textAlign:'center'}}>{this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width="100%"></img> }</div>
             
             <div style={{visibility: this.state.visible ? 'visible' : 'hidden'}} className={this.state.visible ? "productControlsDiv productControlsShow" : "productControlsDiv"}>
 
@@ -105,7 +107,7 @@ class Product extends React.Component {
 
                 <Col md="6">
 
-                        <div className={sold ? "soldTag" : ""} style={{height: '25px'}}> {sold ? "SOLD" : ""} </div>
+                        <div className={sold ? "soldBanner" : ""}> {sold ? "(SOLD OUT)" : ""} </div>
            
                         <div className="modalImageContainer">
                             {this.props.images && this.props.images.length && 

@@ -20,7 +20,15 @@ class Info extends React.Component {
 
       products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
-          newArray.push(product);
+            let itemExpiration = new Date(JSON.parse(localStorage.getItem(JSON.stringify(product._id)))["timestamp"] + 3600000).toLocaleString();
+            let currentTime = new Date().toLocaleString();
+            
+            if(currentTime > itemExpiration){
+              localStorage.removeItem(JSON.stringify(product._id));
+            }
+            else{
+              newArray.push(product);
+            }
         }
       })
 

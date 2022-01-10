@@ -41,7 +41,9 @@ class Collection extends React.Component{
 	render (){
 		return <div className="projectsDiv">
 
-		<h2>My collection</h2>
+    <div className="projectHeader">
+		  <h2>My collection</h2>
+    </div>
 
 		<div className="all-products"> 
             
