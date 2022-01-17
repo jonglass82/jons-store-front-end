@@ -187,7 +187,7 @@ class Collection extends React.Component{
 
                       <div className="grid-container">
 
-                        {this.state.collectibles.filter((p)=>{return p.category === "Artwork"}).map((collectible) => {
+                        {this.state.collectibles.filter((p)=>{return p.Category === "Artwork"}).map((collectible) => {
 
                           return (<div>
                           	<Collectible
