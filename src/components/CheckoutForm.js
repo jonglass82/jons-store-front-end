@@ -22,7 +22,7 @@ class CheckoutForm extends React.Component {
         zip: '',
         message: '',
         paypalOrderID: '',
-        step: 1,
+        step: 3,
         nameError: false,
         emailError: false,
         phoneError: false,
@@ -416,7 +416,7 @@ class CheckoutForm extends React.Component {
                   </Container>
 
                   <div style={{padding: '20px'}}>
-                    <Button className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
+                    <Button variant="contained" color="primary" className="leftButton" onClick={()=>{this.prevStep()}}>Go Back</Button>
                    </div> 
 
                   </div>
