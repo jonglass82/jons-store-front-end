@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
 import Button from '@material-ui/core/Button';
+import HelpIcon from '@material-ui/icons/Help';
 
 class Product extends React.Component {
 
@@ -135,6 +136,9 @@ class Product extends React.Component {
                   </Col>
 
               </Row>
+
+                  <a href={"mailto:jonglasswebsite@gmail.com?subject=" + product.title.replace(' ', '%20')}><HelpIcon /> Ask a question about this item</a>
+
 
               </Container>
 
