@@ -108,11 +108,11 @@ class NavBar extends React.Component{
                           <ListItemText primary={<InstagramIcon/>} />
                         </ListItem>
 
-                        <ListItem className="desktopNav" button component="a" href="https://github.com/jonglass82">
+                        <ListItem  style={{paddingRight:'0px'}}className="desktopNav" button component="a" href="https://github.com/jonglass82">
                           <ListItemText primary={<GitHubIcon/>} />
                         </ListItem>
 
-                        <ListItem>
+                        <ListItem style={{paddingRight:'0px'}}>
 
                         <IconButton style={{float:'right'}} disabled={this.props.cartCount > 0 ? false : true} href="/purchase" aria-label="cart">
 

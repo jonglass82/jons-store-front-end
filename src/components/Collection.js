@@ -41,11 +41,11 @@ class Collection extends React.Component{
 	render (){
 		return <div className="projectsDiv">
 
-    <div className="projectHeader">
-		  <h2>My collection</h2>
-    </div>
-
 		<div className="all-products"> 
+
+        <div className="projectHeader">
+          <h2>My collection</h2>
+        </div>
             
           <div>
               

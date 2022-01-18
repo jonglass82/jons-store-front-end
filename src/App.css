@@ -13,7 +13,6 @@ h2{
 
 .App{
   padding-top: 100px;
-  color: white;
 }
 
 .product{
@@ -111,8 +110,8 @@ li{
 }
 
 .collectibleControlsShow{
-  height: 100px;
-  margin-top: -45px;
+  height: auto;
+  margin-top: -70px;
   z-index: 2;
 }
 
@@ -265,7 +264,7 @@ a{
   top: 48px;
   left: 16px;
   color: white;
-  z-index: 100;
+  z-index: 10;
   width: auto;
   background-color: red;
   padding: 5px;
@@ -308,23 +307,37 @@ a{
   width: auto !important;
 }
 
+.MuiButton-root{
+  color: white !important;
+}
+
 .projectsDiv{
   max-width: 800px;
   margin: 0 auto;
 }
 
 .projectHeader{
-    margin-top: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  text-align: center;
+}
+
+.projectTitle{
+  font-weight: bold;
 }
 
 .projectItem{
   transition: 0.2s;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
-  color: black;
+  color: black !important;
+  background: #f5f6fa;
+}
+
+.projectItem > .MuiButton-root{
+  margin: 0px 8px 0px 8px !important;
 }
 
 .projectItem:hover{
@@ -339,6 +352,13 @@ a{
   height: auto;
   padding: 15px;
   text-align: center;
+}
+
+.removeButton{
+  outline: none;
+  border-width: 0px;
+  background-color: white;
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 600px) {

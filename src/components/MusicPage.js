@@ -15,9 +15,11 @@ class MusicPage extends React.Component{
 	render (){
 		return <div className="projectsDiv">
 
-			<h2>Music</h2>
+			<div className="projectHeader">
+				<h2>Music</h2>
+			</div>
 
-			<p style={{color: 'black', textAlign:'center', fontSize:'24px'}}>Coming soon</p>
+			<p style={{color: 'black', textAlign:'center', fontSize:'24px'}}>Coming soon..</p>
 
 		</div>
 	}

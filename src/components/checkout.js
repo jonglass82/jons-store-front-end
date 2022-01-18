@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Container, Row, Col, Spinner } from 'reactstrap';
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
 
 class Checkout extends React.Component {
 
@@ -23,7 +25,7 @@ class Checkout extends React.Component {
 
       products.forEach((product) => {
         if( localStorage.getItem(JSON.stringify(product._id))){
-          let itemExpiration = new Date(JSON.parse(localStorage.getItem(JSON.stringify(product._id)))["timestamp"] + 3600000).toLocaleString();
+          let itemExpiration = new Date(JSON.parse(localStorage.getItem(JSON.stringify(product._id)))["timestamp"] + 300000).toLocaleString();
           let currentTime = new Date().toLocaleString();
             
           if(currentTime > itemExpiration){
@@ -117,7 +119,7 @@ render (){
                                 <p style={{'fontSize':'12px'}}><em>+ Shipping ${product.shipping}</em></p>
 
                               </Col>
-                            <Col style={{textAlign:'right', padding:'5px'}}><Button onClick={()=>{this.removeProduct(product._id)}}>Remove</Button></Col>
+                            <Col style={{textAlign:'right', padding:'5px'}}><button className="removeButton" onClick={()=>{this.removeProduct(product._id)}}>Remove</button></Col>
                           </Row>
                         </Container>
 
@@ -128,7 +130,9 @@ render (){
 
                         <h4>Your cart is empty</h4> 
 
-                        <Link to="/">Continue shopping</Link>
+                        <div style={{height:'10px'}}></div>
+
+                        <Button variant="contained" color="primary" startIcon={<ArrowBack />} href="/">Continue shopping</Button>
 
                       </div>
 

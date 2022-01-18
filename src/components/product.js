@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
 import Button from '@material-ui/core/Button';
 
 class Product extends React.Component {
@@ -110,12 +110,7 @@ class Product extends React.Component {
                         <div className={sold ? "soldBanner" : ""}> {sold ? "(SOLD OUT)" : ""} </div>
            
                         <div className="modalImageContainer">
-                            {this.props.images && this.props.images.length && 
-                            <UncontrolledCarousel interval={null} items={this.props.images.map(image => {
-                              return { src: image };
-                                })}/>
-                              }
-
+                            {this.props.images && this.props.images.length && <img alt="" src={this.props.images[0]} width="100%"></img>}
                         </div>
 
                   </Col>
