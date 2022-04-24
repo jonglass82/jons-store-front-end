@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 class Header extends React.Component {
@@ -13,7 +13,7 @@ class Header extends React.Component {
 
       <div className="header">
 
-          <h3>www.jon-glass.com</h3>
+          <img src="/chair.png" height='100%'></img>
 
       </div> 
        
