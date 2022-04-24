@@ -22,7 +22,7 @@ class CheckoutForm extends React.Component {
         zip: '',
         message: '',
         paypalOrderID: '',
-        step: 3,
+        step: 1,
         nameError: false,
         emailError: false,
         phoneError: false,
