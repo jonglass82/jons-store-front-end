@@ -54,9 +54,6 @@ class NavBar extends React.Component{
                                   <ListItem button component={Link} to="/" >
                                     <ListItemText primary={'Shop'}/>
                                   </ListItem>
-                                  <ListItem button component={Link} to="/music" >
-                                    <ListItemText primary={'Music'} />
-                                  </ListItem>
 
                                   <ListItem button component={Link} to="/projects" >
                                     <ListItemText primary={'Projects'} />
@@ -91,9 +88,6 @@ class NavBar extends React.Component{
 
                         <ListItem button component={Link} to="/" className="desktopNav" >
                           <ListItemText primary={'Shop'}/>
-                        </ListItem>
-                        <ListItem button className="desktopNav" component="a" href="/music">
-                          <ListItemText primary={'Music'} />
                         </ListItem>
 
                         <ListItem button className="desktopNav" component="a" href="/projects">
